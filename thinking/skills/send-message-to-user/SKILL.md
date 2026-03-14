@@ -29,7 +29,7 @@ Choose a name that clearly describes the topic or purpose of the conversation. F
 - "PR #42 ready for review" for a completed task
 - "Question about database migration" for a question
 
-If a conversation with the given name already exists, your message will be added to that thread. Otherwise a new conversation is created.
+If a conversation with the given name already exists, your message will be added to that thread. Otherwise, a new conversation is created.
 
 This command prints the conversation ID to stdout.
 
@@ -42,6 +42,16 @@ llm inject --cid <conversation_id> -m <model> "Your message here"
 ```
 
 You can find the `conversation_id` from the event you are responding to (it is included in `messages` events), or use the `list-conversations` skill. The `model` should match the model used by that conversation (also visible in the event data or conversation list).
+
+When replying to an existing conversation, you may wish to give the user the *option* to spin out one or more new threads about some specific topic(s).
+In order to do so, simply enclose your reply like this: <SUGGEST_NEW_THREAD>...</SUGGEST_NEW_THREAD>
+This will be rendered in a way that makes it easy for the user to split out a new conversation thread about that topic.
+You should make these suggestions whenever you either find that the conversation has become about something very specific, or if you are making suggestion(s) for tasks that you could do for the user or help with (especially when those tasks would be a larger chunk of work). 
+You should generally only make these suggestions from the "daily thread" (since other threads are generally already about something more specific)
+
+When replying within an existing conversation, you may also want to *link* to one or more other previous conversation(s).
+In order to do so, simply enclose your reply like this: <THREAD_LINK conversation_id="<conversation-id>">...</THREAD_LINK>
+Be sure to fill in the correct conversation id!
 
 ## Choosing which approach to use
 

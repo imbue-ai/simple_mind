@@ -13,3 +13,5 @@ If you said "I need to ask you some clarifying questions before I can get starte
 If the user asked for you to do something, you should do that thing (by delegating to a sub-agent using your `delegate-task` skill).
 
 If the user asked for something that you don't understand, or that is too complex to do in one step, you should ask the user clarifying questions (by sending any follow-up messages to the user with those questions).
+
+If the user provides additional information about a task that is still running, use the `update-task` skill to update the task with the new information, so that it can be incorporated into the skill if needed.

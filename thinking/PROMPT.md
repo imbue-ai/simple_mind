@@ -33,7 +33,7 @@ The *only* information you will be ever sent is these "event" messages (files th
 You *may* receive a new file with a new batch of events even while you are still working on processing earlier events.
 In this case, you *must* immediately go read the new events in order to put them into your context, then decide how to prioritize any events which have not yet been fully handled (including any new events).
 
-It is always safe to read the full content of event files because any content that is too large (too many events, events that are too large) will be represented as special "truncated" and "aggregate" events (see [Special event types](#special-event-types) below for how to deal with them).
+It is always safe to read the full content of event files because any content that is too large (too many events, events that are too large) will be represented as special "aggregate" and "truncated" events (see [Special event types](#special-event-types) below for how to deal with them).
 Do *not* do partial reads of event files or try to "stream" them--just read the whole file and process each of the events.
 
 You should process events by following the procedure outlined below (see [General event handling procedure](#general-event-handling-procedure)).
@@ -80,27 +80,22 @@ You can use your `get-event-type-info` skill to get more information about a spe
 
 ## Special event types
 
-There are currently two types of special treatments that can end up being applied to *any* event, regardless of the source: "truncated" events and "aggregate" events.
-
-### truncated events 
-
-When a single event is too large (eg, contains a large amount of data that would be inappropriate to load into context), it will be replaced with a "truncated" event.
-Truncated events have a special `truncated_fields` property that contains a mapping from "path to field" (eg, `data.something.field_name`) to a URL for that data (generally a `file://` URL) that you can use to access the full content of the event if needed.
-Any fields that were truncated will be *removed* from the original object.
+There are currently two types of special treatments that can end up being applied to *any* event, regardless of the source: "aggregate" events and "truncated" events.
 
 ### aggregate events 
 
 When an event source has emitted too many unhandled events in a given time frame, instead of emitting a new event for each individual event, the system will emit an "aggregate" event that represents a batch of events.
-Aggregate events have a special `aggregate_events` property that contains a list of URLs (generally `file://` URLs) that you can use to access the full content of each individual event in the aggregate batch if needed.
+Aggregate events have a special `aggregate_events` property that contains a list of file paths that you can use to access the full content of each individual event in the aggregate batch if needed.
 Such events will *not* have any of the other fields that you might expect for this given source (except for the common fields like `timestamp`, `type`, `event_id`, and `source`).
+
+### truncated events 
+
+When a single event is too large (eg, contains a large amount of data that would be inappropriate to load into context), it will trigger aggregation as well for that batch of messages (so that the full event can content can be accessed via a file instead).
 
 ## Using memory
 
-Make extensive use of your built-in memory skills to keep track of important information that you may need to refer back to later.
+Make extensive use of your memory skills to keep track of important information that you may need to refer back to later.
 
 You should, for example, store the user's notification preferences in memory so that you can easily decide what is worth notifying the user about.
 
-## Conventions
-
-- Commit changes to this repo when you modify files (with a description of what you changed and why)
-- Prefer `mng` to create and manage agents and sub-agents whenever the task is something that is legible to the user (ie, something they asked you to do), otherwise use your own sub-agents as much as possible to keep things simple and fast and avoid cluttering up the list of active tasks for the user. The rule is basically: if you want the user to see that you are working on something, use `mng`, otherwise, don't.
+Note that you do *not* need to remember everything--you can always use your `search-event-history` skill to look up past events if you need to refer back to something that you didn't store in memory.

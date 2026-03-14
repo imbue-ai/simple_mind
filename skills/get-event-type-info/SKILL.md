@@ -40,3 +40,11 @@ Find events for a specific sub-agent:
 ```bash
 grep '"agent_id":"<agent_id>"' "$MNG_AGENT_STATE_DIR/events/mng/agents/events.jsonl"
 ```
+
+
+## Scratch
+
+idea: we should emit a json API schema for the *current* schema for any given event type
+    if that file exists, great, use that
+    if not, look for an imputed one
+    if that's not there, do a one time exploration and make an imputed one, then save it for next time

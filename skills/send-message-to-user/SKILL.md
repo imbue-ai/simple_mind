@@ -3,6 +3,15 @@ name: send-message-to-user
 description: Send a message to the user in a conversation thread. Use to reply in an existing conversation, start a new conversation, or proactively reach out.
 ---
 
+## Sending messages to the user
+
+Note that users may send messages in different conversation threads (with different "conversation_id"s), and you should reply in the appropriate thread.
+
+When proactively sending a message to the user (e.g. to notify them or ask a question), you should be thoughtful about which conversation id you specify.
+The "send-message-to-user" skill has more details on how to choose the right conversation id.
+
+In general, you should default to the "daily conversation" unless there is a reason to deviate.
+
 # Sending messages to the user
 
 You communicate with users through conversation threads. Each thread has a unique `conversation_id` and a human-readable name.

@@ -47,3 +47,12 @@ mng create verify-<task-name> --message "Verify that the following task was comp
 - When a task fails or crashes, review the error before retrying. Consider whether the instructions need to be revised.
 - Clean up finished agents with `mng destroy` after you have processed their results.
 - If the user should be able to see the task in their agent list, use `mng`. For quick internal operations that are not user-visible, consider using your own sub-agents instead.
+
+
+# Scratch
+
+ and returns a URL.
+*ALWAYS* display that resulting URL to the user so that they can easily track the work.
+ALWAYS set a timeout, resource limits, success criteria, etc, etc
+
+The general form is "kick off the working task" -> "kick off the verifying task" -> core event loop handles actions recommended by the verifier (either new tasks, or, if fast, doing them immediately)

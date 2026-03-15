@@ -1,3 +1,8 @@
+---
+name: handle-messages
+description: Handle events from the messages source. Use when you receive events about user or assistant messages in conversation threads.
+---
+
 ### Events from the `messages` source
 
 These events represent messages sent by the user in conversation threads. Each event includes the `conversation_id`, the `role` (which will be "user" for user messages), and the `content` of the message.
@@ -6,12 +11,18 @@ When you get a message from the user, it will *always* come with a response that
 
 If this response is inappropriate or insufficient, you can use the `send-message-to-user` skill to follow up with the user and clarify, provide more information, or "change your mind".
 
-Otherwise, you should treat the response as "the message you sent to the user" and **do whatever you told the user you were going to do in that message**. 
-For example, if you said "I'm going to start working on X now", then you should start working on X (by delegating to a sub-agent to do the work). 
+Otherwise, you should treat the response as "the message you sent to the user" and **do whatever you told the user you were going to do in that message**.
+For example, if you said "I'm going to start working on X now", then you should start working on X (by delegating to a sub-agent to do the work).
 If you said "I need to ask you some clarifying questions before I can get started on X", then you should ask those clarifying questions (by sending a follow-up message to the user with those questions).
 
-If the user asked for you to do something, you should do that thing (by delegating to a sub-agent using your `delegate-task` skill).
+## Deciding what to do
 
-If the user asked for something that you don't understand, or that is too complex to do in one step, you should ask the user clarifying questions (by sending any follow-up messages to the user with those questions).
+When processing a user message, determine which of these categories it falls into:
 
-If the user provides additional information about a task that is still running, use the `update-task` skill to update the agent task with the new information and let that agent continue working.
+**New task request**: The user is asking you to do something new. Delegate it using your `delegate-task` skill.
+
+**Clarification or question**: The user asked something you don't understand, or the request is too complex to act on immediately. Ask clarifying questions via `send-message-to-user`.
+
+**Update to an in-flight task**: The user is providing additional information, changed requirements, or a cancellation for work that is already in progress. Use the `update-task` skill, which covers how to forward info, restart tasks with revised instructions, or cancel them.
+
+**General conversation**: The user is chatting, providing context, or sharing information that doesn't require immediate action. Acknowledge if appropriate, and store anything useful in memory, but otherwise generally let the "talking" agent handle it.

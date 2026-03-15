@@ -12,7 +12,7 @@ As the thinking agent, you should NEVER do work directly. Instead, delegate all 
 Before creating a new task, first run:
 
 ```bash
-mng list --exclude "has(labels.archived_at)" --exclude "id == \"$AGENT_ID\" --format jsonl"
+mng list --exclude "has(labels.archived_at)" --exclude "id == \"$AGENT_ID\" --format jsonl
 ```
 
 In order to see how many agents (besides yourself) are currently active (ie, not archived).

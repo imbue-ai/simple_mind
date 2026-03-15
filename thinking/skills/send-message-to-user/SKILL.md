@@ -18,7 +18,7 @@ Be sure to any memories about user preferences around notifications and messagin
 When you want to follow up in a conversation you already know about (e.g. responding to a user message in the same thread), inject your message directly using the `llm` tool:
 
 ```bash
-llm inject --cid <conversation_id> -m <model> "Your message here"
+$MNG_AGENT_STATE_DIR/commands/chat.sh chat --reply <conversation-id> "Your message here"
 ```
 
 You can find the `conversation_id` from the event you are responding to (it is included in `messages` events), or use the `list-conversations` skill. The `model` should match the model used by that conversation (also visible in the event data or conversation list).

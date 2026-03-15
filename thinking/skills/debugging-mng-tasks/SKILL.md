@@ -11,7 +11,7 @@ You can always learn more about `mng` and its commands by running `mng --help` o
 
 ## Useful mng commands
 
-- `mng list` - see all running agents and their states
+- `mng list --exclude "has(labels.archived_at)" --exclude "id == \"$AGENT_ID\"" --format jsonl` - see all running agents and their states (and exclude all archived agents and yourself from the list so you can focus on the agents that matter)
 - `mng message <agent> -m "..."` - send a follow-up message to an agent
 - `mng archive <agent>` - stop an agent and remove it from the list of agents (note that an agent's logs and data will still be accessible after this)
 - `mng exec <agent> "command"` - run a shell command on an agent's host
@@ -20,6 +20,6 @@ You can always learn more about `mng` and its commands by running `mng --help` o
 
 ## Debugging process
 
-Start by running `mng list` to see all currently running agents and their states, or `mng capture <agent> --full` to see the full output from a given agent. This can often give you a good sense of what is happening and where things might be going wrong.
+Start by running `mng list --exclude "has(labels.archived_at)" --exclude "id == \"$AGENT_ID\"" --format jsonl` to see all currently running agents (besides yourself) and their states, or `mng capture <agent> --full` to see the full output from a given agent. This can often give you a good sense of what is happening and where things might be going wrong.
 
 **NEVER** run commands on any agents other than those that you created yourself!

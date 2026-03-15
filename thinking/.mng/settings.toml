@@ -1,0 +1,8 @@
+# TODO: actually these bits should be generated so that our operations can be restricted to the particular mind that this is running, but these are close enough for now (since we're typically only running one on a given host)
+#  We might want to consider using MNG_PREFIX or something even more drastic to avoid any possible conflicts with other instances
+[commands.list]
+include = ["""--include 'labels.mind == "true"'"""]
+
+[commands.create]
+label = ["mind=true"]
+type = "claude-mind"

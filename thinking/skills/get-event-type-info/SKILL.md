@@ -13,7 +13,7 @@ To inspect raw events for a specific source, read the corresponding log file:
 cat "$MNG_AGENT_STATE_DIR/events/<source>/events.jsonl"
 ```
 
-Where `<source>` is one of: `messages`, `mng/agents`, `scheduled`, `stop`, `conversations`, `monitor`.
+Where `<source>` is one of: `messages`, `mng/agent_states`, `scheduled`, `stop`, `conversations`, `monitor`.
 
 ## Useful commands for inspecting events
 
@@ -38,7 +38,7 @@ grep '"conversation_id":"<cid>"' "$MNG_AGENT_STATE_DIR/events/messages/events.js
 Find events for a specific sub-agent:
 
 ```bash
-grep '"agent_id":"<agent_id>"' "$MNG_AGENT_STATE_DIR/events/mng/agents/events.jsonl"
+grep '"agent_id":"<agent_id>"' "$MNG_AGENT_STATE_DIR/events/mng/agent_states/events.jsonl"
 ```
 
 

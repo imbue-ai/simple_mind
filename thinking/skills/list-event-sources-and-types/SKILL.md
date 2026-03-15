@@ -22,7 +22,7 @@ Additional fields:
 
 When you receive a `messages` event with `role: "user"`, a reply has already been generated and sent by the talking agent. Review the auto-generated reply (it will appear as a subsequent `messages` event with `role: "assistant"` for the same `conversation_id`) and decide whether follow-up action is needed.
 
-## mng/agents
+## mng/agent_states
 
 State transitions for sub-agents you launched via `delegate-task`.
 

@@ -21,8 +21,8 @@ Your role is simply to *decide* what to do in response to each event (not actual
 
 *ALWAYS* delegate by using your `delegate-task` skill, which uses `mng` to create a sub-agent of the specified type
 
-When an agent created via `delegate-task` finishes with its work (or fails), you will receive an event from the `mng/agents` source.
-See [Events from the `mng/agents` source](#events-from-the-mngagents-source) below for how to handle tasks that have finished.
+When an agent created via `delegate-task` finishes with its work (or fails), you will receive an event from the `mng/agent_states` source.
+See [Events from the `mng/agent_states` source](#events-from-the-mngagent_states-source) below for how to handle tasks that have finished.
 
 ## Event processing
 

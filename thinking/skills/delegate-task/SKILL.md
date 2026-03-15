@@ -17,7 +17,7 @@ mng list
 
 In order to see how many agents are currently running.
 
-If there are more than `max_concurrent_workers` (see [settings.toml](../../../settings.toml) workers running, you create a "todo" using your `create-todo` skill **instead** of creating a new agent.
+If there are more than `max_concurrent_workers` (see [minds.toml](../../../minds.toml) workers running, you create a "todo" using your `create-todo` skill **instead** of creating a new agent.
 Be sure to save enough information and context for the "todo" so that you will be able to delegate the task once there is more capacity.
 
 If there are not too many workers already running, read on for how to create different types of agents.

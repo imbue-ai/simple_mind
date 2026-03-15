@@ -3,37 +3,17 @@ name: send-message-to-user
 description: Send a message to the user in a conversation thread. Use to reply in an existing conversation, start a new conversation, or proactively reach out.
 ---
 
-## Sending messages to the user
-
-Note that users may send messages in different conversation threads (with different "conversation_id"s), and you should reply in the appropriate thread.
-
-When proactively sending a message to the user (e.g. to notify them or ask a question), you should be thoughtful about which conversation id you specify.
-The "send-message-to-user" skill has more details on how to choose the right conversation id.
-
-In general, you should default to the "daily conversation" unless there is a reason to deviate.
-
 # Sending messages to the user
 
 You communicate with users through conversation threads. Each thread has a unique `conversation_id` and a human-readable name.
 
-## Starting a new conversation
+Users may send messages in different conversation threads (with different `conversation_id`s), and you should always *reply* in the same thread.
 
-When you want to proactively reach out (e.g. to notify the user about completed work, ask a question, or share an update), create a new conversation by choosing an appropriate, descriptive name:
+If you are proactively sending a message (not directly replying to a user message), you should think carefully about whether to start a new one vs use an existing conversation (and if so, which one).
 
-```bash
-$MNG_AGENT_STATE_DIR/commands/chat.sh --new --name "<descriptive name>" --as-agent "Your message here"
-```
+Be sure to any memories about user preferences around notifications and messaging are loaded. 
 
-Choose a name that clearly describes the topic or purpose of the conversation. For example:
-- "Build failure in auth module" for a bug report
-- "PR #42 ready for review" for a completed task
-- "Question about database migration" for a question
-
-If a conversation with the given name already exists, your message will be added to that thread. Otherwise, a new conversation is created.
-
-This command prints the conversation ID to stdout.
-
-## Injecting a message into an existing conversation
+## Sending a message in an existing conversation
 
 When you want to follow up in a conversation you already know about (e.g. responding to a user message in the same thread), inject your message directly using the `llm` tool:
 
@@ -52,6 +32,23 @@ You should generally only make these suggestions from the "daily thread" (since 
 When replying within an existing conversation, you may also want to *link* to one or more other previous conversation(s).
 In order to do so, simply enclose your reply like this: <THREAD_LINK conversation_id="<conversation-id>">...</THREAD_LINK>
 Be sure to fill in the correct conversation id!
+
+## Starting a new conversation
+
+When you want to proactively reach out (e.g. to notify the user about completed work, ask a question, or share an update), create a new conversation by choosing an appropriate, descriptive name:
+
+```bash
+$MNG_AGENT_STATE_DIR/commands/chat.sh --new --name "<descriptive name>" --as-agent "Your message here"
+```
+
+Choose a name that clearly describes the topic or purpose of the conversation. For example:
+- "Build failure in auth module" for a bug report
+- "PR #42 ready for review" for a completed task
+- "Question about database migration" for a question
+
+If a conversation with the given name already exists, your message will be added to that thread. Otherwise, a new conversation is created.
+
+This command prints the conversation ID to stdout.
 
 ## Choosing which approach to use
 

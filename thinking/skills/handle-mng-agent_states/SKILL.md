@@ -4,6 +4,9 @@ These events represent state changes for any agents, including sub-agents that y
 Each event includes the `agent_id`, the new `state` (eg, "finished", "blocked", "crashed"), and any relevant metadata about the transition (eg, error message if it crashed).
 Note that you may get events for agents that you did not create, and you should ignore those events.
 
+The general, high level flow of this system is to "kick off the working task", then when it finishes successfully, "kick off the verifying task".
+Once the verifying task finishes successfully, then we handle the actions recommended by the verifier (either as new tasks, or, if fast, doing them immediately).
+
 How to respond to each event depends on both the state that the agent transitioned into, and the type of agent that was created.
 
 ## State: "failed" or "crashed"
@@ -24,7 +27,7 @@ If this agent *was* the "task verification" agent, then you should see what it r
 
 If you believe that the user should be notified about this work (according to their notification preferences, see ["Memory" section below](#memory)), then you should proactively send a message to the user about it (using the `send-message-to-user` skill).
 
+when a task is done, if there's now capacity, check for the highest priority todo
 
-- The general form is "kick off the working task" -> "kick off the verifying task" -> core event loop handles actions recommended by the verifier (either new tasks, or, if fast, doing them immediately)
 - When a task fails or crashes, review the error before retrying. Consider whether the instructions need to be revised.
 - Clean up finished agents with `mng destroy` after you have processed their results.

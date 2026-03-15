@@ -24,10 +24,10 @@ If there are not too many workers already running, read on for how to create dif
 
 ## Creating a working agent
 
-To delegate a task, create a sub-agent using `mng`:
+To delegate a task, create a sub-agent using `mng`. By default, sub-agents are created as copies of the current agent harness with a different role. Use `--env ROLE=working` to create a working agent:
 
 ```bash
-mng create "$MNG_AGENT_NAME-<task-name>" --message "Your task instructions here"
+mng create "$MNG_AGENT_NAME-<task-name>" --env ROLE=working --message "Your task instructions here"
 ```
 
 The `<task-name>` should be a descriptive name for the task (e.g. `fix-login-bug`, `add-search-feature`).
@@ -45,10 +45,10 @@ If the task description would be really long, you can use `--message-file` inste
 
 ## Creating a verifying agent
 
-When a working agent finishes successfully (you will receive an `mng/agent_states` event), create a verifying agent to check the work:
+When a working agent finishes successfully (you will receive an `mng/agent_states` event), create a verifying agent to check the work. Use `--env ROLE=verifying`:
 
 ```bash
-mng create $MNG_AGENT_NAME-verify-<task-name> --message "Verify that the following task was completed successfully: <description>. The agent that performed the work was <agent-name>. Check <specific things to verify>."
+mng create $MNG_AGENT_NAME-verify-<task-name> --env ROLE=verifying --message "Verify that the following task was completed successfully: <description>. The agent that performed the work was <agent-name>. Check <specific things to verify>."
 ```
 
 The same comments above apply--if the message would be really long, use the `--message-file` argument instead, and be sure to include **everything** that the verification agent might need.

@@ -1,9 +1,17 @@
 ---
-name: list-event-types
-description: List all event sources and types you may receive, with descriptions of their fields and meaning.
+name: list-event-sources-and-types
+description: List all event sources and types you may receive, with descriptions of their fields and meaning. Note that event types are dynamic and new sources may appear.
 ---
 
-# Event sources and types
+# Listing all event sources
+
+In order to list all possible sources of events, run:
+
+```bash
+( cd $MNG_AGENT_STATE_DIR/events/ && find -name events.jsonl -printf '%h\n' | sed 's|^\./||' )
+```
+
+# Event schemas
 
 All events follow a standard envelope format:
 
@@ -11,54 +19,18 @@ All events follow a standard envelope format:
 {"timestamp": "...", "type": "...", "event_id": "...", "source": "<source>", ...additional fields}
 ```
 
-## messages
+where:
 
-User and agent messages from conversation threads.
+- `event_id` is a unique string for the event
+- `timestamp` is the time at which the event happened (the output of running `date -u +"%Y-%m-%dT%H:%M:%S.%NZ"`, eg, something like "2026-03-14T11:14:57.000000000Z")
+- `source` is where the event came from, and should match precisely to the folder (under `events/`) that the events file is located in
+- `type` is the specific kind of event (which determines which additional fields will exist) 
 
-Additional fields:
-- `conversation_id` - which conversation thread this message belongs to
-- `role` - "user" or "assistant"
-- `content` - the text content of the message
+logs additionally define:
 
-When you receive a `messages` event with `role: "user"`, a reply has already been generated and sent by the talking agent. Review the auto-generated reply (it will appear as a subsequent `messages` event with `role: "assistant"` for the same `conversation_id`) and decide whether follow-up action is needed.
+- `message`, the actual text of the log message
+- `level`, the logging level, one of TRACE, DEBUG, INFO, WARNING, ERROR, CRITICAL, defining how important the message is
 
-## mng/agent_states
+Logs often contain additional contextual fields as well.
 
-State transitions for sub-agents you launched via `delegate-task`.
-
-Additional fields:
-- `agent_id` - the ID of the sub-agent
-- `state` - the new state (e.g. "finished", "blocked", "crashed", "waiting")
-- `data` - additional metadata about the transition (e.g. error message if crashed)
-
-When you receive this event, check whether the task was completed successfully and whether the user should be notified.
-
-## scheduled
-
-Scheduled trigger events. These fire at times you configured (or that were configured for you).
-
-Additional fields:
-- `data` - a payload describing the trigger, including its name and any metadata
-
-React to scheduled events according to the instructions in the trigger's data payload.
-
-## stop
-
-Signals that you (the thinking agent) are about to stop. This is your last chance to check for unprocessed work before going to sleep.
-
-Additional fields:
-- `data` - metadata about the stop (if any)
-
-When you receive this event, do a final check of your task list. If there is unfinished work, decide whether to handle it now or let it wait until you are next woken up.
-
-## monitor (future)
-
-Metacognitive reminders injected by a local monitor agent. Not yet implemented.
-
-## conversations
-
-Conversation lifecycle events (created, model changed). These are primarily bookkeeping. You do not typically need to react to these directly -- the `messages` source is more actionable.
-
-Additional fields:
-- `conversation_id` - the conversation that was created or modified
-- `model` - the model being used for this conversation
+Most sources define their full schema in `$MNG_AGENT_STATE_DIR/events/<source>/schema.json`, so check to see if that file exists in order to learn more about the exact fields for any given source and event type.

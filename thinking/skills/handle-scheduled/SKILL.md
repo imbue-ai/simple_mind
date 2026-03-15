@@ -1,7 +1,7 @@
 periodically:
     check in on various things:
         anything crashed or stuck that we didn't handle?
-        anything to clean up or destroy?
+        anything to clean up or stop?
         any agents that finished but that we didnt process?
         any capacity to launch pending tasks?
         any events that we didnt handle?

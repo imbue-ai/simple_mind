@@ -13,7 +13,7 @@ You can always learn more about `mng` and its commands by running `mng --help` o
 
 - `mng list` - see all running agents and their states
 - `mng message <agent> -m "..."` - send a follow-up message to an agent
-- `mng destroy <agent>` - clean up a finished or failed agent
+- `mng archive <agent>` - stop an agent and remove it from the list of agents (note that an agent's logs and data will still be accessible after this)
 - `mng exec <agent> "command"` - run a shell command on an agent's host
 - `mng events <agent>` - see the logs or events for a given agent
 - `mng capture <agent>` - effectively calls `tmux capture-pane` on the agent's tmux pane, so you can see the most recent output from that agent

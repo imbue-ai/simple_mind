@@ -1,6 +1,6 @@
 ---
 name: handle-messages
-description: Handle events from the messages source. Use when you receive events about user or assistant messages in conversation threads.
+description: Handle events from the messages source about user or assistant messages in conversation threads. You **MUST** use this skill (and *carefully follow the process in this doc*) whenever you receive a message from the "messages" source!
 ---
 
 ### Events from the `messages` source
@@ -24,5 +24,7 @@ When processing a user message, determine which of these categories it falls int
 **Clarification or question**: The user asked something you don't understand, or the request is too complex to act on immediately. Ask clarifying questions via `send-message-to-user`.
 
 **Update to an in-flight task**: The user is providing additional information, changed requirements, or a cancellation for work that is already in progress. Use the `update-task` skill, which covers how to forward info, restart tasks with revised instructions, or cancel them.
+
+**Finish handling an event**: The user is responding to a question you asked or providing information you requested. The original event was probably already marked as handled, but make sure you ensure that everything was handled correctly given the new information from the user and the associated skill for handling such events.
 
 **General conversation**: The user is chatting, providing context, or sharing information that doesn't require immediate action. Acknowledge if appropriate, and store anything useful in memory, but otherwise generally let the "talking" agent handle it.

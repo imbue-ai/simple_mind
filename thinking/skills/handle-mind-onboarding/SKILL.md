@@ -1,6 +1,6 @@
 ---
 name: handle-mind-onboarding
-description: Handle the one-time mind/onboarding event that fires when this mind starts for the first time. Use to set up onboarding tickets and introduce yourself to the user.
+description: Handle the one-time first-run event to set up onboarding tickets and introduce yourself to the user. You **MUST** use this skill (and *carefully follow the process in this doc*) whenever you receive a message from the "mind/onboarding" source!
 ---
 
 # First-run onboarding

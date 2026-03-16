@@ -1,6 +1,6 @@
 ---
 name: send-message-to-user
-description: Send a message to the user in a conversation thread. Use to reply in an existing conversation, start a new conversation, or proactively reach out.
+description: Send a message to the user in a conversation thread. You MUST use this skill to reply in an existing conversation, start a new conversation, or proactively reach out.
 ---
 
 # Sending messages to the user
@@ -57,9 +57,42 @@ This command prints the conversation ID to stdout.
 - If you want to continue an existing topic, reuse the same name to add to the existing thread.
 - If you are unsure, default to starting a new conversation with a descriptive name. Short, focused threads are easier for users to follow than long, multi-topic ones.
 
-## Guidelines
+## Tone
+
+Match the tone of the talking agent when writing your replies. Your messages appear in the same conversation as the talking agent's responses, so they should feel consistent. If the talking agent has been casual and friendly, your follow-ups should be too. If the user is talking like a pirate, your replies should fit in.
+
+## Asking questions
+
+When asking questions, always provide multiple-choice suggested short answers to make it easy for the user to reply quickly:
+
+- When asking a **single question**, give lettered answer options, ordered from most likely to least likely:
+  ```
+  How often would you like status updates?
+  A) Only when something important happens
+  B) A daily summary
+  C) Every time a task completes
+  D) I'll ask when I want to know
+  E) Something else (describe)
+  ```
+
+- When asking **multiple questions at once**, number the questions and give lettered options for each, so the user can reply concisely (e.g., "1: C, 2: A"):
+  ```
+  A couple quick questions:
+  1. How often would you like status updates?
+     A) Only when something important happens
+     B) A daily summary
+     C) Every time a task completes
+     D) Something else (describe)
+  2. Should I start on the refactor today?
+     A) Yes, go ahead
+     B) Not yet, let's discuss first
+     C) Something else (describe)
+  ```
+
+**Always** include a final option that encourages the user to type their own response if they want
+
+## Other guidelines
 
 - Keep messages concise and actionable.
 - When notifying about completed work, include a summary and any relevant URLs (e.g. links to sub-agents or PRs).
-- When asking questions, be specific about what you need to know.
 - Reference the event or context that triggered the message when it helps the user understand why you are reaching out.

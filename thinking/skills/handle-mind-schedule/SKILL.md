@@ -1,6 +1,6 @@
 ---
 name: handle-mind-schedule
-description: Handle regularly scheduled events. Use when you receive events from the mind/schedule source.
+description: Handle regularly scheduled time-of-day events (start_of_day, end_of_day, etc). You **MUST** use this skill (and *carefully follow the process in this doc*) whenever you receive a message from the "mind/schedule" source!
 ---
 
 # Events from the `mind/schedule` source
@@ -37,7 +37,7 @@ This fires at the configured end of the user's day. Use it to wrap up:
 
 1. **Check your budget**: Think about how much capacity and budget you have remaining for the day.
 2. **High-leverage work**: If you have capacity left, think about the highest-leverage things you could do to help the user while they are away, and kick off that work (using `delegate-task` or `list-tickets`).
-3. **Clean up**: Archive any agents that are done but haven't been cleaned up yet. Check for stuck or crashed agents.
+3. **Clean up**: Archive any agents that are done but haven't been cleaned up yet. Check for stuck or crashed agents. Destroy any archived agents that were archived more than a week ago (`mng list --include "has(labels.archived_at)" --exclude "id == \"$AGENT_ID\"" --format jsonl`).
 4. **Kick off retrospectives**: If you have enough capacity, consider kicking off a "retrospective" agent to review any of the day's tasks that seem like they could have gone better.
 
 ## Custom scheduled events

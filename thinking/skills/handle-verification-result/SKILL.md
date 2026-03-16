@@ -1,6 +1,6 @@
 ---
-name: handle-mng-agent_states
-description: Handle events from the mng/agent_states source. Use when you receive events about sub-agent state transitions (finished, waiting, done, etc).
+name: handle-verification-result
+description: Act on the results of a verifying agent by reviewing its recommendations and taking the appropriate next actions. You **MUST** use this skill (and *carefully follow the process in this doc*) whenever a verifying agent finishes!
 ---
 
 If this was a "verifying" agent, review what the verifier recommended and act on it:

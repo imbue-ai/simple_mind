@@ -1,6 +1,6 @@
 ---
 name: handle-mind-idle
-description: Handle "idle" events. Use the system sends you an event from the "mind/idle" source
+description: Handle "idle" events for periodic housekeeping. You **MUST** use this skill (and *carefully follow the process in this doc*) whenever you receive a message from the "mind/idle" source!
 ---
 
 # Events from the `mind/idle` source

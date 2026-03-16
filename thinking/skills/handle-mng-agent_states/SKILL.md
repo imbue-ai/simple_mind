@@ -1,6 +1,6 @@
 ---
 name: handle-mng-agent_states
-description: Handle events from the mng/agent_states source. Use when you receive events about sub-agent state transitions (finished, waiting, done, etc).
+description: Handle events from the mng/agent_states source about sub-agent state transitions (finished, waiting, done, etc). You **MUST** use this skill (and *carefully follow the process in this doc*) whenever you receive a message from the "mng/agent_states" source!
 ---
 
 # Events from the `mng/agent_states` source

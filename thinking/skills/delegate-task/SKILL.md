@@ -18,8 +18,8 @@ mng list --exclude "has(labels.archived_at)" --exclude "id == \"$AGENT_ID\" --fo
 In order to see how many agents (besides yourself) are currently active (ie, not archived).
 If there are stopped agents in the list that no longer matter, they can be moved to the archive by running `mng archive <agent-id>`
 
-If there are more than `max_concurrent_workers` (see [minds.toml](../../../minds.toml) workers running, you create a "todo" using your `create-todo` skill **instead** of creating a new agent.
-Be sure to save enough information and context for the "todo" so that you will be able to delegate the task once there is more capacity.
+If there are more than `max_concurrent_workers` (see [minds.toml](../../../minds.toml)) workers running, create a ticket using your `create-ticket` skill **instead** of creating a new agent.
+Be sure to save enough information and context in the ticket so that you will be able to delegate the work once there is more capacity.
 
 If there are not too many workers already running, read on for how to create different types of agents.
 

@@ -43,4 +43,4 @@ If the user's message makes it clear the task is no longer needed (e.g., "never 
 mng archive -f <agent-id>
 ```
 
-Acknowledge the cancellation to the user via `send-message-to-user`, and check if there is now capacity to launch a pending todo.
+Acknowledge the cancellation to the user via `send-message-to-user`, and check if there is now capacity to launch a pending ticket (via `list-tickets`).

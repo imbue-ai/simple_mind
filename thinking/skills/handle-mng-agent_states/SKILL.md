@@ -80,7 +80,7 @@ Once you've done that, you should either:
 1. Send a message to the agent with the information it needs to proceed (e.g., answers to its questions, or suggestions on how to fix the errors) by using `mng message <agent-id> --message "(put your message here)"`
 2. Abandon the task, archive the agent, and try again with a new agent (after revising the instructions). It is often useful to retry a task with a fresh agent and updated instructions if you see that the task failed for some reason that you could have prevented with better instructions. In this case, simply call `mng archive -f <agent-id>` to clean up the old agent, revise the instructions, and then create a new agent using your `delegate-task` skill with the updated instructions. 
 3. Ask the user for additional information. You should generally try to avoid doing this if possible, since it adds latency and friction, but sometimes the agent has failed and you simply don't have enough information to know what to do (or even to make a reasonable guess or assumption). In such a case, use your `send-message-to-user` skill to ask the user for additional information that can help you determine how to proceed.
-4. Abandon the task, stop the agent, and either inform the user that you were unable to complete the task (if they requested it), or simply move on with your other priorities if the task was something you decided to do yourself without the user's explicit request. In this case, call `mng stop <agent-id>` to stop the agent, and then check if there is now capacity to launch a pending todo (using `create-todo` to check for queued tasks).
+4. Abandon the task, stop the agent, and either inform the user that you were unable to complete the task (if they requested it), or simply move on with your other priorities if the task was something you decided to do yourself without the user's explicit request. In this case, call `mng stop <agent-id>` to stop the agent, and then check if there is now capacity to launch a pending ticket (using `list-tickets` to check for ready tickets).
 
 ### If the agent believes the task is complete
 
@@ -126,6 +126,6 @@ You may need to fix the underlying agent or code so that `mng` is able to track 
 
 - When a task fails or crashes, review the error before retrying. Use `mng capture <agent-id> --full` to see what happened. Consider whether the instructions need to be revised.
 - Clean up finished agents with `mng f archive` after you have processed their results.
-- After processing any agent state event, check if there is capacity to launch pending todos.
+- After processing any agent state event, check if there is capacity to launch a pending ticket (via `list-tickets`).
 - Notify the user about significant state changes according to their notification preferences
-- After some tasks have been stopped/archived/destroyed, remember to check if there is now capacity to launch a pending todo (using `create-todo` to check for queued tasks).
+- After some tasks have been stopped/archived/destroyed, remember to check if there is now capacity to launch a pending ticket (using `list-tickets` to check for ready tickets).

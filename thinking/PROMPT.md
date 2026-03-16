@@ -85,15 +85,38 @@ You can use your `get-event-type-info` skill to get more information about a spe
 
 There are currently two types of special treatments that can end up being applied to *any* event, regardless of the source: "aggregate" events and "truncated" events.
 
-### aggregate events 
+### aggregate events
 
 When an event source has emitted too many unhandled events in a given time frame, instead of emitting a new event for each individual event, the system will emit an "aggregate" event that represents a batch of events.
 Aggregate events have a special `aggregate_events` property that contains a list of file paths that you can use to access the full content of each individual event in the aggregate batch if needed.
 Such events will *not* have any of the other fields that you might expect for this given source (except for the common fields like `timestamp`, `type`, `event_id`, and `source`).
 
-### truncated events 
+### truncated events
 
 When a single event is too large (eg, contains a large amount of data that would be inappropriate to load into context), it will trigger aggregation as well for that batch of messages (so that the full event can content can be accessed via a file instead).
+
+### Working with aggregate and truncated event files
+
+When you need to inspect events referenced by aggregate or truncated events, **do not blindly read the full file contents**. Individual events can contain very large payloads that would waste context. Instead, first inspect the shape and size of the data:
+
+```bash
+# See the size (in characters) of each field for each event
+cat <file> | jq -c '[to_entries[] | .value = (.value | tojson | length)] | from_entries'
+```
+
+Then load only the specific fields you need:
+
+```bash
+# Example of getting just metadata without large content fields
+cat <file> | jq -c '{timestamp, type, event_id, source}'
+```
+
+## Duplicate events
+
+The event delivery system provides at-least-once delivery, which means you may occasionally receive the same event more than once (e.g., after a restart). 
+If you see an event that you may have already handled (same `event_id`), check that you actually *did* handle it.
+If not, go handle it!
+If so, simply mark it as handled again and move on, duplicates are safe to ignore.
 
 ## Using memory
 

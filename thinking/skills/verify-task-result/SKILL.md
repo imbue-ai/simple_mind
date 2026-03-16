@@ -39,9 +39,10 @@ mng create "$MNG_AGENT_NAME-verify-<task-name>" --env ROLE=verifying --message-f
 
 ## After creating the verifier
 
-Use your `send-message-to-user` skill to notify the user:
+Post to the **Work Log** (see `send-message-to-user` skill):
+
 ```
-<NEW_TASK name="(full-verifier-agent-name)">Verifying the results of <task-name></NEW_TASK>
+Created verifying agent <agent-name> to verify: <brief description of what's being verified>
 ```
 
 Then mark the relevant events as handled and move on. You will receive a new `mng/agent_states` event when the verifying agent finishes -- at that point, use the `handle-verification-result` skill to act on its recommendations.

@@ -76,7 +76,13 @@ Use `tk ready` to see which tickets have all dependencies resolved and are ready
 
 ## After creating a ticket
 
-If the ticket was created because the user asked for something and you couldn't start immediately, acknowledge this to the user via `send-message-to-user` -- let them know you've logged it and will get to it when capacity opens up (and be sure to include the ticket ID so they can refer to it later if needed).
+Always post to the **Work Log** (see `send-message-to-user` skill) with a brief entry:
+
+```
+Created ticket <ticket-id>: <title> (priority <N>)
+```
+
+If the ticket was created because the user asked for something and you couldn't start immediately, also acknowledge this to the user in the relevant conversation via `send-message-to-user` -- let them know you've logged it and will get to it when capacity opens up (and be sure to include the ticket ID so they can refer to it later if needed).
 
 ## Closing tickets
 

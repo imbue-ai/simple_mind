@@ -54,9 +54,22 @@ mng create $MNG_AGENT_NAME-verify-<task-name> --env ROLE=verifying --message "Ve
 
 The same comments above apply--if the message would be really long, use the `--message-file` argument instead, and be sure to include **everything** that the verification agent might need.
 
-## Notifying the user
+## Logging the task
 
-Whenever you create a new task, always use your `send-message-to-user` skill to send a special message like this:
+Whenever you create a new agent, post to the **Work Log** (see `send-message-to-user` skill) with a brief entry, e.g.:
+
+```
+Created working agent <agent-name> for: <short description of what it's doing>
+```
+
+or for verifiers:
+
+```
+Created verifying agent <agent-name> to verify: <what's being verified>
+```
+
+If the user asked for the task to be created, you should reply to the original conversation as well with something like:
+
 ```
 <NEW_TASK name="(full-sub-agent-name)">(a short description of what you're trying to accomplish with the task)</NEW_TASK>
 ```

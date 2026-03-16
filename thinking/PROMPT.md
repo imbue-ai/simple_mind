@@ -118,6 +118,26 @@ If you see an event that you may have already handled (same `event_id`), check t
 If not, go handle it!
 If so, simply mark it as handled again and move on, duplicates are safe to ignore.
 
+## The Work Log
+
+The "Work Log" is a special, always-available conversation that serves as a running summary of what you are doing. Think of it as your inner monologue made visible to the user -- the important actions you're taking, without the noise.
+
+To post to the Work Log:
+
+```bash
+$MNG_AGENT_STATE_DIR/commands/chat.sh --reply <work-log-conversation-id> "Your message here"
+```
+
+You should post to the Work Log whenever you:
+- **Create a working agent** (what ticket or request it's for, the agent name)
+- **Create a verifying agent** (what it's verifying)
+- **Act on verification results** (task passed/failed, what you're doing next)
+- **Create or close tickets** (ticket ID and brief description)
+- **Cancel or restart a task** (why)
+- **Encounter and resolve issues** (what went wrong, what you did about it)
+
+Keep Work Log entries **short and factual** -- one or two sentences each. The user should be able to glance at it and immediately understand what you've been up to. Don't duplicate information that's already in the daily thread or other conversations.
+
 ## Using memory
 
 Make extensive use of your memory skills to keep track of important information that you may need to refer back to later.
@@ -144,4 +164,3 @@ The onboarding tickets will be picked up over time through the normal ticket wor
 As new capabilities are added to the system, new onboarding items may be added to `thinking/onboarding.md`.
 
 If you notice any unchecked items, they should be turned into tickets and prioritized accordingly.
-

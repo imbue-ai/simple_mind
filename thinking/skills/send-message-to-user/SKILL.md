@@ -50,12 +50,13 @@ If a conversation with the given name already exists, your message will be added
 
 This command prints the conversation ID to stdout.
 
-## Choosing which approach to use
+## Choosing which conversation to use
 
-- If you are responding to a user message, use `llm inject` with the same `conversation_id` from the event so your reply appears in the same thread.
-- If you are proactively notifying the user about something new (completed work, a question, an update), use `chat.sh --new --name "<name>" --as-agent` with a descriptive name.
-- If you want to continue an existing topic, reuse the same name to add to the existing thread.
-- If you are unsure, default to starting a new conversation with a descriptive name. Short, focused threads are easier for users to follow than long, multi-topic ones.
+- **Responding to a user message**: reply in the same thread using `chat.sh chat --reply`.
+- **Work status updates** (agents created, tasks verified, tickets changed): post to at least the **Work Log** conversation (occasionally to another conversation if it makes sense / the user asked for it).
+- **Proactive outreach** (completed work that needs the user's attention, questions, suggestions): start or continue a named conversation.
+- **Daily summary and planning**: the daily thread (see `handle-mind-schedule`).
+- If you are unsure, default to the Work Log for operational updates, or the daily thread for anything that needs the user's input.
 
 ## Tone
 

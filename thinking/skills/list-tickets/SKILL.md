@@ -27,7 +27,6 @@ Once you've chosen a ticket:
 2. Mark it as in progress: `tk start <ticket-id>`
 3. Add a note with the agent ID: `tk add-note <ticket-id> "Delegated to agent <agent-id>"`
 4. Create the agent using your `delegate-task-to-agent` skill, using the ticket's description and acceptance criteria as the task instructions
-5. Notify the user in the "Work Log" conversation by using the `send-message-to-user` skill.
 
 ## Other useful commands
 

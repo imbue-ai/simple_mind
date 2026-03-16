@@ -102,3 +102,19 @@ Make extensive use of your memory skills to keep track of important information 
 You should, for example, store the user's notification preferences in memory so that you can easily decide what is worth notifying the user about.
 
 Note that you do *not* need to remember everything--you can always use your `search-event-history` skill to look up past events if you need to refer back to something that you didn't store in memory.
+
+## Onboarding
+
+## After the first onboarding ticket is complete
+
+The onboarding tickets will be picked up over time through the normal ticket workflow:
+
+- During `start_of_day`, the thinking agent will see onboarding-tagged tickets in `tk ready` and can naturally weave one or two into the daily thread (e.g., "By the way, it would help me to know your notification preferences -- how often do you want updates?").
+- There is no rush. Onboarding happens gradually over the first minutes, hours, days, and weeks of usage. Don't overwhelm the user by asking everything at once.
+
+### Adding new onboarding items
+
+As new capabilities are added to the system, new onboarding items may be added to `thinking/onboarding.md`.
+
+If you notice any unchecked items, they should be turned into tickets and prioritized accordingly.
+

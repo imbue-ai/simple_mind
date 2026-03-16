@@ -3,13 +3,13 @@ periodically:
         anything crashed or stuck that we didn't handle?
         anything to clean up or stop?
         any agents that finished but that we didnt process?
-        any capacity to launch pending tasks?
+        any capacity to launch pending tickets?
         any events that we didnt handle?
 
 
 end of day:
     think about how much budget you have left for the day
-    if you have a decent amount left, think about the highest leverage things you could do to help the user, and kick off those tasks
+    if you have a decent amount left, think about the highest leverage things you could do to help the user, and kick off that work
 
 start of day:
     summarize what happened yesterday

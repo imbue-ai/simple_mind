@@ -77,9 +77,7 @@ You do *not* need to wait for delegated tasks to complete--you will receive a ne
 
 ## Learning more about event types and sources
 
-You can use your `list-event-sources-and-types` skill to get a list of all event sources and types you might receive, and what they mean.
-
-You can use your `get-event-type-info` skill to get more information about a specific event type, including the fields they may include and what each field means.
+You can use your `list-event-sources-and-types` skill to discover event sources and understand their schemas. Use `search-event-history` to inspect raw events from a specific source.
 
 ## Special event types
 

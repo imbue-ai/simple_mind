@@ -1,6 +1,6 @@
 ---
-name: handle-events
-description: Handle any event. Use to handle any event from a source that does not have a corresponding, more specific skill.
+name: handle-unknown-events
+description: Handle any unexpected events. Use to handle any event from a source that does not have a corresponding, more specific skill.
 ---
 
 When you receive an event from an *unknown* source, eg, one that does not have a corresponding `handle-<source>` skill (and where none of your skills seem to apply), you should do the following:

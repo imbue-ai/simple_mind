@@ -1,0 +1,42 @@
+---
+name: handle-mind-schedule
+description: Handle regularly scheduled events. Use when you receive events from the mind/schedule source.
+---
+
+# Events from the `mind/schedule` source
+
+These events fire once per day at configured times (set in `minds.toml` under `[watchers].scheduled_events`). Each event includes:
+
+- `event_name` -- the name of the scheduled event (e.g., "start_of_day", "end_of_day")
+- `scheduled_time` -- the time it was configured to fire (e.g., "09:00")
+- `current_time_utc` -- current UTC time
+- `current_time_local` -- current time in the user's configured timezone
+
+## start_of_day
+
+This fires at the configured start of the user's day. Use it to set yourself up for the day:
+
+1. **Summarize yesterday**: Briefly review what happened since the last start_of_day -- what tickets were completed, what tasks are still in progress, any issues that came up. Use `tk closed` and `tk list` to gather this.
+2. **Plan today**: Look at `tk ready` and your current priorities. Think about the most important work to focus on today and in what order.
+3. **Make a suggestion**: Think about the most useful suggestion you could make for the user -- something that would help them get more value from you, or something you noticed that could be improved.
+4. **Create a daily thread**: Use `send-message-to-user` to start a new conversation with your summary, plans, and suggestion. The daily thread is the natural place for ongoing general discussion throughout the day. Be sure to link to the previous day's thread (if it exists) for continuity.
+
+Once you've sent the message, get started on the work that you proposed for yourself for the day by delegating to sub-agents via `delegate-task`.
+Obviously only start on work that you're sure the user would want you to work on--otherwise, ask the user for clarification or confirmation before you start.
+
+A good general pattern is to say "If I don't hear back from you by [time], I'll assume you want me to proceed with these tasks: ..." This gives the user a chance to intervene if they disagree, but also allows you to get started without unnecessary delays if they are busy.
+
+## end_of_day
+
+This fires at the configured end of the user's day. Use it to wrap up:
+
+1. **Check your budget**: Think about how much capacity and budget you have remaining for the day.
+2. **High-leverage work**: If you have capacity left, think about the highest-leverage things you could do to help the user while they are away, and kick off that work (using `delegate-task` or `list-tickets`).
+3. **Clean up**: Archive any agents that are done but haven't been cleaned up yet. Check for stuck or crashed agents.
+4. **Kick off retrospectives**: If you have enough capacity, consider kicking off a "retrospective" agent to review any of the day's tasks that seem like they could have gone better.
+
+## Custom scheduled events
+
+Additional scheduled events may be configured in `minds.toml`. When you receive an event with an `event_name` you don't recognize, check your memory and the settings file for context on what it should trigger.
+
+If you still don't know what to do, you **MUST** ask the user about it.

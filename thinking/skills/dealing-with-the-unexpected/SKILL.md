@@ -11,7 +11,7 @@ You should provide as much detail as possible about the unexpected behavior you 
 As soon as you've decided to go collect this information, you should at least *try* to use the `send-message-to-user` skill to notify the user that you have encountered an unexpected issue and are investigating it. 
 This is not strictly required, but it can help keep the user informed and manage their expectations.
 
-Note that this is one of the few cases where you should do the work **yourself**, rather than delegating to a sub agent via the `delegate-task` skill (because the issue is with the system itself, so delegating might not work, and delegating is asynchronous, and you don't want to change the state of the system if you are currently in an error state).
+Note that this is one of the few cases where you should do the work **yourself**, rather than delegating to a sub agent via the `delegate-task-to-agent` skill (because the issue is with the system itself, so delegating might not work, and delegating is asynchronous, and you don't want to change the state of the system if you are currently in an error state).
 
 Once the bug report is submitted, you should notify the user, and send them the link (if available) to the bug report so they can track the issue.
 After that, you should wait for further instructions from the user on how to proceed.

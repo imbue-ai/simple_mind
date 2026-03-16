@@ -26,7 +26,7 @@ This fires at the configured start of the user's day. Use it to set yourself up 
 - Your top priorities for the day (what you plan to work on)
 - One useful suggestion for the user (either a suggestion to tell you more about something that is useful for onboarding / gathering more context, an idea about new capabilities the user could try, a suggestion for how to use you more effectively, etc.)
 
-Once you've sent the message, get started on the work that you proposed for yourself for the day by delegating to sub-agents via `delegate-task`.
+Once you've sent the message, get started on the work that you proposed for yourself for the day by delegating to sub-agents via `delegate-task-to-agent`.
 Obviously only start on work that you're sure the user would want you to work on--otherwise, ask the user for clarification or confirmation before you start.
 
 A good general pattern is to say "If I don't hear back from you by [time], I'll assume you want me to proceed with these tasks: ..." This gives the user a chance to intervene if they disagree, but also allows you to get started without unnecessary delays if they are busy.
@@ -36,7 +36,7 @@ A good general pattern is to say "If I don't hear back from you by [time], I'll 
 This fires at the configured end of the user's day. Use it to wrap up:
 
 1. **Check your budget**: Think about how much capacity and budget you have remaining for the day.
-2. **High-leverage work**: If you have capacity left, think about the highest-leverage things you could do to help the user while they are away, and kick off that work (using `delegate-task` or `list-tickets`).
+2. **High-leverage work**: If you have capacity left, think about the highest-leverage things you could do to help the user while they are away, and kick off that work (using `delegate-task-to-agent` or `list-tickets`).
 3. **Clean up**: Archive any agents that are done but haven't been cleaned up yet. Check for stuck or crashed agents. Destroy any archived agents that were archived more than a week ago (`mng list --include "has(labels.archived_at)" --exclude "id == \"$AGENT_ID\"" --format jsonl`).
 4. **Kick off retrospectives**: If you have enough capacity, consider kicking off a "retrospective" agent to review any of the day's tasks that seem like they could have gone better.
 

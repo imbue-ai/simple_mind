@@ -5,12 +5,12 @@ description: Handle events from the mng/agent_states source about sub-agent stat
 
 # Events from the `mng/agent_states` source
 
-These events represent state changes for agents, including sub-agents that you have launched via `delegate-task`.
+These events represent state changes for agents, including sub-agents that you have launched via `delegate-task-to-agent`.
 Each event includes the `agent_id`, the new `state`, and any relevant metadata about the transition (eg, error message if it crashed).
 
 Note that you may get events for agents that you did not create, and you should ignore those events.
 
-The general, high level flow of this system is to "kick off the working agent", then when it finishes successfully, "kick off the verifying agent" (both done via using the `delegate-task` skill).
+The general, high level flow of this system is to "kick off the working agent", then when it finishes successfully, "kick off the verifying agent" (both done via using the `delegate-task-to-agent` skill).
 Once the verifying agent task finishes successfully, then we handle the actions recommended by the verifing agent (either by delegating task(s) to new agent(s), or, if fast, taking the actions immediately).
 
 How to respond to each event depends on both the state that the agent transitioned into, and the type of agent that was created.
@@ -78,7 +78,7 @@ If the agent had questions or seems to have run into some problems, then it is e
 Once you've done that, you should either:
 
 1. Send a message to the agent with the information it needs to proceed (e.g., answers to its questions, or suggestions on how to fix the errors) by using `mng message <agent-id> --message "(put your message here)"`
-2. Abandon the task, archive the agent, and try again with a new agent (after revising the instructions). It is often useful to retry a task with a fresh agent and updated instructions if you see that the task failed for some reason that you could have prevented with better instructions. In this case, simply call `mng archive -f <agent-id>` to clean up the old agent, revise the instructions, and then create a new agent using your `delegate-task` skill with the updated instructions. 
+2. Abandon the task, archive the agent, and try again with a new agent (after revising the instructions). It is often useful to retry a task with a fresh agent and updated instructions if you see that the task failed for some reason that you could have prevented with better instructions. In this case, simply call `mng archive -f <agent-id>` to clean up the old agent, revise the instructions, and then create a new agent using your `delegate-task-to-agent` skill with the updated instructions. 
 3. Ask the user for additional information. You should generally try to avoid doing this if possible, since it adds latency and friction, but sometimes the agent has failed and you simply don't have enough information to know what to do (or even to make a reasonable guess or assumption). In such a case, use your `send-message-to-user` skill to ask the user for additional information that can help you determine how to proceed.
 4. Abandon the task, stop the agent, and either inform the user that you were unable to complete the task (if they requested it), or simply move on with your other priorities if the task was something you decided to do yourself without the user's explicit request. In this case, call `mng stop <agent-id>` to stop the agent, and then check if there is now capacity to launch a pending ticket (using `list-tickets` to check for ready tickets).
 
@@ -96,7 +96,7 @@ This state indicates that the underlying infrastructure causes the agent's host 
 
 If a recent snapshot of the host is available (call `mng snapshot list <agent-id>` to check), you can restore from the snapshot and restart the agent, and then tell it to resume its work (by using something like `mng message <agent-id> --message "Please continue"`).
 
-If there were no snapshots (rare), you should archive that agent (using `mng archive -f <agent-id>`) and then create a new agent to redo the work (using your `delegate-task` skill with the same instructions, or revised instructions if you think that would help).
+If there were no snapshots (rare), you should archive that agent (using `mng archive -f <agent-id>`) and then create a new agent to redo the work (using your `delegate-task-to-agent` skill with the same instructions, or revised instructions if you think that would help).
 
 If this happens repeatedly, you should investigate the underlying cause of the crashes (if possible), or use your `dealing-with-the-unexpected` skill to submit a bug report to the developers so they can investigate and fix the underlying issue.
 
@@ -104,7 +104,7 @@ If this happens repeatedly, you should investigate the underlying cause of the c
 
 This state indicates that something went wrong before the host could be created, eg, while building the image or starting the host.
 
-This is typically a problem with the dockerfile or other build instructions. You should investigate your local `mng` logs and see what the actual error was, and then fix the underlying issue (e.g., by fixing the dockerfile or build instructions) before ultimately trying again (by creating a new agent with the same instructions using your `delegate-task` skill).
+This is typically a problem with the dockerfile or other build instructions. You should investigate your local `mng` logs and see what the actual error was, and then fix the underlying issue (e.g., by fixing the dockerfile or build instructions) before ultimately trying again (by creating a new agent with the same instructions using your `delegate-task-to-agent` skill).
 
 ## State: "stopping"
 

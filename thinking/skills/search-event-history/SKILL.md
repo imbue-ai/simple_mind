@@ -9,7 +9,7 @@ Event logs are stored as JSONL files under `$MNG_AGENT_STATE_DIR/events/<source>
 
 **Be careful about how much data you load into context.** Event files can be very large, and individual events can contain large payloads. Always inspect the *shape and size* of the data before loading full content.
 
-**You should generally prefer to use sub-agents or your `delegate-task` skill for larger or more complex explorations of event history**, but for quick lookups or simple queries, see below for some tips on how to search event logs directly.
+**You should generally prefer to use sub-agents or your `delegate-task-to-agent` skill for larger or more complex explorations of event history**, but for quick lookups or simple queries, see below for some tips on how to search event logs directly.
 
 ## Step 1: Find which sources exist
 

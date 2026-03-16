@@ -1,5 +1,5 @@
 ---
-name: delegate-task
+name: delegate-task-to-agent
 description: Create a sub-agent to perform a task. Use when you need to delegate work to another agent, for example, a working agent (for actually accomplishing some task) or a verifying agent (for deciding what to do about the output of a working agent).
 ---
 

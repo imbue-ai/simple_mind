@@ -30,7 +30,7 @@ Note: if the agent is not currently running (e.g., it is stopped or paused), `mn
 If the update fundamentally changes what the task should accomplish (e.g., different goals, different success criteria, "do Y instead of X"), then the running agent's work may no longer be relevant. In this case:
 
 1. Archive the current agent: `mng archive -f <agent-id>`
-2. Create a new agent with revised instructions using your `delegate-task` skill, incorporating the new information from the start
+2. Create a new agent with revised instructions using your `delegate-task-to-agent` skill, incorporating the new information from the start
 3. Notify the user that you're restarting the task with updated instructions
 
 Use your judgment here -- if the agent is nearly done and the change is small enough to course-correct, forwarding a message may be better than restarting from scratch. But if the agent has been working under fundamentally wrong assumptions, a fresh start with correct instructions will be faster and produce better results.

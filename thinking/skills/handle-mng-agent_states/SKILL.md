@@ -53,10 +53,16 @@ You will get another event when it finishes or if it crashes.
 
 This is the most common state transition you will handle. It means the agent's process has either exited ("stopped", "done", "paused") or has finished responding to your prompt and is waiting for either additional input / for you to stop it ("waiting").
 
-First, determine if the task is actually complete, or if the agent had questions or needs input from you by calling something like:
+First, determine if the task is actually complete, or if the agent had questions or needs input from you. Check for the agent's output file first:
 
 ```bash
-mng transcript --format=jsonl <agent-id> | tail -n 5
+cat outputs/<agent-id>/summary.md 2>/dev/null || echo "No summary.md found"
+```
+
+If no `summary.md` exists, you can try reading the agent's transcript:
+
+```bash
+mng transcript --format=jsonl --role=assistant <agent-id> | tail -n 20
 ```
 
 You're looking for the agent's final summary response, which most agents print when they finish their work.

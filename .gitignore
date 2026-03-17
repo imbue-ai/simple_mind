@@ -274,3 +274,6 @@ cov.xml
 
 # canonical location to stick other repos:
 vendor/
+
+# Agent output directories (transient, cleaned up when agents are destroyed)
+outputs/

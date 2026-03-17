@@ -37,7 +37,7 @@ This fires at the configured end of the user's day. Use it to wrap up:
 
 1. **Check your budget**: Think about how much capacity and budget you have remaining for the day.
 2. **High-leverage work**: If you have capacity left, think about the highest-leverage things you could do to help the user while they are away, and kick off that work (using `delegate-task-to-agent` or `list-tickets`).
-3. **Clean up**: Archive any agents that are done but haven't been cleaned up yet. Check for stuck or crashed agents. Destroy any archived agents that were archived more than a week ago (`mng list --include "has(labels.archived_at)" --exclude "id == \"$AGENT_ID\"" --format jsonl`).
+3. **Clean up**: Archive any agents that are done but haven't been cleaned up yet. Check for stuck or crashed agents. Then use the `cleanup-historical-data` skill to destroy old archived agents and clean up their output directories.
 4. **Kick off retrospectives**: If you have enough capacity, consider kicking off a "retrospective" agent to review any of the day's tasks that seem like they could have gone better.
 
 ## Custom scheduled events

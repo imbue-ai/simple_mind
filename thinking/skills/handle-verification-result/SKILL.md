@@ -35,7 +35,7 @@ Use your judgment to decide whether to challenge the verdict or move on to execu
 
 If not, and the verdict seems reasonable to you, then move on to the next step.
 
-## Step 3: Execute each next step
+## Step 4: Execute each next step
 
 Assuming the verdict and next steps seem reasonable, next you should work through the next steps list one by one.
 These may include:
@@ -60,11 +60,11 @@ Verification of <task-name>: PASSED.
 
 If any important data or artifacts need to be preserved beyond the output directory (e.g., a report the user should keep, configuration that should be committed), move or copy them to a permanent location now--the output directory will be cleaned up when the agents are eventually destroyed.
 
-## Step 4: Clean up
+## Step 5: Clean up
 
 After executing the next steps, you should also double-check if anything was missed by the verifying agent's recommendations, for example:
 
 - Closing tickets
-- Archiving agents (the verifying and/or working agent)
-- Sending messages to the user (ex: `mng archive -f <agent-id>`)
+- Archiving agents (the verifying and/or working agent) (ex: `mng archive -f <agent-id>`)
+- Sending messages to the user
 - etc.

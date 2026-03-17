@@ -48,7 +48,7 @@ mng create "$MNG_AGENT_NAME-verify-<task-name>" \
   --env ROLE=verifying \
   --env WORKING_AGENT_ID="<working-agent-id>" \
   --env WORKING_AGENT_BRANCH="mng/<task-name>" \
-  --env WORKING_AGENT_BASE_BRANCH="$MIND_BRANCH" \
+  --env WORKING_AGENT_BASE_BRANCH="$(git rev-parse --abbrev-ref HEAD)" \
   --label role=verifying \
   --message-file /tmp/verify-<task-name>.md
 ```

@@ -27,7 +27,7 @@ tk create "<title>" \
   --description "<description of what needs to be done, including any relevant context>" \
   --acceptance "<what 'done' looks like -- the success criteria>" \
   --priority <priority> \
-  -type <type>
+  --type <type>
 ```
 
 ### Priority levels

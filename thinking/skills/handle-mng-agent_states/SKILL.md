@@ -94,6 +94,8 @@ Once you've done that, you should either:
 ### If the agent believes the task is complete
 
 If the agent seems to believe it has completed the task, then the next steps depend on what type of agent this is.
+You can determine the agent's role by checking its `role` label (e.g., `mng list --format jsonl | grep <working-agent-id> | jq .labels` and look at the `role` label).
+Agents created via `delegate-task-to-agent` will have `working` or `verifying` as their role.
 
 If this was a "working" agent, use the `verify-task-result` skill to check whether the task was completed successfully.
 This will create a verifying agent to review the work.

@@ -46,8 +46,15 @@ cat > /tmp/task-<task-name>.md << 'EOF'
 ## Success criteria
 <what "done" looks like -- be specific>
 EOF
+```
 
-mng create "$MNG_AGENT_NAME-<task-name>" --env ROLE=working --message-file /tmp/task-<task-name>.md
+Then create the agent with a command like the following (substituting the correct value for "<task-name>"):
+
+```bash
+mng create "$MNG_AGENT_NAME-<task-name>" \
+  --env ROLE=working \
+  --label role=working \
+  --message-file /tmp/task-<task-name>.md
 ```
 
 The `<task-name>` should be a descriptive name for the task (e.g. `fix-login-bug`, `add-search-feature`).

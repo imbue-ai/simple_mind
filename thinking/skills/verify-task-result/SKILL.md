@@ -15,7 +15,7 @@ Instead, give the verifying agent all the *pointers* it needs to investigate the
 
 Write a markdown file for the verifying agent that includes:
 
-1. **The working agent's ID** so the verifier can inspect its transcript, artifacts, and state directly (e.g., via `mng transcript <agent-id>`)
+1. **The working agent's ID** so the verifier can inspect its transcript, artifacts, and state directly (e.g., via `mng transcript <working-agent-id>`)
 2. **The original task description** -- what you asked the working agent to do, and why. Copy or closely paraphrase the original `--message` you sent when creating the worker. Include the success criteria.
 3. **Any follow-up context** -- if you sent additional messages to the working agent during its run (e.g., answering its questions, providing clarifications, updating requirements), mention that you did so and what the key points were. The verifier can read the full transcript, but knowing what changed helps it focus.
 4. **The user's original request** (if applicable) -- if this task was triggered by a user message, include any relevant conversation IDs and time-spans for each so the verifier can judge whether the result actually satisfies the user's intent (not just the task instructions as you interpreted them).
@@ -27,7 +27,7 @@ Write the instructions to a temporary markdown file and pass via `--message-file
 cat > /tmp/verify-<task-name>.md << 'EOF'
 ## Task to verify
 
-**Working agent:** <agent-id>
+**Working agent:** <working-agent-id>
 **Original task:** <paste or paraphrase the original task description and success criteria>
 **Follow-up context:** <any clarifications or additional messages you sent>
 **User request:** <conversation ID and summary, if applicable>
@@ -35,8 +35,22 @@ cat > /tmp/verify-<task-name>.md << 'EOF'
 
 Please review the working agent's transcript and any artifacts it produced, then provide your assessment and the recommended next action(s).
 EOF
+```
 
-mng create "$MNG_AGENT_NAME-verify-<task-name>" --env ROLE=verifying --message-file /tmp/verify-<task-name>.md
+Then you can run a `mng create` command like the following to create the verifying agent (be sure to substitute the correct values for "<working-agent-id>" and "<task-name>"):
+
+```bash
+WORKING_AGENT_ID="<working-agent-id>"
+WORKING_AGENT_BRANCH=mng/<task-name>
+WORKING_AGENT_BASE_BRANCH=$(mng exec "$WORKING_AGENT_ID" 'echo $GIT_BASE_BRANCH' 2>/dev/null || echo "main")
+
+mng create "$MNG_AGENT_NAME-verify-<task-name>" \
+  --env ROLE=verifying \
+  --env WORKING_AGENT_ID="<working-agent-id>" \
+  --env WORKING_AGENT_BRANCH="mng/<task-name>" \
+  --env WORKING_AGENT_BASE_BRANCH="$MIND_BRANCH" \
+  --label role=verifying \
+  --message-file /tmp/verify-<task-name>.md
 ```
 
 ## After creating the verifier

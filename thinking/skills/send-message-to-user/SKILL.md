@@ -26,13 +26,13 @@ You can find the `conversation_id` from the event you are responding to (it is i
 The `model` should match the model used by that conversation (also visible in the event data or conversation list).
 
 When replying to an existing conversation, you may wish to give the user the *option* to spin out one or more new conversations about some specific topic(s).
-In order to do so, simply enclose your reply like this: <SUGGEST_NEW_THREAD>...</SUGGEST_NEW_THREAD>
+In order to do so, simply enclose your reply like this: <SUGGEST_NEW_CONVERSATION>...</SUGGEST_NEW_CONVERSATION>
 This will be rendered in a way that makes it easy for the user to split out a new conversation about that topic.
 You should make these suggestions whenever you either find that the conversation has become about something very specific, or if you are making suggestion(s) for work that you could do for the user or help with (especially when it would be a larger chunk of work).
 You should generally only make these suggestions from the "daily conversation" (since other conversations are generally already about something more specific)
 
 When replying within an existing conversation, you may also want to *link* to one or more other previous conversation(s).
-In order to do so, simply enclose your reply like this: <THREAD_LINK conversation_id="<conversation-id>">...</THREAD_LINK>
+In order to do so, simply enclose your reply like this: <CONVERSATION_LINK conversation_id="<conversation-id>">...</CONVERSATION_LINK>
 Be sure to fill in the correct conversation id!
 
 ## Starting a new conversation

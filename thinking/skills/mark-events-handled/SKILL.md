@@ -5,7 +5,8 @@ description: Mark events as handled after processing them. You **MUST** use this
 
 # Marking events as handled
 
-After handling a group of events, you must mark each one as handled individually. But first, **verify that you actually did the right thing for each event**.
+After handling a group of events, you must mark each one as handled individually.
+But first, **verify that you actually did the right thing for each event**.
 
 ## Step 1: Review what you did
 
@@ -14,7 +15,8 @@ Before marking anything as handled, go through each event and confirm:
 - What action did you take for this event? (e.g., delegated a task, sent a message, ignored it, etc.)
 - Was that the right action? Did you actually follow the appropriate skill for this event's source?
 
-If you realize you missed something or took the wrong action for an event, **go do the right thing first** before marking it as handled. Don't just claim you handled it.
+If you realize you missed something or took the wrong action for an event, **go do the right thing first** before marking it as handled.
+Don't just claim you handled it.
 
 ## Step 2: Mark each event as handled
 
@@ -62,4 +64,5 @@ Call `handle_event.sh` **once per event**, providing metadata about how you hand
 
 ## What if you're unsure whether you handled an event correctly?
 
-If you're genuinely unsure, mark it as handled with a low confidence score and ask a question about it. It's better to move forward and revisit than to get stuck.
+If you're genuinely unsure, mark it as handled with a low confidence score and ask a question about it.
+It's better to move forward and revisit than to get stuck.

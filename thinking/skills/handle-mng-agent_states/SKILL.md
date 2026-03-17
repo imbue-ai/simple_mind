@@ -45,15 +45,18 @@ Note that there is no "archived" state for agents--an agent is simply considered
 
 ## State: "running", "starting", "building"
 
-You can generally ignore these. It just means that the agent is running or in the process of starting up.
+You can generally ignore these.
+It just means that the agent is running or in the process of starting up.
 
 You will get another event when it finishes or if it crashes.
 
 ## State: "stopped", "done", "paused", "waiting"
 
-This is the most common state transition you will handle. It means the agent's process has either exited ("stopped", "done", "paused") or has finished responding to your prompt and is waiting for either additional input / for you to stop it ("waiting").
+This is the most common state transition you will handle.
+It means the agent's process has either exited ("stopped", "done", "paused") or has finished responding to your prompt and is waiting for either additional input / for you to stop it ("waiting").
 
-First, determine if the task is actually complete, or if the agent had questions or needs input from you. Check for the agent's output file first:
+First, determine if the task is actually complete, or if the agent had questions or needs input from you.
+Check for the agent's output file first:
 
 ```bash
 cat outputs/<agent-id>/summary.md 2>/dev/null || echo "No summary.md found"
@@ -84,7 +87,7 @@ If the agent had questions or seems to have run into some problems, then it is e
 Once you've done that, you should either:
 
 1. Send a message to the agent with the information it needs to proceed (e.g., answers to its questions, or suggestions on how to fix the errors) by using `mng message <agent-id> --message "(put your message here)"`
-2. Abandon the task, archive the agent, and try again with a new agent (after revising the instructions). It is often useful to retry a task with a fresh agent and updated instructions if you see that the task failed for some reason that you could have prevented with better instructions. In this case, simply call `mng archive -f <agent-id>` to clean up the old agent, revise the instructions, and then create a new agent using your `delegate-task-to-agent` skill with the updated instructions. 
+2. Abandon the task, archive the agent, and try again with a new agent (after revising the instructions). It is often useful to retry a task with a fresh agent and updated instructions if you see that the task failed for some reason that you could have prevented with better instructions. In this case, simply call `mng archive -f <agent-id>` to clean up the old agent, revise the instructions, and then create a new agent using your `delegate-task-to-agent` skill with the updated instructions.
 3. Ask the user for additional information. You should generally try to avoid doing this if possible, since it adds latency and friction, but sometimes the agent has failed and you simply don't have enough information to know what to do (or even to make a reasonable guess or assumption). In such a case, use your `send-message-to-user` skill to ask the user for additional information that can help you determine how to proceed.
 4. Abandon the task, stop the agent, and either inform the user that you were unable to complete the task (if they requested it), or simply move on with your other priorities if the task was something you decided to do yourself without the user's explicit request. In this case, call `mng stop <agent-id>` to stop the agent, and then check if there is now capacity to launch a pending ticket (using `list-tickets` to check for ready tickets).
 
@@ -92,7 +95,8 @@ Once you've done that, you should either:
 
 If the agent seems to believe it has completed the task, then the next steps depend on what type of agent this is.
 
-If this was a "working" agent, use the `verify-task-result` skill to check whether the task was completed successfully. This will create a verifying agent to review the work.
+If this was a "working" agent, use the `verify-task-result` skill to check whether the task was completed successfully.
+This will create a verifying agent to review the work.
 
 If this was a "verifying" agent, use your `handle-verification-result` skill to review the verifier's recommendations and decide what to do next.
 
@@ -110,7 +114,8 @@ If this happens repeatedly, you should investigate the underlying cause of the c
 
 This state indicates that something went wrong before the host could be created, eg, while building the image or starting the host.
 
-This is typically a problem with the dockerfile or other build instructions. You should investigate your local `mng` logs and see what the actual error was, and then fix the underlying issue (e.g., by fixing the dockerfile or build instructions) before ultimately trying again (by creating a new agent with the same instructions using your `delegate-task-to-agent` skill).
+This is typically a problem with the dockerfile or other build instructions.
+You should investigate your local `mng` logs and see what the actual error was, and then fix the underlying issue (e.g., by fixing the dockerfile or build instructions) before ultimately trying again (by creating a new agent with the same instructions using your `delegate-task-to-agent` skill).
 
 ## State: "stopping"
 

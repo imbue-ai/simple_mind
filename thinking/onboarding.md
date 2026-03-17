@@ -20,7 +20,7 @@ The tickets themselves (tagged `onboarding`) track the actual completion of each
 
 ## Second day
 
-- [ ] **Learn communication preferences**: Does the user prefer concise or detailed updates? Formal or casual tone? Do they want suggestions or just do what they ask?  What else would they like to see in the daily updates? Are there any other recurring messages or questions they'd like? 
+- [ ] **Learn communication preferences**: Does the user prefer concise or detailed updates? Formal or casual tone? Do they want suggestions or just do what they ask? What else would they like to see in the daily updates? Are there any other recurring messages or questions they'd like?
 - [ ] **Authenticate services**: Help the user connect any services they want you to interact with (e.g., email, messaging, calendar, GitHub). Create separate tickets for each service as they come up.
 
 ## First week

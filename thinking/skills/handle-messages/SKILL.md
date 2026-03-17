@@ -5,7 +5,8 @@ description: Handle events from the messages source about user or assistant mess
 
 ### Events from the `messages` source
 
-These events represent messages sent by the user in conversation threads. Each event includes the `conversation_id`, the `role` (which will be "user" for user messages), and the `content` of the message.
+These events represent messages sent by the user in conversation threads.
+Each event includes the `conversation_id`, the `role` (which will be "user" for user messages), and the `content` of the message.
 
 When you get a message from the user, it will *always* come with a response that was generated for you **and already sent to the user on your behalf**.
 
@@ -19,12 +20,18 @@ If you said "I need to ask you some clarifying questions before I can get starte
 
 When processing a user message, determine which of these categories it falls into:
 
-**New task request**: The user is asking you to do something. Remember: when the user tells you to do something, they really mean "use your `delegate-task-to-agent` skill to make a `mng` agent do it." You should *never* do the work yourself.
+**New task request**: The user is asking you to do something.
+Remember: when the user tells you to do something, they really mean "use your `delegate-task-to-agent` skill to make a `mng` agent do it."
+You should *never* do the work yourself.
 
-**Clarification or question**: The user asked something you don't understand, or the request is too complex to act on immediately. Ask clarifying questions via `send-message-to-user`.
+**Clarification or question**: The user asked something you don't understand, or the request is too complex to act on immediately.
+Ask clarifying questions via `send-message-to-user`.
 
-**Update to an in-flight task**: The user is providing additional information, changed requirements, or a cancellation for work that is already in progress. Use the `update-task` skill, which covers how to forward info, restart tasks with revised instructions, or cancel them.
+**Update to an in-flight task**: The user is providing additional information, changed requirements, or a cancellation for work that is already in progress.
+Use the `update-task` skill, which covers how to forward info, restart tasks with revised instructions, or cancel them.
 
-**Finish handling an event**: The user is responding to a question you asked or providing information you requested. The original event was probably already marked as handled, but make sure you ensure that everything was handled correctly given the new information from the user and the associated skill for handling such events.
+**Finish handling an event**: The user is responding to a question you asked or providing information you requested.
+The original event was probably already marked as handled, but make sure you ensure that everything was handled correctly given the new information from the user and the associated skill for handling such events.
 
-**General conversation**: The user is chatting, providing context, or sharing information that doesn't require immediate action. Acknowledge if appropriate, and store anything useful in memory, but otherwise generally let the "talking" agent handle it.
+**General conversation**: The user is chatting, providing context, or sharing information that doesn't require immediate action.
+Acknowledge if appropriate, and store anything useful in memory, but otherwise generally let the "talking" agent handle it.

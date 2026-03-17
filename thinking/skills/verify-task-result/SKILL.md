@@ -5,9 +5,11 @@ description: Create a verifying agent to check whether a working agent's task wa
 
 # Verifying a task result
 
-Every completed task must be verified. The verifying agent independently reviews what was done, judges whether it satisfies the original intent, and produces a concrete set of recommended next actions for you to execute.
+Every completed task must be verified.
+The verifying agent independently reviews what was done, judges whether it satisfies the original intent, and produces a concrete set of recommended next actions for you to execute.
 
-You should **not** try to gather or summarize the working agent's output yourself -- that would pollute your context. Instead, give the verifying agent all the *pointers* it needs to investigate the work on its own.
+You should **not** try to gather or summarize the working agent's output yourself -- that would pollute your context.
+Instead, give the verifying agent all the *pointers* it needs to investigate the work on its own.
 
 ## What to include in the verification task message
 
@@ -45,7 +47,8 @@ Post to the **Work Log** (see `send-message-to-user` skill):
 Created verifying agent <agent-name> to verify: <brief description of what's being verified>
 ```
 
-Then mark the relevant events as handled and move on. You will receive a new `mng/agent_states` event when the verifying agent finishes -- at that point, use the `handle-verification-result` skill to act on its recommendations.
+Then mark the relevant events as handled and move on.
+You will receive a new `mng/agent_states` event when the verifying agent finishes -- at that point, use the `handle-verification-result` skill to act on its recommendations.
 
 ## What the verifier will do
 
@@ -55,7 +58,8 @@ The verifying agent (see `verifying/PROMPT.md`) will independently:
 - Judge whether the work satisfies the original intent and success criteria
 - Produce a final response with a clear verdict and concrete recommended next actions (e.g., commands to run, messages to send, tasks to create, branches to merge)
 
-You do **not** need to tell the verifier how to do its job -- it has its own prompt for that. Just give it the pointers listed above so it can find everything it needs.
+You do **not** need to tell the verifier how to do its job -- it has its own prompt for that.
+Just give it the pointers listed above so it can find everything it needs.
 
 ## Guidelines
 

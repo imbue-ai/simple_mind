@@ -5,17 +5,20 @@ description: Create a ticket to track work that needs to be done. Use when you n
 
 # Creating a ticket
 
-Tickets are how you logically track your own work that needs to be done. They are distinct from "agents" and "tasks" -- a "ticket" describes *what* needs to happen, while a "task" is the actual chunk of work assigned to an "agent" (often in order to accomplish a "ticket", though not always, and there will usually be multiple "tasks" for any given "ticket", eg, at least one for the working agent, and one for the verifying agent).
+Tickets are how you logically track your own work that needs to be done.
+They are distinct from "agents" and "tasks" -- a "ticket" describes *what* needs to happen, while a "task" is the actual chunk of work assigned to an "agent" (often in order to accomplish a "ticket", though not always, and there will usually be multiple "tasks" for any given "ticket", eg, at least one for the working agent, and one for the verifying agent).
 
 Tickets are managed using the `tk` command line tool, which stores them as markdown files with YAML frontmatter in `.tickets/`.
 You can run `tk help` to see all available commands.
 
 ## When to create a ticket
 
-- **At capacity**: You need to delegate work but have too many agents running (see `delegate-task-to-agent` skill). Create a ticket so the work is not forgotten, and it can be picked up later when capacity opens up.
+- **At capacity**: You need to delegate work but have too many agents running (see `delegate-task-to-agent` skill).
+Create a ticket so the work is not forgotten, and it can be picked up later when capacity opens up.
 - **Follow-up work**: A verifier recommends additional work, or a completed task surfaced something that needs attention later.
 - **Multi-step projects**: Break a larger goal into multiple tickets, using dependencies to track ordering.
-- **User requests that can't start immediately**: The user asks for something but you are busy with higher-priority work.  Be sure to send them the ticket ID using your `send-message-to-user` skill, so they can refer to it later if needed.
+- **User requests that can't start immediately**: The user asks for something but you are busy with higher-priority work.
+Be sure to send them the ticket ID using your `send-message-to-user` skill, so they can refer to it later if needed.
 
 ## How to create a ticket
 
@@ -55,14 +58,16 @@ tk create "Refactor auth module" --description "..." --priority 2 --tags backend
 
 ## Including enough context
 
-The most important part of a ticket is that it contains **everything** a future agent will need to start working on it without asking you questions. Include:
+The most important part of a ticket is that it contains **everything** a future agent will need to start working on it without asking you questions.
+Include:
 
 - **What** needs to be done and **why**
 - **Success criteria** (via `--acceptance`) so the verifier knows what to check
 - **Relevant context**: conversation IDs, prior attempts, related agent IDs, links to code or docs
 - **The user's original request** (if applicable), including the conversation ID and a summary
 
-Think of it this way: when you later use `list-tickets` to find work to do, you will read this ticket and immediately create an agent from it using `delegate-task-to-agent`. The ticket must have enough detail for that to work smoothly.
+Think of it this way: when you later use `list-tickets` to find work to do, you will read this ticket and immediately create an agent from it using `delegate-task-to-agent`.
+The ticket must have enough detail for that to work smoothly.
 
 ## Dependencies
 

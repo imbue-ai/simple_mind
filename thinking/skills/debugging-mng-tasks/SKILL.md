@@ -20,6 +20,7 @@ You can always learn more about `mng` and its commands by running `mng --help` o
 
 ## Debugging process
 
-Start by running `mng list --exclude "has(labels.archived_at)" --exclude "id == \"$AGENT_ID\"" --format jsonl` to see all currently running agents (besides yourself) and their states, or `mng capture <agent> --full` to see the full output from a given agent. This can often give you a good sense of what is happening and where things might be going wrong.
+Start by running `mng list --exclude "has(labels.archived_at)" --exclude "id == \"$AGENT_ID\"" --format jsonl` to see all currently running agents (besides yourself) and their states, or `mng capture <agent> --full` to see the full output from a given agent.
+This can often give you a good sense of what is happening and where things might be going wrong.
 
 **NEVER** run commands on any agents other than those that you created yourself!

@@ -5,7 +5,8 @@ description: Create a sub-agent to perform a task. Use when you need to delegate
 
 # Delegating tasks to sub-agents
 
-As the thinking agent, you should NEVER do work directly. Instead, delegate all tasks to sub-agents via `mng create`.
+As the thinking agent, you should NEVER do work directly.
+Instead, delegate all tasks to sub-agents via `mng create`.
 
 ## Check remaining worker capacity
 
@@ -25,9 +26,12 @@ If there are not too many workers already running, read on for how to create dif
 
 ## Creating a working agent
 
-To delegate a task, create a sub-agent using `mng`. By default, sub-agents are created as copies of the current agent harness with a different role. Use `--env ROLE=working` to create a working agent.
+To delegate a task, create a sub-agent using `mng`.
+By default, sub-agents are created as copies of the current agent harness with a different role.
+Use `--env ROLE=working` to create a working agent.
 
-**Always write task instructions to a markdown file** and pass it via `--message-file`. This ensures instructions are well-structured, reviewable, and not lost if the command fails.
+**Always write task instructions to a markdown file** and pass it via `--message-file`.
+This ensures instructions are well-structured, reviewable, and not lost if the command fails.
 
 ```bash
 cat > /tmp/task-<task-name>.md << 'EOF'
@@ -54,7 +58,9 @@ By convention (as shown above), the task name should start with your agent name 
 
 ## Creating a verifying agent
 
-When a working agent finishes successfully (you will receive an `mng/agent_states` event), create a verifying agent to check the work. Use `--env ROLE=verifying`. See the `verify-task-result` skill for the full details on what to include in the message file.
+When a working agent finishes successfully (you will receive an `mng/agent_states` event), create a verifying agent to check the work.
+Use `--env ROLE=verifying`.
+See the `verify-task-result` skill for the full details on what to include in the message file.
 
 ## Logging the task
 

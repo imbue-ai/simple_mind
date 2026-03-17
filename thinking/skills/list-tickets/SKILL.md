@@ -13,11 +13,13 @@ Use this skill to check if there are pending tickets ready to be picked up, and 
 tk ready
 ```
 
-This lists all open or in-progress tickets whose dependencies are resolved. Tickets are shown with their ID, priority, title, and tags.
+This lists all open or in-progress tickets whose dependencies are resolved.
+Tickets are shown with their ID, priority, title, and tags.
 
 ## Pick the highest priority ticket
 
-From the ready list, choose the ticket with the highest priority (lowest number -- 0 is critical, 4 is minimal). If there are ties, use your judgment based on your PURPOSE and the current context.
+From the ready list, choose the ticket with the highest priority (lowest number -- 0 is critical, 4 is minimal).
+If there are ties, use your judgment based on your PURPOSE and the current context.
 
 ## Launch the ticket as a task
 

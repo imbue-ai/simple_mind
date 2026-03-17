@@ -5,7 +5,8 @@ description: Handle the one-time first-run event to set up onboarding tickets an
 
 # First-run onboarding
 
-The `mind/onboarding` event fires exactly once -- the first time this mind starts. Use it to bootstrap the onboarding process.
+The `mind/onboarding` event fires exactly once -- the first time this mind starts.
+Use it to bootstrap the onboarding process.
 
 ## What to do immediately
 
@@ -27,11 +28,14 @@ Use priority levels that reflect the timing groups:
 - **First week**: priority `2`
 - **First month**: priority `3`
 
-3. **Check off each item** in `thinking/onboarding.md` as soon as you've created its ticket (change `- [ ]` to `- [x]`). The checklist tracks "ticket created", not "task completed" -- ticket closure is tracked separately by `tk`.
+3. **Check off each item** in `thinking/onboarding.md` as soon as you've created its ticket (change `- [ ]` to `- [x]`).
+The checklist tracks "ticket created", not "task completed" -- ticket closure is tracked separately by `tk`.
 
-4. **Handle the most urgent item yourself**: The "Find a way to provide value immediately" item should be done immediately -- don't delegate it. Use `send-message-to-user` to send any necessary messages and questions.
+4. **Handle the most urgent item yourself**: The "Find a way to provide value immediately" item should be done immediately -- don't delegate it.
+Use `send-message-to-user` to send any necessary messages and questions.
 
-5. **Continue onboarding over time**: The other items will be handled over the first hours, days, and weeks of usage. Don't try to do everything at once -- let the user get used to you gradually and avoid overwhelming them.
+5. **Continue onboarding over time**: The other items will be handled over the first hours, days, and weeks of usage.
+Don't try to do everything at once -- let the user get used to you gradually and avoid overwhelming them.
 
 ## After the first onboarding ticket is complete
 

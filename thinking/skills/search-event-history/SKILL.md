@@ -5,9 +5,12 @@ description: Search through past events in the event log files. Use when you nee
 
 # Searching event history
 
-Event logs are stored as JSONL files under `$MNG_AGENT_STATE_DIR/events/<source>/events.jsonl`. You can search them using standard tools like `grep` and `jq`.
+Event logs are stored as JSONL files under `$MNG_AGENT_STATE_DIR/events/<source>/events.jsonl`.
+You can search them using standard tools like `grep` and `jq`.
 
-**Be careful about how much data you load into context.** Event files can be very large, and individual events can contain large payloads. Always inspect the *shape and size* of the data before loading full content.
+**Be careful about how much data you load into context.**
+Event files can be very large, and individual events can contain large payloads.
+Always inspect the *shape and size* of the data before loading full content.
 
 **You should generally prefer to use sub-agents or your `delegate-task-to-agent` skill for larger or more complex explorations of event history**, but for quick lookups or simple queries, see below for some tips on how to search event logs directly.
 
@@ -26,7 +29,8 @@ Before reading event content, check how large the fields are to avoid pulling hu
 cat "$MNG_AGENT_STATE_DIR/events/<source>/events.jsonl" | tail -20 | jq -c '[to_entries[] | .value = (.value | tojson | length)] | from_entries'
 ```
 
-This tells you which fields are small (IDs, timestamps) and which are large (content, data payloads). Only load the fields you actually need.
+This tells you which fields are small (IDs, timestamps) and which are large (content, data payloads).
+Only load the fields you actually need.
 
 ## Step 3: Search with targeted queries
 

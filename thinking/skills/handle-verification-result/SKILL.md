@@ -37,7 +37,8 @@ If not, and the verdict seems reasonable to you, then move on to the next step.
 
 ## Step 3: Execute each next step
 
-Assuming the verdict and next steps seem reasonable, next you should work through the next steps list one by one. These may include:
+Assuming the verdict and next steps seem reasonable, next you should work through the next steps list one by one.
+These may include:
 
 - **Running commands** (e.g., `git merge`, shell commands)
 - **Sending messages to the user** (via `send-message-to-user`)
@@ -46,7 +47,8 @@ Assuming the verdict and next steps seem reasonable, next you should work throug
 - **Closing tickets** (via `tk close`)
 - **Retrying with revised instructions** (via `delegate-task-to-agent`)
 
-Post each action to the **Work Log** as you execute it. For example:
+Post each action to the **Work Log** as you execute it.
+For example:
 
 ```
 Verification of <task-name>: PASSED.

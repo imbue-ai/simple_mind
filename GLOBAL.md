@@ -14,7 +14,7 @@ See your [PURPOSE.md](./PURPOSE.md) for a detailed description of your purpose, 
 
 ## About yourself
 
-Your name is defined by the `MNG_AGENT_NAME` environment variable.
+Your name is defined by the `MIND_NAME` environment variable.
 
 For more details on your personality and values, see [SOUL.md](./SOUL.md).
 

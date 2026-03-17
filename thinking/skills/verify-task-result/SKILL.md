@@ -44,12 +44,13 @@ WORKING_AGENT_ID="<working-agent-id>"
 WORKING_AGENT_BRANCH=mng/<task-name>
 WORKING_AGENT_BASE_BRANCH=$(mng exec "$WORKING_AGENT_ID" 'echo $GIT_BASE_BRANCH' 2>/dev/null || echo "main")
 
-mng create "$MNG_AGENT_NAME-verify-<task-name>" \
+mng create "$MIND_NAME-verify-<task-name>" \
   --env ROLE=verifying \
   --env WORKING_AGENT_ID="<working-agent-id>" \
   --env WORKING_AGENT_BRANCH="mng/<task-name>" \
   --env WORKING_AGENT_BASE_BRANCH="$(git rev-parse --abbrev-ref HEAD)" \
   --label role=verifying \
+  --label mind=$MIND_NAME \
   --message-file /tmp/verify-<task-name>.md
 ```
 

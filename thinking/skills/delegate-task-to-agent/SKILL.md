@@ -51,9 +51,10 @@ EOF
 Then create the agent with a command like the following (substituting the correct value for "<task-name>"):
 
 ```bash
-mng create "$MNG_AGENT_NAME-<task-name>" \
+mng create "$MIND_NAME-<task-name>" \
   --env ROLE=working \
   --label role=working \
+  --label mind=$MIND_NAME \
   --message-file /tmp/task-<task-name>.md
 ```
 

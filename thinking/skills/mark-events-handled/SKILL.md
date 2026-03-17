@@ -52,7 +52,7 @@ Call `handle_event.sh` **once per event**, providing metadata about how you hand
 
 # Uncertain: asked the user for clarification
 ./skills/mark-events-handled/handle_event.sh evt-def456 \
-  --summary "User request was ambiguous, asked for clarification in daily thread" \
+  --summary "User request was ambiguous, asked for clarification in daily conversation" \
   --confidence 0.5 \
   --message msg-789
 

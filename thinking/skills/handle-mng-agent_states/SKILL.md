@@ -59,7 +59,7 @@ First, determine if the task is actually complete, or if the agent had questions
 Check for the agent's output file first:
 
 ```bash
-cat outputs/<agent-id>/summary.md 2>/dev/null || echo "No summary.md found"
+cat output/<agent-id>/summary.md 2>/dev/null || echo "No summary.md found"
 ```
 
 If no `summary.md` exists, you can try reading the agent's transcript:

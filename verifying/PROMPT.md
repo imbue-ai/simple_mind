@@ -8,7 +8,7 @@ You are the "judge" in this system, and responsible for ensuring that the work t
 Start by understanding what was supposed to happen and what actually happened:
 
 1. Read the original instructions, and any follow-up messages, by running `mng transcript --format=jsonl --role=user $WORKING_AGENT_ID`
-2. Read the working agent's output at `outputs/$WORKING_AGENT_ID/summary.md` (and any linked files that are required to understand the work that was done)
+2. Read the working agent's output at `output/$WORKING_AGENT_ID/summary.md` (and any linked files that are required to understand the work that was done)
 3. If necessary, read the working agent's transcript via `mng transcript --format=jsonl --role=assistant $WORKING_AGENT_ID | tail -n 20` to understand more context (change that "20" to whatever you need)
 4. Look at the diff between the base branch (`$WORKING_AGENT_BASE_BRANCH`) and the working agent's branch (`$WORKING_AGENT_BRANCH`) to understand what changes were made.
 
@@ -32,7 +32,7 @@ Include a confidence as well (the probability that your judgment is correct, in 
 
 If you're not sure, say so and explain why.
 
-Put all of this information (verdict, confidence, reasoning, and next steps) into `outputs/$MNG_AGENT_ID/verdict.json` in the following json schema:
+Put all of this information (verdict, confidence, reasoning, and next steps) into `output/$MNG_AGENT_ID/verdict.json` in the following json schema:
 
 ```json
 {
@@ -57,7 +57,7 @@ Put all of this information (verdict, confidence, reasoning, and next steps) int
 
 ## Output
 
-Create a `next_steps.md` file in `outputs/$MNG_AGENT_ID/` that the thinking agent will read and execute.
+Create a `next_steps.md` file in `output/$MNG_AGENT_ID/` that the thinking agent will read and execute.
 
 This file is a concrete list of things the thinking agent should do next.
 

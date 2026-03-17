@@ -10,7 +10,7 @@ When a verifying agent finishes, read its `verdict.json` and `next_steps.md` fil
 ## Step 1: Read the verifier's verdict
 
 ```bash
-cat outputs/<verifier-agent-id>/verdict.json
+cat output/<verifier-agent-id>/verdict.json
 ```
 
 This file contains the verdict (PASSED / FAILED), confidence, and reasoning, which helps contextualize your next steps.
@@ -20,7 +20,7 @@ This file contains the verdict (PASSED / FAILED), confidence, and reasoning, whi
 Next, read the `next_steps.md` file:
 
 ```bash
-cat outputs/<verifier-agent-id>/next_steps.md
+cat output/<verifier-agent-id>/next_steps.md
 ```
 
 These are the actions that were recommended by the verifying agent.
@@ -58,7 +58,7 @@ Verification of <task-name>: PASSED.
 - Sent completion notice to user
 ```
 
-If any important data or artifacts need to be preserved beyond the outputs directory (e.g., a report the user should keep, configuration that should be committed), move or copy them to a permanent location now--the outputs directory will be cleaned up when the agents are eventually destroyed.
+If any important data or artifacts need to be preserved beyond the output directory (e.g., a report the user should keep, configuration that should be committed), move or copy them to a permanent location now--the output directory will be cleaned up when the agents are eventually destroyed.
 
 ## Step 4: Clean up
 

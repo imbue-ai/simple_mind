@@ -1,14 +1,14 @@
 ---
 name: send-message-to-user
-description: Send a message to the user in a conversation thread. You MUST use this skill to reply in an existing conversation, start a new conversation, or proactively reach out.
+description: Send a message to the user in a conversation. You MUST use this skill to reply in an existing conversation, start a new conversation, or proactively reach out.
 ---
 
 # Sending messages to the user
 
-You communicate with users through conversation threads.
-Each thread has a unique `conversation_id` and a human-readable name.
+You communicate with users through conversations.
+Each conversation has a unique `conversation_id` and a human-readable name.
 
-Users may send messages in different conversation threads (with different `conversation_id`s), and you should always *reply* in the same thread.
+Users may send messages in different conversations (with different `conversation_id`s), and you should always *reply* in the same conversation.
 
 If you are proactively sending a message (not directly replying to a user message), you should think carefully about whether to start a new one vs use an existing conversation (and if so, which one).
 
@@ -16,7 +16,7 @@ Be sure to any memories about user preferences around notifications and messagin
 
 ## Sending a message in an existing conversation
 
-When you want to follow up in a conversation you already know about (e.g. responding to a user message in the same thread), inject your message directly using the `llm` tool:
+When you want to follow up in a conversation you already know about (e.g. responding to a user message in the same conversation), inject your message directly using the `llm` tool:
 
 ```bash
 $MNG_AGENT_STATE_DIR/commands/chat.sh chat --reply <conversation-id> "Your message here"
@@ -25,11 +25,11 @@ $MNG_AGENT_STATE_DIR/commands/chat.sh chat --reply <conversation-id> "Your messa
 You can find the `conversation_id` from the event you are responding to (it is included in `messages` events), or use the `list-conversations` skill.
 The `model` should match the model used by that conversation (also visible in the event data or conversation list).
 
-When replying to an existing conversation, you may wish to give the user the *option* to spin out one or more new threads about some specific topic(s).
+When replying to an existing conversation, you may wish to give the user the *option* to spin out one or more new conversations about some specific topic(s).
 In order to do so, simply enclose your reply like this: <SUGGEST_NEW_THREAD>...</SUGGEST_NEW_THREAD>
-This will be rendered in a way that makes it easy for the user to split out a new conversation thread about that topic.
+This will be rendered in a way that makes it easy for the user to split out a new conversation about that topic.
 You should make these suggestions whenever you either find that the conversation has become about something very specific, or if you are making suggestion(s) for work that you could do for the user or help with (especially when it would be a larger chunk of work).
-You should generally only make these suggestions from the "daily thread" (since other threads are generally already about something more specific)
+You should generally only make these suggestions from the "daily conversation" (since other conversations are generally already about something more specific)
 
 When replying within an existing conversation, you may also want to *link* to one or more other previous conversation(s).
 In order to do so, simply enclose your reply like this: <THREAD_LINK conversation_id="<conversation-id>">...</THREAD_LINK>
@@ -49,18 +49,18 @@ For example:
 - "PR #42 ready for review" for a completed task
 - "Question about database migration" for a question
 
-If a conversation with the given name already exists, your message will be added to that thread.
+If a conversation with the given name already exists, your message will be added to that conversation.
 Otherwise, a new conversation is created.
 
 This command prints the conversation ID to stdout.
 
 ## Choosing which conversation to use
 
-- **Responding to a user message**: reply in the same thread using `chat.sh chat --reply`.
+- **Responding to a user message**: reply in the same conversation using `chat.sh chat --reply`.
 - **Work status updates** (agents created, tasks verified, tickets changed): post to at least the **Work Log** conversation (occasionally to another conversation if it makes sense / the user asked for it).
 - **Proactive outreach** (completed work that needs the user's attention, questions, suggestions): start or continue a named conversation.
-- **Daily summary and planning**: the daily thread (see `handle-mind-schedule`).
-- If you are unsure, default to the Work Log for operational updates, or the daily thread for anything that needs the user's input.
+- **Daily summary and planning**: the daily conversation (see `handle-mind-schedule`).
+- If you are unsure, default to the Work Log for operational updates, or the daily conversation for anything that needs the user's input.
 
 ## Tone
 

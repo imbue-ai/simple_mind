@@ -28,7 +28,7 @@ mng destroy -f <agent-id>
 When destroying an agent, also remove its output directory:
 
 ```bash
-rm -rf outputs/<agent-id>
+rm -rf output/<agent-id>
 ```
 
 **Before removing**, check if the output directory contains anything that should be preserved (e.g., reports, data files, or artifacts that haven't been moved to a permanent location).

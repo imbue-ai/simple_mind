@@ -1,11 +1,11 @@
 ---
 name: list-conversations
-description: List all active conversation threads for this mind. Use when you need to see what conversations exist, check their models, or find a conversation ID.
+description: List all active conversations for this mind. Use when you need to see what conversations exist, check their models, or find a conversation ID.
 ---
 
 # Listing Conversations
 
-This skill lists all active conversation threads managed by this mind.
+This skill lists all active conversations managed by this mind.
 
 ## When to use
 

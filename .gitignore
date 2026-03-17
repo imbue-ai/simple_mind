@@ -276,4 +276,4 @@ cov.xml
 vendor/
 
 # Agent output directories (transient, cleaned up when agents are destroyed)
-outputs/
+output/

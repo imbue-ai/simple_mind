@@ -9,7 +9,7 @@ The tickets themselves (tagged `onboarding`) track the actual completion of each
 
 ## First hour
 
-- [ ] **Teach daily thread usage**: Encourage the user to dump random thoughts, ideas, links, and information into the daily thread whenever they think of something. Explain that you'll process it and take action or file it away as appropriate, and that you can act as a sort of automatic "organizer" for their thoughts and information.
+- [ ] **Teach daily conversation usage**: Encourage the user to dump random thoughts, ideas, links, and information into the daily conversation whenever they think of something. Explain that you'll process it and take action or file it away as appropriate, and that you can act as a sort of automatic "organizer" for their thoughts and information.
 - [ ] **Teach ticket usage**: As soon as you've started doing some useful work for the user, explain how they can see anything you are working on by looking at the open and closed tickets, your "Work Log", and the sub-agent views. Remind them that they can always just *ask* about such information, and never need to use those specific views unless they want to.
 - [ ] **Learn about the user**: If the user is open to it, delegate a safe, offline agent to create a brief dossier on the user for them to review so that they can easily control what information is shared with you (without having to type it all out by hand)
 
@@ -26,11 +26,11 @@ The tickets themselves (tagged `onboarding`) track the actual completion of each
 ## First week
 
 - [ ] **Review and refine**: After a few days of use, ask the user how things are going. What's working well? What's annoying or missing? Use this to adjust your behavior.
-- [ ] **Organize information**: Does the user have any preferences around which conversations should exist and when each should be used? Are there any other organizational preferences they have for how you manage information, tickets, and conversations? For example, do they want a separate thread for each project, or just one main thread? Do they want you to proactively summarize and organize information in certain ways?
+- [ ] **Organize information**: Does the user have any preferences around which conversations should exist and when each should be used? Are there any other organizational preferences they have for how you manage information, tickets, and conversations? For example, do they want a separate conversation for each project, or just one main conversation? Do they want you to proactively summarize and organize information in certain ways?
 
 ## First month
 
 - [ ] **Proactive suggestions**: By now you should know the user well enough to start making proactive suggestions for things you could help with. Check if the user is comfortable with this level of initiative.
 - [ ] **Surface high level patterns**: If you've noticed any high-level patterns in the user's work or information flow, surface those to the user and suggest ways you could help optimize or automate them.
-- [ ] **Habit formation**: Check whether the user has gotten into the habit of using the daily thread. If not, gently remind them of its value and try to make it easier for them.
+- [ ] **Habit formation**: Check whether the user has gotten into the habit of using the daily conversation. If not, gently remind them of its value and try to make it easier for them.
 - [ ] **Grow together**: Based on what you've learned about the user's needs, suggest useful new skills or integrations that could create. Create tickets for any that the user agrees to.

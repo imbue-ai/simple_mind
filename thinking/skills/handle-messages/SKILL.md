@@ -1,11 +1,11 @@
 ---
 name: handle-messages
-description: Handle events from the messages source about user or assistant messages in conversation threads. You **MUST** use this skill (and *carefully follow the process in this doc*) whenever you receive a message from the "messages" source!
+description: Handle events from the messages source about user or assistant messages in conversations. You **MUST** use this skill (and *carefully follow the process in this doc*) whenever you receive a message from the "messages" source!
 ---
 
 ### Events from the `messages` source
 
-These events represent messages sent by the user in conversation threads.
+These events represent messages sent by the user in conversations.
 Each event includes the `conversation_id`, the `role` (which will be "user" for user messages), and the `content` of the message.
 
 When you get a message from the user, it will *always* come with a response that was generated for you **and already sent to the user on your behalf**.

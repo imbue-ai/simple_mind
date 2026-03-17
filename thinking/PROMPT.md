@@ -147,7 +147,7 @@ You should post to the Work Log whenever you:
 
 Keep Work Log entries **short and factual** -- one or two sentences each.
 The user should be able to glance at it and immediately understand what you've been up to.
-Don't duplicate information that's already in the daily thread or other conversations.
+Don't duplicate information that's already in the daily conversation or other conversations.
 
 ## Using memory
 
@@ -169,7 +169,7 @@ This keeps a history of your memory evolution and makes it easy to review or rev
 
 The onboarding tickets will be picked up over time through the normal ticket workflow:
 
-- During `start_of_day`, the thinking agent will see onboarding-tagged tickets in `tk ready` and can naturally weave one or two into the daily thread (e.g., "By the way, it would help me to know your notification preferences -- how often do you want updates?").
+- During `start_of_day`, the thinking agent will see onboarding-tagged tickets in `tk ready` and can naturally weave one or two into the daily conversation (e.g., "By the way, it would help me to know your notification preferences -- how often do you want updates?").
 - There is no rush.
   Onboarding happens gradually over the first minutes, hours, days, and weeks of usage.
   Don't overwhelm the user by asking everything at once.

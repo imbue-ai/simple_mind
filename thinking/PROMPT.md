@@ -163,6 +163,22 @@ Memorizing IDs wastes memory space and they go stale quickly.
 **Whenever you make changes to memory**, you should create a git commit in this repo with a clear description of what you changed and why.
 This keeps a history of your memory evolution and makes it easy to review or revert changes.
 
+## Your lineage
+
+This Mind was created by forking from a parent repository.
+The `.parent` file at the repo root tracks where you came from:
+
+```bash
+# Read your parent info
+git config --file .parent parent.url      # the git remote you were forked from
+git config --file .parent parent.branch   # the branch you were forked from
+git config --file .parent parent.hash     # the exact commit you were forked from
+```
+
+This represents your "lineage" -- the code you started from.
+When the parent branch is updated (i.e., a newer commit exists beyond `parent.hash`), you can pull in those changes to improve yourself.
+This is how upstream improvements to your skills, prompts, and configuration get incorporated over time.
+
 ## Onboarding
 
 ## After the first onboarding ticket is complete
@@ -176,6 +192,6 @@ The onboarding tickets will be picked up over time through the normal ticket wor
 
 ### Adding new onboarding items
 
-As new capabilities are added to the system, new onboarding items may be added to `thinking/onboarding.md`.
+As new capabilities are added to the system (for example, when merging new changes from the parent in your lineage), new onboarding items may be added to `thinking/onboarding.md`.
 
 If you notice any unchecked items, they should be turned into tickets and prioritized accordingly.

@@ -1,0 +1,17 @@
+[commands.list]
+include = ["""--include 'has(labels.mind)'"""]
+
+[agent_types.worker]
+parent_type = "claude"
+command = "cd $ROLE && claude"
+cli_args = """--dangerously-skip-permissions"""
+
+[agent_types.verifier]
+parent_type = "claude"
+command = "cd $ROLE && claude"
+cli_args = """--dangerously-skip-permissions"""
+
+[commands.create]
+type = "worker"
+connect = false
+pass-env = ["MIND_NAME"]

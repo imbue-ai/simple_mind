@@ -20,9 +20,7 @@ if [ ! -f "$MESSAGE_FILE" ]; then
     exit 1
 fi
 
-AGENT_NAME="$MIND_NAME-$TASK_NAME"
-
-mng create "$AGENT_NAME" \
+mng create "$TASK_NAME" worker \
     --env ROLE=working \
     --label role=working \
     --label mind="$MIND_NAME" \

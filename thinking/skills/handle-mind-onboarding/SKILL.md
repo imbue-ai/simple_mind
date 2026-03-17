@@ -28,8 +28,11 @@ Use priority levels that reflect the timing groups:
 - **First week**: priority `2`
 - **First month**: priority `3`
 
-3. **Check off each item** in `thinking/onboarding.md` as soon as you've created its ticket (change `- [ ]` to `- [x]`).
+**Do this all as one big bash command**!  Otherwise it takes you a while, since there are many entries.
+
+3. **Check off all the items** in `thinking/onboarding.md` as soon as you've created its ticket (change `- [ ]` to `- [x]`).
 The checklist tracks "ticket created", not "task completed" -- ticket closure is tracked separately by `tk`.
+Again, do this with a single edit command that checks off all the items at once, so you don't have to keep re-reading the file.
 
 4. **Handle the most urgent item yourself**: The "Find a way to provide value immediately" item should be done immediately -- don't delegate it.
 Use `send-message-to-user` to send any necessary messages and questions.

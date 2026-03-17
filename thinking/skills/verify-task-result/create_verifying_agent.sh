@@ -26,11 +26,11 @@ if [ ! -f "$MESSAGE_FILE" ]; then
     exit 1
 fi
 
-AGENT_NAME="$MIND_NAME-verify-$TASK_NAME"
+AGENT_NAME="verify-$TASK_NAME"
 WORKING_AGENT_BRANCH="mng/$TASK_NAME"
 WORKING_AGENT_BASE_BRANCH="$(git rev-parse --abbrev-ref HEAD)"
 
-mng create "$AGENT_NAME" \
+mng create "$AGENT_NAME" verifier \
     --env ROLE=verifying \
     --env WORKING_AGENT_ID="$WORKING_AGENT_ID" \
     --env WORKING_AGENT_BRANCH="$WORKING_AGENT_BRANCH" \

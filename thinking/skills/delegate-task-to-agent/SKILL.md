@@ -54,13 +54,14 @@ Then create the agent using the wrapper script in this skill's directory:
 ./skills/delegate-task-to-agent/create_working_agent.sh <task-name> /tmp/task-<task-name>.md
 ```
 
-This script handles setting the correct env vars (`ROLE=working`), labels (`role=working`, `mind=$MIND_NAME`), and naming convention (`$MIND_NAME-<task-name>`).
+This script handles setting the correct env vars (`ROLE=working`), agent type ("worker") and labels (`role=working`, `mind=$MIND_NAME`).
 
 The `<task-name>` should be a descriptive name for the task (e.g. `fix-login-bug`, `add-search-feature`).
 Note that the names *must* be unique because git branches are created for each task.
 If the command fails because the name is taken, simply choose a more specific, longer name.
 
-By convention (as shown above), the task name should start with your agent name (this helps make it more obvious which tasks belong to which minds).
+Note that you may need to commit first (if your working directory has uncommitted changes).
+This ensures that the new agent's branch has the same base commit as the current agent, which allows the verifying agent to do a proper diff later on.
 
 ## Creating a verifying agent
 

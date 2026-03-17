@@ -43,7 +43,7 @@ Then create the verifying agent using the wrapper script in this skill's directo
 ./skills/verify-task-result/create_verifying_agent.sh <task-name> <working-agent-id> /tmp/verify-<task-name>.md
 ```
 
-This script handles setting the correct env vars (`ROLE=verifying`, `WORKING_AGENT_ID`, `WORKING_AGENT_BRANCH`, `WORKING_AGENT_BASE_BRANCH`), labels (`role=verifying`, `mind=$MIND_NAME`), and naming convention (`$MIND_NAME-verify-<task-name>`).
+This script handles setting the correct env vars (`ROLE=verifying`, `WORKING_AGENT_ID`, `WORKING_AGENT_BRANCH`, `WORKING_AGENT_BASE_BRANCH`), labels (`role=verifying`, `mind=$MIND_NAME`), and agent type ("verifier").
 
 ## After creating the verifier
 

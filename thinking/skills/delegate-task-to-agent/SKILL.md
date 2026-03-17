@@ -48,15 +48,13 @@ cat > /tmp/task-<task-name>.md << 'EOF'
 EOF
 ```
 
-Then create the agent with a command like the following (substituting the correct value for "<task-name>"):
+Then create the agent using the wrapper script in this skill's directory:
 
 ```bash
-mng create "$MIND_NAME-<task-name>" \
-  --env ROLE=working \
-  --label role=working \
-  --label mind=$MIND_NAME \
-  --message-file /tmp/task-<task-name>.md
+./skills/delegate-task-to-agent/create_working_agent.sh <task-name> /tmp/task-<task-name>.md
 ```
+
+This script handles setting the correct env vars (`ROLE=working`), labels (`role=working`, `mind=$MIND_NAME`), and naming convention (`$MIND_NAME-<task-name>`).
 
 The `<task-name>` should be a descriptive name for the task (e.g. `fix-login-bug`, `add-search-feature`).
 Note that the names *must* be unique because git branches are created for each task.

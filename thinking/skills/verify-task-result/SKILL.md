@@ -37,22 +37,13 @@ Please review the working agent's transcript and any artifacts it produced, then
 EOF
 ```
 
-Then you can run a `mng create` command like the following to create the verifying agent (be sure to substitute the correct values for "<working-agent-id>" and "<task-name>"):
+Then create the verifying agent using the wrapper script in this skill's directory:
 
 ```bash
-WORKING_AGENT_ID="<working-agent-id>"
-WORKING_AGENT_BRANCH=mng/<task-name>
-WORKING_AGENT_BASE_BRANCH=$(mng exec "$WORKING_AGENT_ID" 'echo $GIT_BASE_BRANCH' 2>/dev/null || echo "main")
-
-mng create "$MIND_NAME-verify-<task-name>" \
-  --env ROLE=verifying \
-  --env WORKING_AGENT_ID="<working-agent-id>" \
-  --env WORKING_AGENT_BRANCH="mng/<task-name>" \
-  --env WORKING_AGENT_BASE_BRANCH="$(git rev-parse --abbrev-ref HEAD)" \
-  --label role=verifying \
-  --label mind=$MIND_NAME \
-  --message-file /tmp/verify-<task-name>.md
+./skills/verify-task-result/create_verifying_agent.sh <task-name> <working-agent-id> /tmp/verify-<task-name>.md
 ```
+
+This script handles setting the correct env vars (`ROLE=verifying`, `WORKING_AGENT_ID`, `WORKING_AGENT_BRANCH`, `WORKING_AGENT_BASE_BRANCH`), labels (`role=verifying`, `mind=$MIND_NAME`), and naming convention (`$MIND_NAME-verify-<task-name>`).
 
 ## After creating the verifier
 

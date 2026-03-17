@@ -25,34 +25,36 @@ If there are not too many workers already running, read on for how to create dif
 
 ## Creating a working agent
 
-To delegate a task, create a sub-agent using `mng`. By default, sub-agents are created as copies of the current agent harness with a different role. Use `--env ROLE=working` to create a working agent:
+To delegate a task, create a sub-agent using `mng`. By default, sub-agents are created as copies of the current agent harness with a different role. Use `--env ROLE=working` to create a working agent.
+
+**Always write task instructions to a markdown file** and pass it via `--message-file`. This ensures instructions are well-structured, reviewable, and not lost if the command fails.
 
 ```bash
-mng create "$MNG_AGENT_NAME-<task-name>" --env ROLE=working --message "Your task instructions here"
+cat > /tmp/task-<task-name>.md << 'EOF'
+# Task: <title>
+
+## What to do
+<description of what needs to be done and why>
+
+## Context
+<any relevant context: conversation IDs, prior attempts, constraints, links>
+
+## Success criteria
+<what "done" looks like -- be specific>
+EOF
+
+mng create "$MNG_AGENT_NAME-<task-name>" --env ROLE=working --message-file /tmp/task-<task-name>.md
 ```
 
 The `<task-name>` should be a descriptive name for the task (e.g. `fix-login-bug`, `add-search-feature`).
 Note that the names *must* be unique because git branches are created for each task.
 If the command fails because the name is taken, simply choose a more specific, longer name.
 
-By convention (as shown above), the task name should start with your agent name (this helps make it more obvious which tasks belong to which minds)
-
-The `--message` flag sends an initial prompt to the agent describing what work to do. Be specific and include:
-- What the task is and why it needs to be done
-- Any relevant context (e.g. related conversation IDs, prior attempts, constraints)
-- Success criteria so the agent (and later the verifier) knows what "done" looks like
-
-If the task description would be really long, you can use `--message-file` instead (and write to a random file in `/tmp`)
+By convention (as shown above), the task name should start with your agent name (this helps make it more obvious which tasks belong to which minds).
 
 ## Creating a verifying agent
 
-When a working agent finishes successfully (you will receive an `mng/agent_states` event), create a verifying agent to check the work. Use `--env ROLE=verifying`:
-
-```bash
-mng create $MNG_AGENT_NAME-verify-<task-name> --env ROLE=verifying --message "Verify that the following task was completed successfully: <description>. The agent that performed the work was <agent-name>. Check <specific things to verify>."
-```
-
-The same comments above apply--if the message would be really long, use the `--message-file` argument instead, and be sure to include **everything** that the verification agent might need.
+When a working agent finishes successfully (you will receive an `mng/agent_states` event), create a verifying agent to check the work. Use `--env ROLE=verifying`. See the `verify-task-result` skill for the full details on what to include in the message file.
 
 ## Logging the task
 

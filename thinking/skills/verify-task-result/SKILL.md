@@ -11,7 +11,7 @@ You should **not** try to gather or summarize the working agent's output yoursel
 
 ## What to include in the verification task message
 
-Write a message (or message file) for the verifying agent that includes:
+Write a markdown file for the verifying agent that includes:
 
 1. **The working agent's ID** so the verifier can inspect its transcript, artifacts, and state directly (e.g., via `mng transcript <agent-id>`)
 2. **The original task description** -- what you asked the working agent to do, and why. Copy or closely paraphrase the original `--message` you sent when creating the worker. Include the success criteria.
@@ -19,7 +19,7 @@ Write a message (or message file) for the verifying agent that includes:
 4. **The user's original request** (if applicable) -- if this task was triggered by a user message, include any relevant conversation IDs and time-spans for each so the verifier can judge whether the result actually satisfies the user's intent (not just the task instructions as you interpreted them).
 5. **High level purpose** -- if the task is part of a larger project (and *especially* if this was not a task that the user asked for directly), include a brief description of the overall purpose or goal of the project and how the task fits in.
 
-These messages will almost always be fairly detailed, so you should default to writing them to a temporary file and using `--message-file`:
+Write the instructions to a temporary markdown file and pass via `--message-file`:
 
 ```bash
 cat > /tmp/verify-<task-name>.md << 'EOF'

@@ -44,9 +44,8 @@ If uncertainty is greater than 0.4, you **must** include one or more specific qu
 
 ## Step 3: Record the triage result
 
-Call the recording script once per message:
+Call the recording script once per message, passing the emoji label scores as a JSON object:
 
-Example:
 ```bash
 ./skills/handle-slack-messages/record_slack_triage.sh <event_id> \
   --channel <channel_name> \
@@ -55,16 +54,12 @@ Example:
   --summary "<one-line summary of the message>" \
   --importance <0.00-1.00> \
   --urgency <0.00-1.00> \
-  --bookmark <0.00-1.00> \
-  --writing-hand <0.00-1.00> \
-  --memo <0.00-1.00> \
-  --fire <0.00-1.00> \
-  --star <0.00-1.00> \
-  --calendar <0.00-1.00> \
-  --arrow-right <0.00-1.00> \
+  --labels '{ ":bookmark:": 0.10, ":writing_hand:": 0.85, ... }' \
   --uncertainty <0.00-1.00> \
   [--question "<what you were uncertain about>"]...
 ```
+
+The `--labels` value is a JSON object whose keys are the emoji names from the [emoji key](../../emoji_key.md) (with colons) and whose values are the probability scores. Include an entry for every emoji in the key.
 
 This writes a JSONL event to `$MNG_AGENT_STATE_DIR/events/handled_slack_messages/events.jsonl`.
 

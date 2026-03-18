@@ -10,19 +10,9 @@ If the emoji matches one from the [emoji key](../../emoji_key.md), you must exec
 
 ## Step 1: Identify the emoji
 
-Check the reaction event's emoji name against the emoji key:
+Check the reaction event's emoji name against the [emoji key](../../emoji_key.md).
 
-| Emoji name | Action |
-|------------|--------|
-| `bookmark` | Save for later |
-| `writing_hand` | Draft reply |
-| `memo` | Create task |
-| `fire` | Urgent -- notify immediately |
-| `star` | Save info |
-| `calendar` | Schedule meeting |
-| `arrow_right` | Delegate |
-
-If the emoji does not match any of these, ignore the reaction -- the user is just reacting normally in Slack.
+If the emoji does not match any entry in the key, ignore the reaction -- the user is just reacting normally in Slack.
 
 ## Step 2: Find the referenced message
 
@@ -30,7 +20,7 @@ The reaction event contains the message that was reacted to.
 Look up whether you have already triaged this message (check `handled_slack_messages/events.jsonl` for a matching `message_ts` and `channel`).
 
 If you have already triaged it, you can use the existing triage context.
-If not, gather context using the `handle-slack-messages` skill's context gathering step first.
+If not, use the `gather-slack-context` skill to assemble context for the message first.
 
 ## Step 3: Execute the action
 

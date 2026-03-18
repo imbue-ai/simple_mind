@@ -11,15 +11,7 @@ You must triage each message/reply event by following the procedure below.
 
 ## Step 1: Gather context
 
-For each message or reply event, run the context assembly script to get the information you need to make a good triage decision:
-
-```bash
-./skills/handle-slack-messages/gather_slack_context.sh <event_id> <channel_name> <message_ts>
-```
-
-This will output relevant context such as: the full message text, the sender's name, the channel purpose, recent messages / thread context.
-
-You should also be aware of any user preferences or memory about this channel, sender, and user.
+Use the `gather-slack-context` skill to assemble the information you need to make a good triage decision for each message or reply event.
 
 ## Step 2: Score the message
 

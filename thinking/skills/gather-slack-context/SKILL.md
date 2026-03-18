@@ -12,7 +12,7 @@ Before triaging a message or acting on a reaction, you need context about the me
 Run the context assembly script:
 
 ```bash
-./skills/gather-slack-context/gather_slack_context.sh <event_id> <channel_name> <message_ts>
+./skills/gather-slack-context/gather_slack_context.py <event_id> <channel_name> <message_ts>
 ```
 
 This outputs relevant context as JSON, including:

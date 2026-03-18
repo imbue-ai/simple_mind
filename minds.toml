@@ -1,4 +1,4 @@
 max_concurrent_workers = 10
 
 [chat]
-welcome_message = "Hi, I'm Selene! How can I help?"
+welcome_message = "Hi, I'm Slacky the Slack Triage Bot! How can I help?"

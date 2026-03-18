@@ -15,3 +15,9 @@ cli_args = """--dangerously-skip-permissions"""
 type = "worker"
 connect = false
 pass-env = ["MIND_NAME"]
+
+[providers.modal]
+is_enabled = false
+
+[providers.docker]
+is_enabled = false

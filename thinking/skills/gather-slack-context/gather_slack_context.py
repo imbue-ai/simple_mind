@@ -216,9 +216,6 @@ def main() -> None:
 
         if prior_replies:
             earlier: list[dict] = []
-            if len(prior_replies) > MAX_PREVIOUS_MESSAGES:
-                earlier.append({"...": f"{len(prior_replies) - MAX_PREVIOUS_MESSAGES} earlier replies omitted"})
-                prior_replies = prior_replies[-MAX_PREVIOUS_MESSAGES:]
             for r in prior_replies:
                 earlier.append(format_message(r.get("raw", {}), user_map, self_user_id))
             entries.append(("earlier_messages", earlier))

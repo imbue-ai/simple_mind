@@ -72,3 +72,4 @@ After triaging and acting on a message, use the `mark-events-handled` skill to m
 - Use your memory of user preferences (notification settings, channel importance, key people) to inform your scores.
 - Be thoughtful about when you are applying an emoji--it could create real work for the user (e.g., creating a task, sending a notification, drafting a reply). Don't apply an emoji unless you think it's really warranted.
 - Note that you should **NOT** take the actions described in the action key as part of using this skill! Your job is just to triage and label the message--the actions will happen later.
+- If you notice a channel consistently producing irrelevant noise, suggest to the user that it be added to the ignore list (see the `ignore-channels` skill).

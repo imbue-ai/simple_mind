@@ -7,7 +7,7 @@ description: Route Slack events to the appropriate handler skill based on event 
 
 The slack exporter produces events under various `slack/` sources. Each source follows the pattern `slack/<type>/<stream>`, for example `slack/messages/updated` or `slack/reactions/updated`.
 
-Events from `/created` streams and certain metadata types (`user`, `unread_marker`, `channel`) are pre-filtered by `scripts/filter_slack_events.py` before they reach you, so you will only see `/updated` stream events for actionable types.
+Events from `/created` streams, certain metadata types (`user`, `unread_marker`, `channel`), and channels listed in `ignored_channel_ids.txt` are all pre-filtered by `scripts/filter_slack_events.py` before they reach you. See the `ignore-channels` skill for how to manage the ignored channels list.
 
 You may receive multiple events for the same message (e.g., if the message was edited). This is fine -- just triage the message again with the updated content. This should be fairly rare.
 

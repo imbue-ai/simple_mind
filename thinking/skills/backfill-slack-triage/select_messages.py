@@ -38,8 +38,8 @@ def get_channel_messages(slack_dir: Path, channel_name: str) -> list[dict]:
     messages = []
     seen: set[str] = set()
     for events_file in [
-        slack_dir / "messages" / "created" / "events.jsonl",
-        slack_dir / "messages" / "updated" / "events.jsonl",
+        slack_dir / "message" / "created" / "events.jsonl",
+        slack_dir / "message" / "updated" / "events.jsonl",
     ]:
         for event in load_jsonl(events_file):
             if event.get("channel_name") != channel_name:
@@ -56,8 +56,8 @@ def get_last_read_ts(slack_dir: Path, channel_name: str) -> str | None:
     """Get the most recent last_read_ts for a channel, or None if no marker exists."""
     last_read: str | None = None
     for events_file in [
-        slack_dir / "unread_markers" / "created" / "events.jsonl",
-        slack_dir / "unread_markers" / "updated" / "events.jsonl",
+        slack_dir / "unread_marker" / "created" / "events.jsonl",
+        slack_dir / "unread_marker" / "updated" / "events.jsonl",
     ]:
         for event in load_jsonl(events_file):
             if event.get("channel_name") == channel_name:

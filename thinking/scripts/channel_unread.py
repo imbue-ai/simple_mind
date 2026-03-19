@@ -41,8 +41,8 @@ def main() -> None:
     # Get unread markers
     markers: dict[str, str] = {}
     for events_file in [
-        slack_dir / "unread_markers" / "created" / "events.jsonl",
-        slack_dir / "unread_markers" / "updated" / "events.jsonl",
+        slack_dir / "unread_marker" / "created" / "events.jsonl",
+        slack_dir / "unread_marker" / "updated" / "events.jsonl",
     ]:
         for event in load_jsonl(events_file):
             name = event.get("channel_name", "")
@@ -55,8 +55,8 @@ def main() -> None:
     counts: dict[str, int] = {}
     seen: dict[str, set[str]] = {}  # channel -> set of message_ts for dedup
     for events_file in [
-        slack_dir / "messages" / "created" / "events.jsonl",
-        slack_dir / "messages" / "updated" / "events.jsonl",
+        slack_dir / "message" / "created" / "events.jsonl",
+        slack_dir / "message" / "updated" / "events.jsonl",
     ]:
         for event in load_jsonl(events_file):
             channel = event.get("channel_name", "")

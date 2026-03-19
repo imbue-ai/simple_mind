@@ -43,10 +43,10 @@ def main() -> None:
     # Track the latest message ts per channel
     latest: dict[str, str] = {}
     for events_file in [
-        slack_dir / "messages" / "created" / "events.jsonl",
-        slack_dir / "messages" / "updated" / "events.jsonl",
-        slack_dir / "replies" / "created" / "events.jsonl",
-        slack_dir / "replies" / "updated" / "events.jsonl",
+        slack_dir / "message" / "created" / "events.jsonl",
+        slack_dir / "message" / "updated" / "events.jsonl",
+        slack_dir / "reply" / "created" / "events.jsonl",
+        slack_dir / "reply" / "updated" / "events.jsonl",
     ]:
         for event in load_jsonl(events_file):
             channel = event.get("channel_name", "")

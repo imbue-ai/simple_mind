@@ -5,7 +5,7 @@ description: Handle emoji reactions from the user on Slack messages. When the us
 
 # Handling Slack reactions
 
-When the user reacts to a Slack message with an emoji, the slack exporter captures it as a `reaction` event (from `slack/reactions/updated`).
+When the user reacts to a Slack message with an emoji, the slack exporter captures it as a `reaction` event (from `slack/reaction/updated`).
 If the emoji matches one from the [emoji key](../../emoji_key.md), you must execute the corresponding action.
 
 ## Step 1: Identify the emoji

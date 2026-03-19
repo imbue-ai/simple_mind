@@ -16,7 +16,7 @@ The file `ignored_channel_ids.txt` (in the `thinking/` directory) contains one S
 1. Find the channel ID. You can look it up from the slack event data -- channel events include both `channel_id` and `channel_name`. For example:
 
 ```bash
-grep '"<channel_name>"' $SLACK_EVENTS_DIR/channels/created/events.jsonl | python3 -c "import json,sys; print(json.loads(sys.stdin.readline())['channel_id'])"
+grep '"<channel_name>"' $SLACK_EVENTS_DIR/channel/created/events.jsonl | python3 -c "import json,sys; print(json.loads(sys.stdin.readline())['channel_id'])"
 ```
 
 2. Add the channel ID to `ignored_channel_ids.txt`:

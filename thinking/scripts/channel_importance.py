@@ -41,8 +41,8 @@ def get_unread_markers(slack_dir: Path) -> dict[str, str]:
     """Get the most recent last_read_ts per channel_name."""
     markers: dict[str, str] = {}
     for events_file in [
-        slack_dir / "unread_markers" / "created" / "events.jsonl",
-        slack_dir / "unread_markers" / "updated" / "events.jsonl",
+        slack_dir / "unread_marker" / "created" / "events.jsonl",
+        slack_dir / "unread_marker" / "updated" / "events.jsonl",
     ]:
         for event in load_jsonl(events_file):
             name = event.get("channel_name", "")
@@ -57,8 +57,8 @@ def get_all_channel_messages(slack_dir: Path) -> dict[str, list[dict]]:
     """Get all messages grouped by channel_name, deduplicated by message_ts."""
     by_channel: dict[str, dict[str, dict]] = {}  # channel -> {ts -> event}
     for events_file in [
-        slack_dir / "messages" / "created" / "events.jsonl",
-        slack_dir / "messages" / "updated" / "events.jsonl",
+        slack_dir / "message" / "created" / "events.jsonl",
+        slack_dir / "message" / "updated" / "events.jsonl",
     ]:
         for event in load_jsonl(events_file):
             channel = event.get("channel_name", "")

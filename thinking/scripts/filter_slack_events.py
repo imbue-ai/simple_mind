@@ -21,7 +21,7 @@ import os
 import sys
 from pathlib import Path
 
-FILTERED_TYPES = {"user", "unread_marker", "channel", "reply"}
+FILTERED_TYPES = {"user", "unread_marker", "channel", "reply", "relevant_thread"}
 
 
 def load_ignored_channels(path: Path) -> set[str]:

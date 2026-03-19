@@ -15,15 +15,25 @@ Route each event based on its `type` field.
 
 ## Event types and routing
 
-### Messages and replies
+### Messages
 
-**Types:** `message`, `reply`
+**Type:** `message`
 
-**Sources:** `slack/message/updated`, `slack/reply/updated`
+**Source:** `slack/message/updated`
 
-These are new or updated messages and thread replies from Slack channels.
+These are new or updated top-level messages in Slack channels.
 
 Use the **`handle-slack-messages`** skill to handle these.
+
+### Relevant thread replies
+
+**Type:** `relevant_thread_reply`
+
+**Source:** `slack/relevant_thread_reply/updated`
+
+These are replies in threads that are relevant to the user -- specifically, threads where the user has replied or was @mentioned. Plain `reply` events (which cover *all* threads) are pre-filtered out; you will only see `relevant_thread_reply` events.
+
+Use the **`handle-slack-messages`** skill to handle these (same as messages).
 
 ### Reactions
 

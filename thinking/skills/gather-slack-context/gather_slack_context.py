@@ -54,7 +54,7 @@ def build_user_map(slack_dir: Path) -> dict[str, str]:
 
 def find_event_by_id(slack_dir: Path, event_id: str) -> dict | None:
     """Find an event by its event_id across all message/reply sources."""
-    for subdir in ["message", "reply"]:
+    for subdir in ["message", "relevant_thread_reply"]:
         for stream in ["created", "updated"]:
             events_file = slack_dir / subdir / stream / "events.jsonl"
             for event in load_jsonl(events_file):
@@ -73,8 +73,8 @@ def find_message(slack_dir: Path, channel_name: str, message_ts: str) -> dict | 
             if event.get("channel_name") == channel_name and event.get("message_ts") == message_ts:
                 return event
     for events_file in [
-        slack_dir / "reply" / "created" / "events.jsonl",
-        slack_dir / "reply" / "updated" / "events.jsonl",
+        slack_dir / "relevant_thread_reply" / "created" / "events.jsonl",
+        slack_dir / "relevant_thread_reply" / "updated" / "events.jsonl",
     ]:
         for event in load_jsonl(events_file):
             if event.get("channel_name") == channel_name and event.get("reply_ts") == message_ts:
@@ -129,8 +129,8 @@ def get_thread_messages(
     replies = []
     seen: set[str] = set()
     for events_file in [
-        slack_dir / "reply" / "created" / "events.jsonl",
-        slack_dir / "reply" / "updated" / "events.jsonl",
+        slack_dir / "relevant_thread_reply" / "created" / "events.jsonl",
+        slack_dir / "relevant_thread_reply" / "updated" / "events.jsonl",
     ]:
         for event in load_jsonl(events_file):
             if event.get("channel_name") != channel_name:
@@ -187,7 +187,7 @@ def main() -> None:
 
     raw = event.get("raw", {})
     is_reply = bool(
-        event.get("type") == "reply"
+        event.get("type") == "relevant_thread_reply"
         or (raw.get("thread_ts") and raw.get("thread_ts") != raw.get("ts"))
     )
     thread_ts = event.get("thread_ts") or raw.get("thread_ts")

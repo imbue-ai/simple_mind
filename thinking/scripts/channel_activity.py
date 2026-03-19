@@ -45,8 +45,8 @@ def main() -> None:
     for events_file in [
         slack_dir / "message" / "created" / "events.jsonl",
         slack_dir / "message" / "updated" / "events.jsonl",
-        slack_dir / "reply" / "created" / "events.jsonl",
-        slack_dir / "reply" / "updated" / "events.jsonl",
+        slack_dir / "relevant_thread_reply" / "created" / "events.jsonl",
+        slack_dir / "relevant_thread_reply" / "updated" / "events.jsonl",
     ]:
         for event in load_jsonl(events_file):
             channel = event.get("channel_name", "")

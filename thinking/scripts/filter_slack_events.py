@@ -6,7 +6,7 @@ numbers are preserved between input and output.
 
 Filters:
   - Events whose source ends with "/created" (we only handle /updated events)
-  - Events with type: user, unread_marker, channel
+  - Events with type: user, unread_marker, channel, reply
   - Events whose channel_id is listed in ignored_channel_ids.txt
 
 Usage: cat events.jsonl | filter_slack_events.py [--ignored-channels <path>]
@@ -21,7 +21,7 @@ import os
 import sys
 from pathlib import Path
 
-FILTERED_TYPES = {"user", "unread_marker", "channel"}
+FILTERED_TYPES = {"user", "unread_marker", "channel", "reply"}
 
 
 def load_ignored_channels(path: Path) -> set[str]:

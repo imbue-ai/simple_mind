@@ -1,11 +1,13 @@
 ---
 name: handle-slack-messages
-description: Triage new Slack messages and replies from the Slack event streams. You **MUST** use this skill (and *carefully follow the process in this doc*) whenever you receive events from any "slack" source
+description: Triage Slack messages and replies. You **MUST** use this skill whenever you receive `message` or `reply` type events from a `slack/` source (e.g., `slack/messages/updated`, `slack/replies/updated`).
 ---
 
 # Handling Slack messages
 
-Each event that is a Slack message (top level channel message) or reply (message within a thread) comes along with metadata (channel, sender, timestamp, raw payload).
+Events from `slack/messages/updated` and `slack/replies/updated` are routed here by the `handle-slack-events` skill. Each event is a Slack message (top level channel message) or reply (message within a thread), along with metadata (channel, sender, timestamp, raw payload).
+
+You may receive multiple events for the same message if it was edited -- just re-triage with the updated content.
 
 You must triage each message/reply event by following the procedure below.
 

@@ -1,18 +1,25 @@
 ---
 name: handle-slack-events
-description: Route Slack events to the appropriate handler skill based on event type. You **MUST** use this skill (and *carefully follow the process in this doc*) whenever you receive events from the "slack" source!
+description: Route Slack events to the appropriate handler skill based on event type. You **MUST** use this skill (and *carefully follow the process in this doc*) whenever you receive events from any "slack/" source!
 ---
 
 # Handling Slack events
 
-The slack exporter produces events of various types under the `slack` source.
-When you receive a batch of slack events, you must route each one to the appropriate handler skill based on its `type` field.
+The slack exporter produces events under various `slack/` sources. Each source follows the pattern `slack/<type>/<stream>`, for example `slack/messages/updated` or `slack/reactions/updated`.
+
+Events from `/created` streams and certain metadata types (`user`, `unread_marker`, `channel`) are pre-filtered before they reach you, so you will only see `/updated` stream events for actionable types.
+
+You may receive multiple events for the same message (e.g., if the message was edited). This is fine -- just triage the message again with the updated content. This should be fairly rare.
+
+Route each event based on its `type` field.
 
 ## Event types and routing
 
 ### Messages and replies
 
 **Types:** `message`, `reply`
+
+**Sources:** `slack/messages/updated`, `slack/replies/updated`
 
 These are new or updated messages and thread replies from Slack channels.
 
@@ -22,38 +29,18 @@ Use the **`handle-slack-messages`** skill to handle these.
 
 **Type:** `reaction`
 
+**Source:** `slack/reactions/updated`
+
 These are items the user has reacted to with an emoji in Slack.
 This is how the user signals that they want one of the actions from the [emoji key](../../emoji_key.md) to be taken.
 
 Use the **`handle-slack-reactions`** skill to handle these.
 
-### Channels
-
-**Type:** `channel`
-
-New or updated channel metadata (name, purpose, topic, membership).
-
-**What to do:** ignore these events
-
-### Users
-
-**Type:** `user`
-
-New or updated Slack user records.
-
-**What to do:** ignore these events
-
-### Unread markers
-
-**Type:** `unread_marker`
-
-Changes to the user's read position in a channel.
-
-**What to do:** ignore these events
-
 ### Self identity
 
 **Type:** `self_identity`
+
+**Source:** `slack/self_identity/updated`
 
 The authenticated user's own Slack identity.
 

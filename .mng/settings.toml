@@ -1,5 +1,5 @@
 [commands.list]
-include = ["""--include 'has(labels.mind)'"""]
+include = ["""has(labels.mind)"""]
 
 [agent_types.worker]
 parent_type = "claude"

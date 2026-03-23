@@ -4,4 +4,4 @@ max_concurrent_workers = 10
 welcome_message = "Hi, I'm Slacky the Slack Triage Bot! How can I help?"
 
 [watchers]
-event_batch_filter_script = "python thinking/scripts/filter_slack_events.py"
+event_batch_filter_command = "python thinking/scripts/filter_slack_events.py"

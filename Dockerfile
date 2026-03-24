@@ -51,14 +51,13 @@ ENV CLAUDE_CODE_VERSION=${CLAUDE_CODE_VERSION}
 ENV UV_LINK_MODE=copy
 
 # copy in all of our code:
-COPY . /code/
+COPY . /code/simple_mind/
 
 # extract our code into the project directory
-RUN mkdir -p /code/mng/ && tar -xzf /code/current.tar.gz -C /code/mng/ && rm /code/*.tar.gz && git config --global --add safe.directory /code/mng/ && chown -R root:root /code/mng/
+RUN git config --global --add safe.directory /code/simple_mind/ && chown -R root:root /code/simple_mind/
 
-# set working directory to the project root -- this is where `mng schedule`
-# will copy project deploy files and where scheduled commands will run
-WORKDIR /code/mng/
+# set working directory to the project root
+WORKDIR /code/simple_mind/
 
 # install python dependencies
 RUN unset UV_INDEX_URL && uv sync --all-packages && uv tool install -e /code/mng/libs/mng && uv tool install modal && uv tool install llm && llm install llm-anthropic && llm install llm-live-chat && llm install llm-matched-responses

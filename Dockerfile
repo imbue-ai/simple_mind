@@ -50,6 +50,9 @@ ENV CLAUDE_CODE_VERSION=${CLAUDE_CODE_VERSION}
 # without this, there are some annoying bugs on modal's side with snapshotting
 ENV UV_LINK_MODE=copy
 
+# install python dependencies
+RUN unset UV_INDEX_URL && uv tool install modal && uv tool install llm && llm install llm-anthropic && llm install llm-live-chat && llm install llm-matched-responses
+
 # copy in all of our code:
 COPY . /code/simple_mind/
 
@@ -58,9 +61,6 @@ RUN git config --global --add safe.directory /code/simple_mind/ && chown -R root
 
 # set working directory to the project root
 WORKDIR /code/simple_mind/
-
-# install python dependencies
-RUN unset UV_INDEX_URL && uv sync --all-packages && uv tool install -e /code/mng/libs/mng && uv tool install modal && uv tool install llm && llm install llm-anthropic && llm install llm-live-chat && llm install llm-matched-responses
 
 # Run idly forever while being responsive to SIGTERM.
 # PID 1 must explicitly install signal handlers in order to respect signals.

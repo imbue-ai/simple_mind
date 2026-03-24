@@ -60,7 +60,7 @@ COPY . /code/simple_mind/
 RUN git config --global --add safe.directory /code/simple_mind/ && chown -R root:root /code/simple_mind/
 
 # add mng as a tool
-RUN uv tool install -e /code/simple_mind/vendor/mng/libs/mng && mng plugin add --path libs/mng_llm/ --path libs/mng_mind --path libs/mng_claude --path libs/mng_claude_mind --path libs/mng_pi_coding --path libs/mng_mind_chat/
+RUN uv tool install -e /code/simple_mind/vendor/mng/libs/mng && mng plugin add --path vendor/mng/libs/mng_llm/ --path vendor/mng/libs/mng_mind --path vendor/mng/libs/mng_claude --path vendor/mng/libs/mng_claude_mind --path vendor/mng/libs/mng_pi_coding --path vendor/mng/libs/mng_mind_chat/
 
 # set working directory to the project root
 WORKDIR /code/simple_mind/

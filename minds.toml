@@ -6,6 +6,7 @@ welcome_message = "Hi, I'm Slacky the Slack Triage Bot! How can I help?"
 [watchers]
 event_batch_filter_command = "python thinking/scripts/filter_slack_events.py"
 is_message_batching_enabled = false
+idle_event_delay_minutes_schedule = [1, 10, 60]
 
 [[vendor]]
 name = "mng"

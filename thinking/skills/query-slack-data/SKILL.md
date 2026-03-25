@@ -30,3 +30,11 @@ If none of the above cover your need, write a new script in `scripts/`. Follow t
 5. Keep it simple -- these scripts are tools, not frameworks
 
 Look at the existing scripts for examples of common patterns like building user/channel maps, deduplicating events, and working with Slack timestamps.
+
+## Common data lookups
+
+**User's Slack identity**: The user's `user_name` and `user_id` are in `$SLACK_EVENTS_DIR/self_identity/updated/events.jsonl` (top-level fields on each event). Use `get_self_user_id()` from `gather_slack_context.py` as a reference.
+
+**User ID to display name**: Build a map from `$SLACK_EVENTS_DIR/user/updated/events.jsonl`. See `build_user_map()` in `gather_slack_context.py`.
+
+**Channel ID to name/metadata**: Build a map from `$SLACK_EVENTS_DIR/channel/updated/events.jsonl`. Each event has `channel_id` and `channel_name` at the top level, plus `raw.purpose.value` and `raw.topic.value` for channel metadata.

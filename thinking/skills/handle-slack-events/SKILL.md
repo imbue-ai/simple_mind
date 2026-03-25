@@ -56,6 +56,16 @@ The authenticated user's own Slack identity.
 
 **What to do:** Store this in memory if not already known -- it tells you who "the user" is in Slack so you can distinguish their own messages from others. No further action needed.
 
+## Identifying the user
+
+The user's Slack username and user ID can be found in the self identity event data at `$SLACK_EVENTS_DIR/self_identity/updated/events.jsonl`. Each event has `user_id` and `user_name` fields at the top level. For example:
+
+```bash
+tail -1 "$SLACK_EVENTS_DIR/self_identity/updated/events.jsonl" | python3 -c "import json,sys; e=json.loads(sys.stdin.read()); print(e['user_name'], e['user_id'])"
+```
+
+Scripts that need to know the user's identity (e.g., to detect `is_from_self`) should read it from this file. See `gather_slack_context.py`'s `get_self_user_id()` for an example.
+
 ## Guidelines
 
 - Always check the `type` field to route correctly. Do not assume all slack events are messages!

@@ -11,8 +11,6 @@ Run:
 python3 scripts/channel_unread.py
 ```
 
-Requires `SLACK_EVENTS_DIR` to be set.
-
 Outputs one line per channel that has unread messages, sorted by unread count (highest first).
 
 To list the individual unread message event IDs for a specific channel, use:

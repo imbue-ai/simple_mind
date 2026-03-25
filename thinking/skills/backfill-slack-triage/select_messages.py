@@ -8,8 +8,7 @@ Usage:
 
 Prints one event ID per line to stdout.
 
-Requires SLACK_EVENTS_DIR to be set (the directory containing slack event streams).
-Falls back to $MNG_AGENT_STATE_DIR/events/slack if not set.
+Uses the SLACK_EVENTS_DIR environment variable.
 """
 
 import json
@@ -84,10 +83,7 @@ def main() -> None:
     channel_name = sys.argv[1]
     mode = sys.argv[2]
 
-    slack_dir_str = os.environ.get("SLACK_EVENTS_DIR") or os.path.join(
-        os.environ.get("MNG_AGENT_STATE_DIR", ""), "events", "slack"
-    )
-    slack_dir = Path(slack_dir_str)
+    slack_dir = Path(os.environ["SLACK_EVENTS_DIR"])
 
     if not slack_dir.is_dir():
         print(f"Error: Slack events directory not found: {slack_dir}", file=sys.stderr)

@@ -11,6 +11,4 @@ Run:
 python3 scripts/channel_activity.py
 ```
 
-Requires `SLACK_EVENTS_DIR` to be set.
-
 Outputs one line per channel, sorted from most recently active to least, with the timestamp of the last message or reply.

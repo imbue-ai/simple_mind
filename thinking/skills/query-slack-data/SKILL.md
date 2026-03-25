@@ -23,7 +23,7 @@ Check if an existing script or skill already does what you need:
 
 If none of the above cover your need, write a new script in `scripts/`. Follow these conventions from the existing scripts:
 
-1. Read `SLACK_EVENTS_DIR` from the environment (fall back to `$MNG_AGENT_STATE_DIR/events/slack`)
+1. Read `SLACK_EVENTS_DIR` from the environment (it is always set)
 2. Use the `load_jsonl(path)` pattern for reading event files
 3. Event data lives under `$SLACK_EVENTS_DIR/<type>/<stream>/events.jsonl` where type is singular (e.g., `message`, `relevant_thread_reply`, `user`, `channel`, `reaction`, `unread_marker`, `self_identity`) and stream is `created` or `updated`
 4. Output should be human-readable (one line per result) or JSON, depending on the use case

@@ -7,10 +7,8 @@ importance, highest first.
 
 Usage: channel_importance.py
 
-Requires:
-  SLACK_EVENTS_DIR  -- directory containing slack event streams
-  TRIAGE_EVENTS_DIR -- directory containing handled_slack_messages/events.jsonl
-                       (falls back to $MNG_AGENT_STATE_DIR/events)
+Optionally set TRIAGE_EVENTS_DIR to point to the directory containing
+handled_slack_messages/events.jsonl (falls back to $MNG_AGENT_STATE_DIR/events).
 
 Output: one line per channel with unread messages, sorted by max importance:
   <max_importance>  <unread_count>/<triaged_count>  <channel_name>
@@ -88,10 +86,7 @@ def get_triage_scores(triage_dir: Path) -> dict[tuple[str, str], float]:
 
 
 def main() -> None:
-    slack_dir_str = os.environ.get("SLACK_EVENTS_DIR") or os.path.join(
-        os.environ.get("MNG_AGENT_STATE_DIR", ""), "events", "slack"
-    )
-    slack_dir = Path(slack_dir_str)
+    slack_dir = Path(os.environ["SLACK_EVENTS_DIR"])
 
     triage_dir_str = os.environ.get("TRIAGE_EVENTS_DIR") or os.path.join(
         os.environ.get("MNG_AGENT_STATE_DIR", ""), "events"

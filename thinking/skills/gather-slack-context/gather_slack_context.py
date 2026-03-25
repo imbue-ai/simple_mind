@@ -5,8 +5,7 @@ Usage: gather_slack_context.py <event_id> <channel_name> <message_ts>
 
 Outputs a simplified JSON object to stdout with the message context.
 
-Requires SLACK_EVENTS_DIR to be set (the directory containing slack event streams).
-Falls back to $MNG_AGENT_STATE_DIR/events/slack if not set.
+Uses the SLACK_EVENTS_DIR environment variable.
 """
 
 import json
@@ -165,10 +164,7 @@ def main() -> None:
     channel_name = sys.argv[2]
     message_ts = sys.argv[3]
 
-    slack_dir_str = os.environ.get("SLACK_EVENTS_DIR") or os.path.join(
-        os.environ.get("MNG_AGENT_STATE_DIR", ""), "events", "slack"
-    )
-    slack_dir = Path(slack_dir_str)
+    slack_dir = Path(os.environ["SLACK_EVENTS_DIR"])
 
     if not slack_dir.is_dir():
         print(f"Error: Slack events directory not found: {slack_dir}", file=sys.stderr)

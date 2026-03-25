@@ -3,9 +3,6 @@
 
 Usage: channel_unread.py
 
-Requires SLACK_EVENTS_DIR to be set (the directory containing slack event streams).
-Falls back to $MNG_AGENT_STATE_DIR/events/slack if not set.
-
 Output: one line per channel that has unread messages:
   <unread_count>  #<channel_name>
 """
@@ -29,10 +26,7 @@ def load_jsonl(path: Path) -> list[dict]:
 
 
 def main() -> None:
-    slack_dir_str = os.environ.get("SLACK_EVENTS_DIR") or os.path.join(
-        os.environ.get("MNG_AGENT_STATE_DIR", ""), "events", "slack"
-    )
-    slack_dir = Path(slack_dir_str)
+    slack_dir = Path(os.environ["SLACK_EVENTS_DIR"])
 
     if not slack_dir.is_dir():
         print(f"Error: Slack events directory not found: {slack_dir}", file=sys.stderr)

@@ -5,3 +5,13 @@ welcome_message = "Hi, I'm Slacky the Slack Triage Bot! How can I help?"
 
 [watchers]
 event_batch_filter_command = "python thinking/scripts/filter_slack_events.py"
+is_message_batching_enabled = false
+
+[[vendor]]
+name = "mng"
+url = "https://github.com/imbue-ai/mng/"
+
+[[vendor]]
+name = "tk"
+url = "https://github.com/wedow/ticket/"
+ref = "194b71a8bbc3771da1ce9f579395937c976bbddc"

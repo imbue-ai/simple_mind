@@ -1,6 +1,6 @@
 ---
 name: handle-mind-idle
-description: Handle "idle" events for periodic housekeeping. You **MUST** use this skill (and *carefully follow the process in this doc*) whenever you receive a message from the "mind/idle" source!
+description: Handle "idle" events for periodic housekeeping and proactive work. You **MUST** use this skill (and *carefully follow the process in this doc*) whenever you receive a message from the "mind/idle" source!
 ---
 
 # Events from the `mind/idle` source
@@ -15,11 +15,9 @@ Each event includes:
 
 ## What to do when idle
 
-You can use idle time for periodic housekeeping.
+First, check if you have agents currently running. If tasks are already in flight, be conservative -- you'll be notified when they finish, so there's no need to start a lot of new work.
 
-**Do what make sense**.
-
-Run through these checks:
+Then run through these checks in order:
 
 1. **Crashed or stuck agents**: Run `mng list --exclude "has(labels.archived_at)" --exclude "id == \"$AGENT_ID\"" --format jsonl` and look for agents in unexpected states (crashed, stopped, waiting for too long).
 If you find any that you created, handle them using your `handle-mng-agent_states` skill.
@@ -33,14 +31,17 @@ If so, read and handle them.
 4. **Pending tickets**: Run `tk ready` to check if there are tickets waiting to be picked up.
 If you have capacity (fewer than `max_concurrent_workers` active agents), launch the highest-priority ready ticket using your `list-tickets` skill.
 
-5. **Cleanup**: Archive agents that are done and have been fully processed.
+5. **Proactive work**: If nothing above needs attention and you have no agents in flight, consider whether there's something useful you could do proactively:
+   - **Ask the user a question**: If there's something you've been uncertain about (e.g., how to handle a particular type of message, whether a channel is important), this is a good time to ask. Check your memory for any outstanding questions or gaps in your understanding. Be sure not to have too many outstanding questions at once -- you don't want to overwhelm the user.  If it's important and it's been a while though, you can ask again (or better yet, ask a variant)
+   - **Onboarding**: If there are uncompleted onboarding items, pick one up.
+
+6. **Cleanup**: Archive agents that are done and have been fully processed.
 This frees up capacity for new work.
 Do this only if you've been idle for quite a while.
 
 ## Guidelines
 
-- Keep idle handling lightweight.
-The goal is maintenance and catching things that fell through the cracks or continue with existing work, not starting major new initiatives (save that for `start_of_day` events).
+- If agents are already running, keep idle handling lightweight -- just do the maintenance checks (steps 1-4) and stop. You'll be notified when tasks complete.
 - Early idle events (low `idle_event_number`) should do quick checks.
-Later ones (the system has been quiet for a long time) can do more thorough cleanup.
-- If everything looks clean and there are no pending tickets, there is nothing to do--just finish your response and stop.
+Later ones (the system has been quiet for a long time) can do more thorough work like proactive triage or cleanup.
+- If everything looks clean, no pending tickets, and no proactive work to do -- just finish your response and stop.

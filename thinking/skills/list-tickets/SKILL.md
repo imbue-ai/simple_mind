@@ -27,8 +27,8 @@ Once you've chosen a ticket:
 
 1. Read the ticket details: `tk show <ticket-id>`
 2. Mark it as in progress: `tk start <ticket-id>`
-3. Add a note with the agent ID: `tk add-note <ticket-id> "Delegated to agent <agent-id>"`
-4. Create the agent using your `delegate-task-to-agent` skill, using the ticket's description and acceptance criteria as the task instructions
+3. Create the agent using your `delegate-task-to-agent` skill, passing the ticket ID so the agent gets a `ticket=<ticket-id>` label (see that skill for details on bidirectional linking)
+4. Add a note to the ticket with the agent ID: `tk add-note <ticket-id> "Working agent <agent-id> created"`
 
 ## Other useful commands
 

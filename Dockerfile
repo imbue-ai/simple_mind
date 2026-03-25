@@ -63,7 +63,7 @@ WORKDIR /code/simple_mind/
 RUN git config --global --add safe.directory /code/simple_mind/ && chown -R root:root /code/simple_mind/
 
 # add tk and mng as a tool
-RUN ln -s "/code/simple_mind/vendor/tk/ticket" ~/.local/bin/tk && uv tool install -e /code/simple_mind/vendor/mng/libs/mng && mng plugin add --path vendor/mng/libs/mng_llm/ --path vendor/mng/libs/mng_mind --path vendor/mng/libs/mng_claude --path vendor/mng/libs/mng_claude_mind --path vendor/mng/libs/mng_pi_coding --path vendor/mng/libs/mng_mind_chat/
+RUN ln -s "/code/simple_mind/vendor/tk/ticket" ~/.local/bin/tk && uv tool install -e /code/simple_mind/vendor/mng/libs/mng && mng plugin add --path vendor/mng/libs/mng_modal/ --path vendor/mng/libs/mng_llm/ --path vendor/mng/libs/mng_mind --path vendor/mng/libs/mng_claude --path vendor/mng/libs/mng_claude_mind --path vendor/mng/libs/mng_pi_coding --path vendor/mng/libs/mng_mind_chat/
 
 # Run idly forever while being responsive to SIGTERM.
 # PID 1 must explicitly install signal handlers in order to respect signals.

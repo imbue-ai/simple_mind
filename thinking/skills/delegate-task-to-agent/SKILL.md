@@ -51,10 +51,22 @@ EOF
 Then create the agent using the wrapper script in this skill's directory:
 
 ```bash
-./skills/delegate-task-to-agent/create_working_agent.sh <task-name> /tmp/task-<task-name>.md
+./skills/delegate-task-to-agent/create_working_agent.sh <task-name> /tmp/task-<task-name>.md [<ticket-id>]
 ```
 
-This script handles setting the correct env vars (`ROLE=working`), agent type ("worker") and labels (`role=working`, `mind=$MIND_NAME`).
+This script handles setting the correct env vars (`ROLE=working`), agent type ("worker") and labels (`role=working`, `mind=$MIND_NAME`, and `ticket=<ticket-id>` if provided).
+
+### Linking agents to tickets
+
+If this task is being done for a ticket, you **must** link them bidirectionally:
+
+1. **Agent -> ticket**: Pass the ticket ID as the third argument to `create_working_agent.sh`. This sets a `ticket=<ticket-id>` label on the agent.
+2. **Ticket -> agent**: Add a note to the ticket with the agent ID:
+   ```bash
+   tk add-note <ticket-id> "Working agent <agent-id> created"
+   ```
+
+This bidirectional linking ensures that if the system restarts, you can always reconstruct what was happening by checking agent labels (to find the ticket) or ticket notes (to find the agents).
 
 The `<task-name>` should be a descriptive name for the task (e.g. `fix-login-bug`, `add-search-feature`).
 Note that the names *must* be unique because git branches are created for each task.

@@ -54,6 +54,8 @@ Otherwise, a new conversation is created.
 
 This command prints the conversation ID to stdout.
 
+**IMPORTANT:** After creating a new conversation, you **MUST** link to it from an existing conversation that the user will actually see -- either the Daily Thread or the conversation where the user made the request that prompted it. Otherwise the user will never know the new conversation exists. Use a `<CONVERSATION_LINK>` tag (see above) to do this.
+
 ## Choosing which conversation to use
 
 - **Responding to a user message**: reply in the same conversation using `chat.sh chat --reply`.

@@ -31,9 +31,7 @@ If so, read and handle them.
 4. **Pending tickets**: Run `tk ready` to check if there are tickets waiting to be picked up.
 If you have capacity (fewer than `max_concurrent_workers` active agents), launch the highest-priority ready ticket using your `list-tickets` skill.
 
-5. **Proactive work**: If nothing above needs attention and you have no agents in flight, consider whether there's something useful you could do proactively:
-   - **Ask the user a question**: If there's something you've been uncertain about (e.g., how to handle a particular type of message, whether a channel is important), this is a good time to ask. Check your memory for any outstanding questions or gaps in your understanding. Be sure not to have too many outstanding questions at once -- you don't want to overwhelm the user.  If it's important and it's been a while though, you can ask again (or better yet, ask a variant)
-   - **Onboarding**: If there are uncompleted onboarding items, pick one up.
+5. **Proactive work**: If nothing above needs attention and you have no agents in flight, consult [idle_activities.md](../../idle_activities.md) for things you could do proactively.
 
 6. **Cleanup**: Archive agents that are done and have been fully processed.
 This frees up capacity for new work.

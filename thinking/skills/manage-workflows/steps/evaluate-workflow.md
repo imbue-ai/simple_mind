@@ -2,6 +2,8 @@
 
 You are testing a crystallized workflow script against multiple inputs and compiling results for review. The goal is to find bugs, edge cases, and quality issues before the script is finalized.
 
+**Authentication**: Scripts should be using `latchkey curl <service> <url>` for authenticated API calls. If you need to make ad-hoc API calls during evaluation, use latchkey as well.
+
 ## Inputs
 
 You should have been provided:

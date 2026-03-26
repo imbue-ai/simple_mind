@@ -2,6 +2,8 @@
 
 You are improving a workflow based on accumulated runtime data. Unlike crystallize (which fixes known issues), evolution is about discovering improvement opportunities from patterns in the workflow's actual usage.
 
+**Authentication**: Scripts should use `latchkey curl <service> <url>` for authenticated API calls — do not add custom auth logic.
+
 ## Inputs
 
 You should have been provided:

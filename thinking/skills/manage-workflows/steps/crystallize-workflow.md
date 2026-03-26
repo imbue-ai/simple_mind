@@ -2,6 +2,8 @@
 
 You are improving a workflow script based on evaluation feedback. Your job is to fix issues found during evaluation, simplify the code, and improve robustness — but only where there's a reason to.
 
+**Authentication**: Scripts should use `latchkey curl <service> <url>` for authenticated API calls — do not add custom auth logic.
+
 ## Inputs
 
 You should have been provided:

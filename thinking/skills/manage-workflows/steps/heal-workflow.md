@@ -2,6 +2,8 @@
 
 You are diagnosing and fixing a workflow that failed during a run. The goal is to get the workflow working again within its existing scope. If the fix requires fundamentally new capabilities, report that rather than attempting it.
 
+**Authentication**: Scripts should use `latchkey curl <service> <url>` for authenticated API calls. If a failure is auth-related, check whether latchkey itself is working (`latchkey curl <service> <test-url>`) before modifying the script.
+
 ## Inputs
 
 You should have been provided:

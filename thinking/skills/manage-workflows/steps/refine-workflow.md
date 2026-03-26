@@ -2,6 +2,8 @@
 
 You are transforming API exploration findings into an initial working Python script. A previous agent explored the service's APIs and documented what works — your job is to turn that into a clean, runnable script.
 
+**Authentication**: Use `latchkey curl <service> <url>` (via `subprocess`) for authenticated API calls. Latchkey handles token management automatically — do not implement auth logic in the script itself.
+
 ## Inputs
 
 You should have been provided:

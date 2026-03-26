@@ -2,6 +2,8 @@
 
 You are researching how to accomplish a service integration task. Your goal is to discover how the service's APIs work and actually perform the task at small scale. You are NOT writing a script — you are learning what works so that a future agent can write the script.
 
+**Authentication**: Use `latchkey curl <service> <url>` for authenticated API calls. Latchkey handles token management automatically. Use `/latchkey` to discover available services and their capabilities.
+
 ## Approach
 
 Research the service's APIs. Consider three tiers in order of preference:

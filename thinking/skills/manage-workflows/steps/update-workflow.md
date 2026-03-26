@@ -2,6 +2,8 @@
 
 You are modifying an existing workflow to accommodate new requirements or changed scope requested by the user. The key constraint: preserve existing functionality while adding the new capabilities.
 
+**Authentication**: Use `latchkey curl <service> <url>` for any new authenticated API calls. If the existing script already uses latchkey, follow the same pattern.
+
 ## Inputs
 
 You should have been provided:

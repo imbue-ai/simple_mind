@@ -7,7 +7,7 @@ description: Run commands to explore the current state of mngr and any relevant 
 
 If something seems to have gone wrong with a given task, `mngr` provides a variety of commands that can make it easier to see what is happening.
 
-You can always learn more about `mngr` and its commands by running `mngr --help` or `mngr <command> --help` for a specific command.
+**If you are unsure how to do something with `mngr`, use the `using-mngr` skill** -- never guess or invent commands. To check the status of a specific agent, see the `check-agent-status` skill.
 
 ## Useful mngr commands
 

@@ -1,5 +1,10 @@
 max_concurrent_workers = 10
 
+[[vendor]]
+name = "mng"
+url = "https://github.com/imbue-ai/mng.git"
+ref = "fix/mind-agent-state-events"
+
 [chat]
 welcome_message = "Hi, I'm ProductBot! I help organize your GitHub project. What repo should I manage?"
 

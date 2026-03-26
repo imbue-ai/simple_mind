@@ -28,6 +28,8 @@ Before delegating any work, clarify the user's intent via `send-message-to-user`
 
 Frame as: "I'll start with a basic version and we can iterate." The point is to minimize the chance that the script later has to be scrapped to support requirements that were foreseeable upfront.
 
+If the user's request is clear enough that you already know the service, data, and rough parameters, you can skip the interview and go straight to exploration. But if there's any ambiguity about what parameters the user will want — e.g., "export my Slack data" could mean channels, DMs, threads, date ranges, specific users — interview first. The exploration agent needs to know what to test, and exploring the wrong thing wastes a full agent cycle.
+
 ---
 
 ## How to delegate workflow steps
@@ -125,9 +127,11 @@ Then delegate with task name `refine-<workflow-name>` and this message file.
 
 Use standard verification.
 
-### 6. Evaluate
+### 6–8. Evaluate → Present → Crystallize
 
-Delegate using `steps/evaluate-workflow.md`. Append a Task Details section with:
+Every evaluation must be followed by a crystallize step to address the findings and improve the script. Never evaluate without crystallizing — even if the evaluation looks clean, the crystallize agent will confirm there's nothing to change.
+
+**6a. Evaluate**: Delegate using `steps/evaluate-workflow.md`. Append a Task Details section with:
 - The script files (copy `main.py` content)
 - The `task.yaml` content
 - The exploration output for comparison (if available)
@@ -153,13 +157,9 @@ EOF
 
 Then delegate with task name `evaluate-<workflow-name>` and this message file.
 
-### 7. Present to user
+**6b. Present to user**: Share the evaluation results with the user via `send-message-to-user`. Collect feedback.
 
-Share the evaluation results with the user via `send-message-to-user`. Collect feedback.
-
-### 8. Crystallize
-
-Delegate using `steps/crystallize-workflow.md`. Append a Task Details section with:
+**6c. Crystallize**: Delegate using `steps/crystallize-workflow.md`. Append a Task Details section with:
 - The current script files
 - The evaluation report
 - User feedback (if any)
@@ -185,11 +185,11 @@ EOF
 
 Then delegate with task name `crystallize-<workflow-name>` and this message file.
 
-### 9. Iterate
+### 7. Iterate
 
-Repeat steps 6-8 (evaluate → present → crystallize) up to 3 times or until quality stabilizes.
+Repeat the evaluate → present → crystallize cycle (step 6) up to 3 times or until quality stabilizes.
 
-### 10. Finalize
+### 8. Finalize
 
 On the final pass, present the script to the user for approval. Once approved, commit the workflow files to `thinking/skills/<workflow-name>/`.
 
@@ -261,8 +261,8 @@ EOF
 
 Then delegate with task name `evolve-<workflow-name>` and this message file.
 
-- Run the evaluate cycle (step 6 from "Creating").
-- Present changes to user for re-approval.
+- Run the evaluate → crystallize cycle (step 6 from "Creating") to validate and improve the changes.
+- Present to user for re-approval.
 
 ---
 

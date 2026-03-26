@@ -3,11 +3,13 @@ include = ["""has(labels.mind)"""]
 
 [agent_types.worker]
 parent_type = "claude"
+trust_working_directory = true
 command = "cd $ROLE && claude"
 cli_args = """--dangerously-skip-permissions"""
 
 [agent_types.verifier]
 parent_type = "claude"
+trust_working_directory = true
 command = "cd $ROLE && claude"
 cli_args = """--dangerously-skip-permissions"""
 

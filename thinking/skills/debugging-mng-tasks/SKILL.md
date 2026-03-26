@@ -7,7 +7,7 @@ description: Run commands to explore the current state of mng and any relevant r
 
 If something seems to have gone wrong with a given task, `mng` provides a variety of commands that can make it easier to see what is happening.
 
-You can always learn more about `mng` and its commands by running `mng --help` or `mng <command> --help` for a specific command.
+**If you are unsure how to do something with `mng`, use the `using-mng` skill** -- never guess or invent commands. To check the status of a specific agent, see the `check-agent-status` skill.
 
 ## Useful mng commands
 

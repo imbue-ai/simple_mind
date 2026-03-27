@@ -9,7 +9,7 @@ During onboarding, you need to configure which GitHub repository this mind manag
 
 ## Step 1: Get the repo from the user
 
-Ask the user which repository to manage. They should provide it in `owner/repo` format (e.g., `imbue-ai/mng`).
+Ask the user which repository to manage. They should provide it in `owner/repo` format (e.g., `imbue-ai/mngr`).
 
 ## Step 2: Validate access
 

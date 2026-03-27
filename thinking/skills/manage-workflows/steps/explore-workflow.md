@@ -1,8 +1,16 @@
 # Task: Explore Service Integration
 
-You are researching how to accomplish a service integration task. Your goal is to discover how the service's APIs work and actually perform the task at small scale. You are NOT writing a script — you are learning what works so that a future agent can write the script.
+You are researching how to accomplish a service integration task. Your goal is to discover how the service's APIs work and actually perform the task. You are NOT writing a reusable script — you are learning what works and producing results.
 
 **Authentication**: Use `latchkey curl <service> <url>` for authenticated API calls. Latchkey handles token management automatically. Use `/latchkey` to discover available services and their capabilities.
+
+## Modes
+
+Check the Task Details section for the mode:
+
+- **Full-execution mode** (`Mode: full-execution`): The user asked for something to be done — "summarize my Slack notifications", "check my PRs", etc. You must complete the *entire* task and produce user-facing results. Don't stop at small-scale testing. Fetch all the data needed, process it, and produce a clear, complete answer to the user's request.
+
+- **Exploration mode** (default, or `Mode: exploration`): You are scouting APIs so a future agent can write a script. Perform the task at small scale to validate the approach, but you don't need to produce complete results.
 
 ## Approach
 
@@ -22,13 +30,20 @@ For whichever tier you use:
 
 ## Actually attempt the task
 
-Don't just read docs — actually perform the task with small-scale test parameters. For example, if the task is "export messages from Slack channels," fetch messages from one channel with a small time window.
+Don't just read docs — actually perform the task.
+
+- **In full-execution mode**: Complete the entire task. Fetch all relevant data, paginate through everything needed, and produce the full result. For example, if the task is "summarize my Slack notifications," fetch all recent notifications and write a useful summary.
+- **In exploration mode**: Perform the task with small-scale test parameters. For example, if the task is "export messages from Slack channels," fetch messages from one channel with a small time window.
 
 Save any output data to `output/$MNG_AGENT_ID/data/`.
 
 ## Output
 
-Produce two files in `output/$MNG_AGENT_ID/`:
+Produce files in `output/$MNG_AGENT_ID/`:
+
+### `results.md` (full-execution mode only)
+
+The actual answer to the user's request. This will be shown directly to the user, so write it for them — not for a developer. Focus on clarity, useful structure, and the information they asked for. Don't include API details or implementation notes here.
 
 ### `summary.md`
 
@@ -37,7 +52,7 @@ Produce two files in `output/$MNG_AGENT_ID/`:
 - Pagination patterns observed
 - Rate limiting behavior encountered
 - Data format and schema of responses
-- What test parameters were used and what output was produced
+- What parameters were used and what output was produced
 - Decisions made and rationale
 - Status: complete / partial / blocked
 

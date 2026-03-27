@@ -1,10 +1,13 @@
 ---
 name: manage-workflows
 description: >
-  Orchestrate the creation, evaluation, evolution, update, and repair of
-  crystallized service workflows. Use when the user asks to set up a new
-  integration, automate a recurring task involving an external service,
-  fix a broken workflow, update an existing one, or improve one.
+  Load this skill VERY proactively — any time the user's request involves
+  fetching data from, acting on, or integrating with an external service.
+  This includes direct task requests like "summarize my Slack notifications",
+  "check my GitHub PRs", or "what emails did I get today" — not just explicit
+  "build a workflow" requests. Also covers setting up new integrations,
+  automating recurring tasks, fixing broken workflows, updating or improving
+  existing ones. If the request touches an external service, load this skill.
 ---
 
 # Managing Workflows
@@ -17,18 +20,92 @@ Each workflow lives in `thinking/skills/<workflow-name>/` and contains:
 - `requirements.txt` — Python dependencies
 - `SKILL.md` — auto-generated, describes how to run the workflow
 
+## Two modes of operation
+
+Users interact with external services in two ways, and you should handle them differently:
+
+1. **Direct task request** — The user wants something done *now*: "summarize my Slack notifications", "what PRs need my review", "check my email". They didn't ask for a workflow — they asked for results. Handle this with the **Direct task execution** flow below.
+
+2. **Explicit workflow request** — The user specifically asks to build, set up, or automate something: "build a workflow for summarizing Slack", "automate my PR reviews". Handle this with the **Creating a new workflow** flow further below.
+
+When in doubt, treat it as a direct task request. The user gets their answer faster, and you can always crystallize it into a reusable workflow afterward.
+
+---
+
 ## Step 0 — Interview
 
-Before delegating any work, clarify the user's intent via `send-message-to-user`. Keep it quick — the goal is establishing what the MVP looks like, not comprehensive requirements. Ask:
+Before delegating any work, clarify the user's intent via `send-message-to-user`. Keep it quick — the goal is understanding what they need, not comprehensive requirements. Ask about:
 
 - What service and what data/action?
-- What parameters should be configurable (and reasonable defaults)?
+- What parameters matter (time ranges, filters, scope) and reasonable defaults?
 - What does the output look like?
 - Any known API docs or hints?
 
-Frame as: "I'll start with a basic version and we can iterate." The point is to minimize the chance that the script later has to be scrapped to support requirements that were foreseeable upfront.
+If the user's request is clear enough that you already know the service, data, and rough parameters, you can skip the interview. But if there's ambiguity — e.g., "export my Slack data" could mean channels, DMs, threads, date ranges, specific users — interview first. The exploration agent needs to know what to target, and exploring the wrong thing wastes a full agent cycle.
 
-If the user's request is clear enough that you already know the service, data, and rough parameters, you can skip the interview and go straight to exploration. But if there's any ambiguity about what parameters the user will want — e.g., "export my Slack data" could mean channels, DMs, threads, date ranges, specific users — interview first. The exploration agent needs to know what to test, and exploring the wrong thing wastes a full agent cycle.
+For direct task requests, frame as: "Let me make sure I understand what you need before I go fetch this." For explicit workflow requests, frame as: "I'll start with a basic version and we can iterate."
+
+---
+
+## Direct task execution
+
+When the user asks you to do something involving an external service (not explicitly asking to build a workflow), prioritize getting them results quickly.
+
+### 1. Execute the task
+
+Delegate using `steps/explore-workflow.md` in **full execution mode**. The explore agent will both figure out the APIs and actually complete the full task, producing user-facing results.
+
+Append a Task Details section with:
+- The user's request (verbatim)
+- The service name
+- Any parameters implied by the request (e.g., time ranges, filters)
+- **Mode: full-execution** — this tells the explore agent to complete the entire task, not just small-scale testing
+
+```bash
+cp ./skills/manage-workflows/steps/explore-workflow.md /tmp/task-explore-<task-name>.md
+cat >> /tmp/task-explore-<task-name>.md << 'EOF'
+
+---
+
+## Task Details
+
+**Mode: full-execution**
+
+### User's Request
+<paste the user's request verbatim>
+
+### Service
+<service name>
+
+### Parameters
+<any parameters implied or stated by the user — time ranges, filters, scope, etc.>
+EOF
+```
+
+Then delegate with task name `explore-<task-name>` and this message file.
+
+### 2. Present results to user
+
+Once the explore agent finishes, present the results to the user via `send-message-to-user`. Focus on the actual answer to their question — the data, the summary, whatever they asked for. Don't lead with API details or implementation notes.
+
+### 3. Decide whether to crystallize
+
+After presenting results, evaluate whether this task would benefit from being a reusable workflow:
+- Is this the kind of thing the user would want to do again (recurring, periodic)?
+- Is the integration non-trivial enough that re-discovering it each time would be wasteful?
+- Does an existing workflow already cover this? (Check `thinking/skills/` for overlap.)
+
+If yes: proceed to the **Refine** step (step 4 under "Creating a new workflow") using the explore agent's output. You can suggest this to the user: "This seems like something you'd want to run regularly — want me to save it as a reusable workflow?"
+
+If no (one-off request, trivial, or already covered): you're done.
+
+---
+
+## Creating a new workflow
+
+Use this flow when the user explicitly asks to build or automate a workflow, OR when you've decided to crystallize a direct task (see above).
+
+**If coming from a direct task execution**: skip straight to step 4 (Refine) — you already have the exploration output.
 
 ---
 

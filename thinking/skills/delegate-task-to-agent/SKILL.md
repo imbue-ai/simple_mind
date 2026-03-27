@@ -88,6 +88,11 @@ When a working agent finishes successfully (you will receive an `mngr/agent_stat
 Use `--env ROLE=verifying`.
 See the `verify-task-result` skill for the full details on what to include in the message file.
 
+### Dealing with errors
+
+If there are any errors while creating an agent, go investigate them!
+Don't simply try launching another agent--figure out what went wrong and fix it before trying again.
+
 ## 4. Logging the task
 
 Whenever you create a new agent, post to the **Work Log** (see `send-message-to-user` skill) with a brief entry, e.g.:

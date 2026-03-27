@@ -16,7 +16,6 @@ command = "mkdir -p $ROLE/.claude && mv .claude/settings.local.json $ROLE/.claud
 cli_args = """--dangerously-skip-permissions"""
 
 [commands.create]
-type = "worker"
 connect = false
 pass_env = ["MIND_NAME", "ANTHROPIC_API_KEY", "IS_SANDBOX", "IS_AUTONOMOUS"]
 

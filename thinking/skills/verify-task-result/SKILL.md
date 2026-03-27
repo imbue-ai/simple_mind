@@ -15,7 +15,7 @@ Instead, give the verifying agent all the *pointers* it needs to investigate the
 
 Write a markdown file for the verifying agent that includes:
 
-1. **The working agent's ID** so the verifier can inspect its transcript, artifacts, and state directly (e.g., via `mng transcript <working-agent-id>`)
+1. **The working agent's ID** so the verifier can inspect its transcript, artifacts, and state directly (e.g., via `mngr transcript <working-agent-id>`)
 2. **The original task description** -- what you asked the working agent to do, and why. Copy or closely paraphrase the original `--message` you sent when creating the worker. Include the success criteria.
 3. **Any follow-up context** -- if you sent additional messages to the working agent during its run (e.g., answering its questions, providing clarifications, updating requirements), mention that you did so and what the key points were. The verifier can read the full transcript, but knowing what changed helps it focus.
 4. **The user's original request** (if applicable) -- if this task was triggered by a user message, include any relevant conversation IDs and time-spans for each so the verifier can judge whether the result actually satisfies the user's intent (not just the task instructions as you interpreted them).
@@ -54,7 +54,7 @@ Created verifying agent <agent-name> to verify: <brief description of what's bei
 ```
 
 Then mark the relevant events as handled and move on.
-You will receive a new `mng/agent_states` event when the verifying agent finishes -- at that point, use the `handle-verification-result` skill to act on its recommendations.
+You will receive a new `mngr/agent_states` event when the verifying agent finishes -- at that point, use the `handle-verification-result` skill to act on its recommendations.
 
 ## What the verifier will do
 

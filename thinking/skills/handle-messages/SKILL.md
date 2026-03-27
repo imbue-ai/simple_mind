@@ -21,7 +21,7 @@ If you said "I need to ask you some clarifying questions before I can get starte
 When processing a user message, determine which of these categories it falls into:
 
 **New task request**: The user is asking you to do something.
-Remember: when the user tells you to do something, they really mean "use your `delegate-task-to-agent` skill to make a `mng` agent do it."
+Remember: when the user tells you to do something, they really mean "use your `delegate-task-to-agent` skill to make a `mngr` agent do it."
 You should *never* do the work yourself.
 
 **Clarification or question**: The user asked something you don't understand, or the request is too complex to act on immediately.

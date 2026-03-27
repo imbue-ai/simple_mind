@@ -19,8 +19,8 @@ First, check if you have agents currently running. If tasks are already in fligh
 
 Then run through these checks in order:
 
-1. **Crashed or stuck agents**: Run `mng list --exclude "has(labels.archived_at)" --exclude "id == \"$AGENT_ID\"" --format jsonl` and look for agents in unexpected states (crashed, stopped, waiting for too long).
-If you find any that you created, handle them using your `handle-mng-agent_states` skill.
+1. **Crashed or stuck agents**: Run `mngr list --exclude "has(labels.archived_at)" --exclude "id == \"$AGENT_ID\"" --format jsonl` and look for agents in unexpected states (crashed, stopped, waiting for too long).
+If you find any that you created, handle them using your `handle-mngr-agent_states` skill.
 
 2. **Unprocessed agents**: Check if any agents finished but you haven't yet verified their results or acted on their output.
 If so, handle them now.

@@ -18,7 +18,7 @@ This skill lists all active conversations managed by this mind.
 Run the chat script with `--list`:
 
 ```bash
-$MNG_AGENT_STATE_DIR/commands/chat.sh --list
+$MNGR_AGENT_STATE_DIR/commands/chat.sh --list
 ```
 
 This reads the `mind_conversations` table from the llm database and displays each conversation with:

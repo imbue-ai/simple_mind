@@ -13,14 +13,14 @@ This skill describes how to clean them up.
 Find agents that were archived more than a week ago and destroy them:
 
 ```bash
-mng list --include "has(labels.archived_at)" --exclude "id == \"$AGENT_ID\"" --format jsonl
+mngr list --include "has(labels.archived_at)" --exclude "id == \"$AGENT_ID\"" --format jsonl
 ```
 
 For each agent in the list, check the `archived_at` label.
 If it is more than a week old, destroy the agent:
 
 ```bash
-mng destroy -f <agent-id>
+mngr destroy -f <agent-id>
 ```
 
 ## Cleaning up output directories

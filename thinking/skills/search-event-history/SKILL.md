@@ -5,7 +5,7 @@ description: Search through past events in the event log files. Use when you nee
 
 # Searching event history
 
-Event logs are stored as JSONL files under `$MNG_AGENT_STATE_DIR/events/<source>/events.jsonl`.
+Event logs are stored as JSONL files under `$MNGR_AGENT_STATE_DIR/events/<source>/events.jsonl`.
 You can search them using standard tools like `grep` and `jq`.
 
 **Be careful about how much data you load into context.**
@@ -17,7 +17,7 @@ Always inspect the *shape and size* of the data before loading full content.
 ## Step 1: Find which sources exist
 
 ```bash
-( cd $MNG_AGENT_STATE_DIR/events/ && find -name events.jsonl -printf '%h\n' | sed 's|^\./||' )
+( cd $MNGR_AGENT_STATE_DIR/events/ && find -name events.jsonl -printf '%h\n' | sed 's|^\./||' )
 ```
 
 ## Step 2: Understand the data before loading it
@@ -26,7 +26,7 @@ Before reading event content, check how large the fields are to avoid pulling hu
 
 ```bash
 # See the size (in characters) of each field for each event
-cat "$MNG_AGENT_STATE_DIR/events/<source>/events.jsonl" | tail -20 | jq -c '[to_entries[] | .value = (.value | tojson | length)] | from_entries'
+cat "$MNGR_AGENT_STATE_DIR/events/<source>/events.jsonl" | tail -20 | jq -c '[to_entries[] | .value = (.value | tojson | length)] | from_entries'
 ```
 
 This tells you which fields are small (IDs, timestamps) and which are large (content, data payloads).
@@ -37,7 +37,7 @@ Only load the fields you actually need.
 ### Find events matching a pattern
 
 ```bash
-grep '<pattern>' "$MNG_AGENT_STATE_DIR/events/<source>/events.jsonl" | jq -c '[to_entries[] | .value = (.value | tojson | length)] | from_entries'
+grep '<pattern>' "$MNGR_AGENT_STATE_DIR/events/<source>/events.jsonl" | jq -c '[to_entries[] | .value = (.value | tojson | length)] | from_entries'
 ```
 
 ### Extract specific fields only
@@ -46,26 +46,26 @@ When you know which fields you need, use `jq` to select only those fields:
 
 ```bash
 # Get just timestamps and event types from recent events
-tail -50 "$MNG_AGENT_STATE_DIR/events/<source>/events.jsonl" | jq -c '{timestamp, type, event_id}'
+tail -50 "$MNGR_AGENT_STATE_DIR/events/<source>/events.jsonl" | jq -c '{timestamp, type, event_id}'
 
 # Get message metadata without loading content
-tail -50 "$MNG_AGENT_STATE_DIR/events/messages/events.jsonl" | jq -c '{timestamp, conversation_id, role, event_id}'
+tail -50 "$MNGR_AGENT_STATE_DIR/events/messages/events.jsonl" | jq -c '{timestamp, conversation_id, role, event_id}'
 
 # Get content only for a specific conversation
-grep '<conversation-id>' "$MNG_AGENT_STATE_DIR/events/messages/events.jsonl" | jq -c '{role, content}'
+grep '<conversation-id>' "$MNGR_AGENT_STATE_DIR/events/messages/events.jsonl" | jq -c '{role, content}'
 ```
 
 ### Find events for a specific agent
 
 ```bash
-grep '"<agent-id>"' "$MNG_AGENT_STATE_DIR/events/mng/agent_states/events.jsonl" | jq -c '{timestamp, state, event_id, agent_id}'
+grep '"<agent-id>"' "$MNGR_AGENT_STATE_DIR/events/mngr/agent_states/events.jsonl" | jq -c '{timestamp, state, event_id, agent_id}'
 ```
 
 ### Find events in a time range
 
 ```bash
 # Events after a specific timestamp
-cat "$MNG_AGENT_STATE_DIR/events/<source>/events.jsonl" | jq -c 'select(.timestamp > "2026-03-15T00:00:00")' | jq -c '[to_entries[] | .value = (.value | tojson | length)] | from_entries'
+cat "$MNGR_AGENT_STATE_DIR/events/<source>/events.jsonl" | jq -c 'select(.timestamp > "2026-03-15T00:00:00")' | jq -c '[to_entries[] | .value = (.value | tojson | length)] | from_entries'
 ```
 
 ## Guidelines

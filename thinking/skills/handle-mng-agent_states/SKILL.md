@@ -1,9 +1,9 @@
 ---
-name: handle-mng-agent_states
-description: Handle events from the mng/agent_states source about sub-agent state transitions (finished, waiting, done, etc). You **MUST** use this skill (and *carefully follow the process in this doc*) whenever you receive a message from the "mng/agent_states" source!
+name: handle-mngr-agent_states
+description: Handle events from the mngr/agent_states source about sub-agent state transitions (finished, waiting, done, etc). You **MUST** use this skill (and *carefully follow the process in this doc*) whenever you receive a message from the "mngr/agent_states" source!
 ---
 
-# Events from the `mng/agent_states` source
+# Events from the `mngr/agent_states` source
 
 These events represent state changes for agents, including sub-agents that you have launched via `delegate-task-to-agent`.
 Each event includes the `agent_id`, the new `state`, and any relevant metadata about the transition (eg, error message if it crashed).
@@ -17,7 +17,7 @@ How to respond to each event depends on both the state that the agent transition
 
 # Possible agent states
 
-While their host is running, agents can be in one of the following states (see `AgentLifecycleState` in `imbue/mng/primitives.py` and the [agent lifecycle docs](./vendor/mng/libs/mng/docs/concepts/agents.md#lifecycle)):
+While their host is running, agents can be in one of the following states (see `AgentLifecycleState` in `imbue/mngr/primitives.py` and the [agent lifecycle docs](./vendor/mngr/libs/mngr/docs/concepts/agents.md#lifecycle)):
 
 - **stopped**: the agent's tmux session does not exist (it has been stopped or not yet started)
 - **running**: the agent process is actively running
@@ -25,7 +25,7 @@ While their host is running, agents can be in one of the following states (see `
 - **done**: the agent's process has exited (the tmux session still exists but the process has finished)
 - **replaced**: a different process is running in the agent's tmux pane (unusual)
 
-Agents run on hosts, which can be in the following states (see `HostState` in `imbue/mng/primitives.py`) and the [host lifecycle docs](./vendor/mng/libs/mng/docs/concepts/hosts.md#lifecycle):
+Agents run on hosts, which can be in the following states (see `HostState` in `imbue/mngr/primitives.py`) and the [host lifecycle docs](./vendor/mngr/libs/mngr/docs/concepts/hosts.md#lifecycle):
 
 - **building**: Building the image, etc.
 - **starting**: Creating and provisioning the host, starting the agent, etc.
@@ -65,7 +65,7 @@ cat output/<agent-id>/summary.md 2>/dev/null || echo "No summary.md found"
 If no `summary.md` exists, you can try reading the agent's transcript:
 
 ```bash
-mng transcript --format=jsonl --role=assistant <agent-id> | tail -n 20
+mngr transcript --format=jsonl --role=assistant <agent-id> | tail -n 20
 ```
 
 You're looking for the agent's final summary response, which most agents print when they finish their work.
@@ -73,7 +73,7 @@ You're looking for the agent's final summary response, which most agents print w
 Sometimes the agent may have had a bunch of pointless system messages at the end if there were some errors, in which case you may need to look a bit further back, or restrict to just the assistant messages:
 
 ```bash
-mng transcript --format=jsonl --role=assistant <agent-id> | tail -n 20
+mngr transcript --format=jsonl --role=assistant <agent-id> | tail -n 20
 ```
 
 Once you've found the final summary response, you can determine whether the task was completed successfully, or if there were errors or questions.
@@ -86,15 +86,15 @@ If the agent had questions or seems to have run into some problems, then it is e
 
 Once you've done that, you should either:
 
-1. Send a message to the agent with the information it needs to proceed (e.g., answers to its questions, or suggestions on how to fix the errors) by using `mng message <agent-id> --message "(put your message here)"`
-2. Abandon the task, archive the agent, and try again with a new agent (after revising the instructions). It is often useful to retry a task with a fresh agent and updated instructions if you see that the task failed for some reason that you could have prevented with better instructions. In this case, simply call `mng archive -f <agent-id>` to clean up the old agent, revise the instructions, and then create a new agent using your `delegate-task-to-agent` skill with the updated instructions.
+1. Send a message to the agent with the information it needs to proceed (e.g., answers to its questions, or suggestions on how to fix the errors) by using `mngr message <agent-id> --message "(put your message here)"`
+2. Abandon the task, archive the agent, and try again with a new agent (after revising the instructions). It is often useful to retry a task with a fresh agent and updated instructions if you see that the task failed for some reason that you could have prevented with better instructions. In this case, simply call `mngr archive -f <agent-id>` to clean up the old agent, revise the instructions, and then create a new agent using your `delegate-task-to-agent` skill with the updated instructions.
 3. Ask the user for additional information. You should generally try to avoid doing this if possible, since it adds latency and friction, but sometimes the agent has failed and you simply don't have enough information to know what to do (or even to make a reasonable guess or assumption). In such a case, use your `send-message-to-user` skill to ask the user for additional information that can help you determine how to proceed.
-4. Abandon the task, stop the agent, and either inform the user that you were unable to complete the task (if they requested it), or simply move on with your other priorities if the task was something you decided to do yourself without the user's explicit request. In this case, call `mng stop <agent-id>` to stop the agent, and then check if there is now capacity to launch a pending ticket (using `list-tickets` to check for ready tickets).
+4. Abandon the task, stop the agent, and either inform the user that you were unable to complete the task (if they requested it), or simply move on with your other priorities if the task was something you decided to do yourself without the user's explicit request. In this case, call `mngr stop <agent-id>` to stop the agent, and then check if there is now capacity to launch a pending ticket (using `list-tickets` to check for ready tickets).
 
 ### If the agent believes the task is complete
 
 If the agent seems to believe it has completed the task, then the next steps depend on what type of agent this is.
-You can determine the agent's role and associated ticket by checking its labels (e.g., `mng list --format jsonl | grep <agent-id> | jq .labels` and look at the `role` and `ticket` labels).
+You can determine the agent's role and associated ticket by checking its labels (e.g., `mngr list --format jsonl | grep <agent-id> | jq .labels` and look at the `role` and `ticket` labels).
 Agents created via `delegate-task-to-agent` will have `working` or `verifying` as their role, and a `ticket` label if they were created for a specific ticket.
 
 If this was a "working" agent, use the `verify-task-result` skill to check whether the task was completed successfully.
@@ -106,9 +106,9 @@ If this was a "verifying" agent, use your `handle-verification-result` skill to 
 
 This state indicates that the underlying infrastructure causes the agent's host to crash.
 
-If a recent snapshot of the host is available (call `mng snapshot list <agent-id>` to check), you can restore from the snapshot and restart the agent, and then tell it to resume its work (by using something like `mng message <agent-id> --message "Please continue"`).
+If a recent snapshot of the host is available (call `mngr snapshot list <agent-id>` to check), you can restore from the snapshot and restart the agent, and then tell it to resume its work (by using something like `mngr message <agent-id> --message "Please continue"`).
 
-If there were no snapshots (rare), you should archive that agent (using `mng archive -f <agent-id>`) and then create a new agent to redo the work (using your `delegate-task-to-agent` skill with the same instructions, or revised instructions if you think that would help).
+If there were no snapshots (rare), you should archive that agent (using `mngr archive -f <agent-id>`) and then create a new agent to redo the work (using your `delegate-task-to-agent` skill with the same instructions, or revised instructions if you think that would help).
 
 If this happens repeatedly, you should investigate the underlying cause of the crashes (if possible), or use your `dealing-with-the-unexpected` skill to submit a bug report to the developers so they can investigate and fix the underlying issue.
 
@@ -117,7 +117,7 @@ If this happens repeatedly, you should investigate the underlying cause of the c
 This state indicates that something went wrong before the host could be created, eg, while building the image or starting the host.
 
 This is typically a problem with the dockerfile or other build instructions.
-You should investigate your local `mng` logs and see what the actual error was, and then fix the underlying issue (e.g., by fixing the dockerfile or build instructions) before ultimately trying again (by creating a new agent with the same instructions using your `delegate-task-to-agent` skill).
+You should investigate your local `mngr` logs and see what the actual error was, and then fix the underlying issue (e.g., by fixing the dockerfile or build instructions) before ultimately trying again (by creating a new agent with the same instructions using your `delegate-task-to-agent` skill).
 
 ## State: "stopping"
 
@@ -125,20 +125,20 @@ This state is transient and can be ignored.
 
 ## State: "destroyed"
 
-This state is the result of calling `mng destroy`, and can be safely ignored.
+This state is the result of calling `mngr destroy`, and can be safely ignored.
 
 ## State: "replaced"
 
-This is unusual and typically indicates that `mng` believes that the agent process ID has shifted since it was first launched.
-This typically happens if there is a bug in the `mng` `Agent` class implementation.
+This is unusual and typically indicates that `mngr` believes that the agent process ID has shifted since it was first launched.
+This typically happens if there is a bug in the `mngr` `Agent` class implementation.
 
-You can investigate with `mng capture` and consider archiving and recreating the agent if necessary (eg, if this is transient)
-You may need to fix the underlying agent or code so that `mng` is able to track the agent process (if this is a persistent issue).
+You can investigate with `mngr capture` and consider archiving and recreating the agent if necessary (eg, if this is transient)
+You may need to fix the underlying agent or code so that `mngr` is able to track the agent process (if this is a persistent issue).
 
 ## General guidelines
 
-- When a task fails or crashes, review the error before retrying. Use `mng capture <agent-id> --full` to see what happened. Consider whether the instructions need to be revised.
-- Clean up finished agents with `mng f archive` after you have processed their results.
+- When a task fails or crashes, review the error before retrying. Use `mngr capture <agent-id> --full` to see what happened. Consider whether the instructions need to be revised.
+- Clean up finished agents with `mngr f archive` after you have processed their results.
 - After processing any agent state event, check if there is capacity to launch a pending ticket (via `list-tickets`).
 - Notify the user about significant state changes according to their notification preferences
 - After some tasks have been stopped/archived/destroyed, remember to check if there is now capacity to launch a pending ticket (using `list-tickets` to check for ready tickets).

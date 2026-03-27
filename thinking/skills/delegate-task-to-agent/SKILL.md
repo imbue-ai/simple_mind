@@ -6,18 +6,18 @@ description: Create a sub-agent to perform a task. Use when you need to delegate
 # Delegating tasks to sub-agents
 
 As the thinking agent, you should NEVER do work directly.
-Instead, delegate all tasks to sub-agents via `mng create`.
+Instead, delegate all tasks to sub-agents via `mngr create`.
 
 ## Check remaining worker capacity
 
 Before creating a new task, first run:
 
 ```bash
-mng list --exclude "has(labels.archived_at)" --exclude "id == \"$AGENT_ID\" --format jsonl
+mngr list --exclude "has(labels.archived_at)" --exclude "id == \"$AGENT_ID\" --format jsonl
 ```
 
 In order to see how many agents (besides yourself) are currently active (ie, not archived).
-If there are stopped agents in the list that no longer matter, they can be moved to the archive by running `mng archive <agent-id>`
+If there are stopped agents in the list that no longer matter, they can be moved to the archive by running `mngr archive <agent-id>`
 
 If there are more than `max_concurrent_workers` (see [minds.toml](../../../minds.toml)) workers running, create a ticket using your `create-ticket` skill **instead** of creating a new agent.
 Be sure to save enough information and context in the ticket so that you will be able to delegate the work once there is more capacity.
@@ -26,7 +26,7 @@ If there are not too many workers already running, read on for how to create dif
 
 ## Creating a working agent
 
-To delegate a task, create a sub-agent using `mng`.
+To delegate a task, create a sub-agent using `mngr`.
 By default, sub-agents are created as copies of the current agent harness with a different role.
 Use `--env ROLE=working` to create a working agent.
 
@@ -77,7 +77,7 @@ This ensures that the new agent's branch has the same base commit as the current
 
 ## Creating a verifying agent
 
-When a working agent finishes successfully (you will receive an `mng/agent_states` event), create a verifying agent to check the work.
+When a working agent finishes successfully (you will receive an `mngr/agent_states` event), create a verifying agent to check the work.
 Use `--env ROLE=verifying`.
 See the `verify-task-result` skill for the full details on what to include in the message file.
 

@@ -61,19 +61,19 @@ if [[ -z "$CONFIDENCE" ]]; then
     exit 1
 fi
 
-# -- timestamp detection (from mng_log.sh) --
-_MNG_TIMESTAMP_METHOD=""
+# -- timestamp detection (from mngr_log.sh) --
+_MNGR_TIMESTAMP_METHOD=""
 _detect_ts() {
     local t
     t=$(date -u +"%Y-%m-%dT%H:%M:%S.%NZ" 2>/dev/null) || true
-    if [[ "$t" != *"%N"* ]]; then _MNG_TIMESTAMP_METHOD="gnu"; return; fi
-    if perl -MTime::HiRes=gettimeofday -e '1' 2>/dev/null; then _MNG_TIMESTAMP_METHOD="perl"; return; fi
-    _MNG_TIMESTAMP_METHOD="basic"
+    if [[ "$t" != *"%N"* ]]; then _MNGR_TIMESTAMP_METHOD="gnu"; return; fi
+    if perl -MTime::HiRes=gettimeofday -e '1' 2>/dev/null; then _MNGR_TIMESTAMP_METHOD="perl"; return; fi
+    _MNGR_TIMESTAMP_METHOD="basic"
 }
 _detect_ts
 
 _ts() {
-    case "$_MNG_TIMESTAMP_METHOD" in
+    case "$_MNGR_TIMESTAMP_METHOD" in
         gnu)  date -u +"%Y-%m-%dT%H:%M:%S.%NZ" ;;
         perl) perl -MTime::HiRes=gettimeofday -MPOSIX=strftime \
                   -e '($s,$us)=gettimeofday();printf "%s.%09dZ\n",strftime("%Y-%m-%dT%H:%M:%S",gmtime($s)),$us*1000' ;;
@@ -108,9 +108,9 @@ _json_array() {
 }
 
 # -- main --
-_MNG_LOG_FILE="$MNG_AGENT_STATE_DIR/events/handled_events/events.jsonl"
+_MNGR_LOG_FILE="$MNGR_AGENT_STATE_DIR/events/handled_events/events.jsonl"
 
-mkdir -p "$(dirname "$_MNG_LOG_FILE")"
+mkdir -p "$(dirname "$_MNGR_LOG_FILE")"
 
 ts=$(_ts)
 eid="evt-$(head -c 16 /dev/urandom | xxd -p)"
@@ -120,4 +120,4 @@ ticket_ids_json=$(_json_array "${TICKET_IDS[@]+"${TICKET_IDS[@]}"}")
 message_ids_json=$(_json_array "${MESSAGE_IDS[@]+"${MESSAGE_IDS[@]}"}")
 
 printf '{"timestamp":"%s","type":"handled","event_id":"%s","source":"handled_events","handled_event_id":"%s","summary":"%s","confidence":%s,"ticket_ids":%s,"message_ids":%s,"pid":%s}\n' \
-    "$ts" "$eid" "$escaped_handled_id" "$escaped_summary" "$CONFIDENCE" "$ticket_ids_json" "$message_ids_json" "$$" >> "$_MNG_LOG_FILE"
+    "$ts" "$eid" "$escaped_handled_id" "$escaped_summary" "$CONFIDENCE" "$ticket_ids_json" "$message_ids_json" "$$" >> "$_MNGR_LOG_FILE"

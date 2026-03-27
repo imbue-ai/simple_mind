@@ -9,7 +9,7 @@ set -euo pipefail
 #
 # Sets these env vars for the verifying agent:
 #   WORKING_AGENT_ID          - the working agent's ID
-#   WORKING_AGENT_BRANCH      - the working agent's git branch (mng/<task-name>)
+#   WORKING_AGENT_BRANCH      - the working agent's git branch (mngr/<task-name>)
 #   WORKING_AGENT_BASE_BRANCH - the current branch of this mind (ie, what the working agent branched from)
 
 if (( $# < 3 || $# > 4 )); then
@@ -28,7 +28,7 @@ if [ ! -f "$MESSAGE_FILE" ]; then
 fi
 
 AGENT_NAME="verify-$TASK_NAME"
-WORKING_AGENT_BRANCH="mng/$TASK_NAME"
+WORKING_AGENT_BRANCH="mngr/$TASK_NAME"
 WORKING_AGENT_BASE_BRANCH="$(git rev-parse --abbrev-ref HEAD)"
 
 LABEL_ARGS=(
@@ -40,7 +40,7 @@ if [ -n "$TICKET_ID" ]; then
     LABEL_ARGS+=(--label ticket="$TICKET_ID")
 fi
 
-mng create "$AGENT_NAME" verifier \
+mngr create "$AGENT_NAME" verifier \
     --env ROLE=verifying \
     --env WORKING_AGENT_ID="$WORKING_AGENT_ID" \
     --env WORKING_AGENT_BRANCH="$WORKING_AGENT_BRANCH" \

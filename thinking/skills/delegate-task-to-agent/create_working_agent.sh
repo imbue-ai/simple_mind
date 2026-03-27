@@ -30,7 +30,7 @@ if [ -n "$TICKET_ID" ]; then
     LABEL_ARGS+=(--label ticket="$TICKET_ID")
 fi
 
-mng create "$TASK_NAME" worker \
+mngr create "$TASK_NAME" worker \
     --env ROLE=working \
     "${LABEL_ARGS[@]}" \
     --message-file "$MESSAGE_FILE"

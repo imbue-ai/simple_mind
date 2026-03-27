@@ -20,19 +20,19 @@ For more details on your personality and values, see [SOUL.md](./SOUL.md).
 
 ## Important documentation
 
-See [the `Core Mind` docs](./vendor/mng/apps/minds/docs/mind/README.md) for a high-level overview of how a `Mind` is supposed to work, including docs on the [event lifecycle](./vendor/mng/apps/minds/docs/mind/event_lifecycle.md) and the [conversation system](./vendor/mng/apps/minds/docs/mind/conversations.md).
+See [the `Core Mind` docs](./vendor/mngr/apps/minds/docs/mind/README.md) for a high-level overview of how a `Mind` is supposed to work, including docs on the [event lifecycle](./vendor/mngr/apps/minds/docs/mind/event_lifecycle.md) and the [conversation system](./vendor/mngr/apps/minds/docs/mind/conversations.md).
 
-See [the `Minds` app docs](./vendor/mng/apps/minds/docs/design.md) for more details on how the `Minds` application (which is how the end-user runs a given `Mind`).
+See [the `Minds` app docs](./vendor/mngr/apps/minds/docs/design.md) for more details on how the `Minds` application (which is how the end-user runs a given `Mind`).
 The `Minds` application handles authentication, agent creation, request forwarding, and more.
 This code is *not* editable by you, but you can understand more about how it works by reading the docs.
 
-See [the `mng` tool docs](./vendor/mng/README.md) and your [`delegate-task-to-agent` skill](./skills/delegate-task-to-agent/SKILL.md) for details on how to use the `mng` command line tool, which you should use for the creation and management of all sub-agents that you create in order to delegate work.
-The `Minds` application, and the entire `Mind` framework, are built on top of `mng`, so understanding how to use it is critical to your functioning.
+See [the `mngr` tool docs](./vendor/mngr/README.md) and your [`delegate-task-to-agent` skill](./skills/delegate-task-to-agent/SKILL.md) for details on how to use the `mngr` command line tool, which you should use for the creation and management of all sub-agents that you create in order to delegate work.
+The `Minds` application, and the entire `Mind` framework, are built on top of `mngr`, so understanding how to use it is critical to your functioning.
 In particular:
-- [Environment variables](./vendor/mng/libs/mng/docs/concepts/environment_variables.md) documents the runtime variables available to agents (e.g. `MNG_AGENT_ID`, `MNG_AGENT_NAME`, `MNG_AGENT_STATE_DIR`, `MNG_AGENT_WORK_DIR`, `MNG_HOST_DIR`)
-- [Agent lifecycle](./vendor/mng/libs/mng/docs/concepts/agents.md#lifecycle) documents the possible agent states
-- [mng_mind plugin](./vendor/mng/libs/mng_mind/README.md) provides the shared mind infrastructure (event watcher, data types)
-- [mng_llm plugin](./vendor/mng/libs/mng_llm/README.md) provides the LLM integration (conversation management, supporting services, chat tools)
+- [Environment variables](./vendor/mngr/libs/mngr/docs/concepts/environment_variables.md) documents the runtime variables available to agents (e.g. `MNGR_AGENT_ID`, `MNGR_AGENT_NAME`, `MNGR_AGENT_STATE_DIR`, `MNGR_AGENT_WORK_DIR`, `MNGR_HOST_DIR`)
+- [Agent lifecycle](./vendor/mngr/libs/mngr/docs/concepts/agents.md#lifecycle) documents the possible agent states
+- [mngr_mind plugin](./vendor/mngr/libs/mngr_mind/README.md) provides the shared mind infrastructure (event watcher, data types)
+- [mngr_llm plugin](./vendor/mngr/libs/mngr_llm/README.md) provides the LLM integration (conversation management, supporting services, chat tools)
 
 ## README files
 

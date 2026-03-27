@@ -19,7 +19,7 @@ Be sure to any memories about user preferences around notifications and messagin
 When you want to follow up in a conversation you already know about (e.g. responding to a user message in the same conversation), inject your message directly using the `llm` tool:
 
 ```bash
-$MNG_AGENT_STATE_DIR/commands/chat.sh --reply <conversation-id> "Your message here"
+$MNGR_AGENT_STATE_DIR/commands/chat.sh --reply <conversation-id> "Your message here"
 ```
 
 You can find the `conversation_id` from the event you are responding to (it is included in `messages` events), or use the `list-conversations` skill.
@@ -40,7 +40,7 @@ Be sure to fill in the correct conversation id!
 When you want to proactively reach out (e.g. to notify the user about completed work, ask a question, or share an update), create a new conversation by choosing an appropriate, descriptive name:
 
 ```bash
-$MNG_AGENT_STATE_DIR/commands/chat.sh --new --name "<descriptive name>" --as-agent "Your message here"
+$MNGR_AGENT_STATE_DIR/commands/chat.sh --new --name "<descriptive name>" --as-agent "Your message here"
 ```
 
 Choose a name that clearly describes the topic or purpose of the conversation.

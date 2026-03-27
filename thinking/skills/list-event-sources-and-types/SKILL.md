@@ -8,7 +8,7 @@ description: List all event sources and types you may receive, with descriptions
 In order to list all possible sources of events, run:
 
 ```bash
-( cd $MNG_AGENT_STATE_DIR/events/ && find -name events.jsonl -printf '%h\n' | sed 's|^\./||' )
+( cd $MNGR_AGENT_STATE_DIR/events/ && find -name events.jsonl -printf '%h\n' | sed 's|^\./||' )
 ```
 
 # Event schemas
@@ -33,8 +33,8 @@ logs additionally define:
 
 Logs often contain additional contextual fields as well.
 
-Most sources define their full schema in `$MNG_AGENT_STATE_DIR/events/<source>/schema.json`, so check to see if that file exists in order to learn more about the exact fields for any given source and event type.
+Most sources define their full schema in `$MNGR_AGENT_STATE_DIR/events/<source>/schema.json`, so check to see if that file exists in order to learn more about the exact fields for any given source and event type.
 
-If a `schema.json` does not exist for a source, check for an imputed one at `$MNG_AGENT_STATE_DIR/events/<source>/schema.imputed.json`.
+If a `schema.json` does not exist for a source, check for an imputed one at `$MNGR_AGENT_STATE_DIR/events/<source>/schema.imputed.json`.
 
 If that also doesn't exist, you should do a one-time exploration of the events in that source (using the field-size inspection technique from `search-event-history`) and create an imputed schema file, then save it for next time.

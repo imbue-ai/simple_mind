@@ -9,8 +9,8 @@ is_message_batching_enabled = false
 idle_event_delay_minutes_schedule = [1, 10, 60]
 
 [[vendor]]
-name = "mng"
-url = "https://github.com/imbue-ai/mng/"
+name = "mngr"
+url = "https://github.com/imbue-ai/mngr/"
 
 [[vendor]]
 name = "tk"

@@ -28,7 +28,7 @@ These are the actions that were recommended by the verifying agent.
 ## Step 3: Verify the verifier's verdict
 
 Think carefully about the verdict.
-If you disagree, you can send a message to the verifying agent (by calling `mng message <verifying-agent-id> --message "Your message goes here"`) to ask for clarification, include new information, or point out anything you think it missed.
+If you disagree, you can send a message to the verifying agent (by calling `mngr message <verifying-agent-id> --message "Your message goes here"`) to ask for clarification, include new information, or point out anything you think it missed.
 In such a case, you should *stop* executing this skill, and wait for the verifying agent to update its verdict (which will ultimately trigger this skill again)
 Remember that a "FAILED" verdict does not necessarily mean that the work was bad or that the user will be unhappy--it just means that the verifying agent found some issue that it thinks should be followed up on.
 Use your judgment to decide whether to challenge the verdict or move on to executing the next steps.
@@ -43,7 +43,7 @@ These may include:
 - **Running commands** (e.g., `git merge`, shell commands)
 - **Sending messages to the user** (via `send-message-to-user`)
 - **Creating follow-up tickets** (via `create-ticket`)
-- **Archiving agents** (via `mng archive`)
+- **Archiving agents** (via `mngr archive`)
 - **Closing tickets** (via `tk close`)
 - **Retrying with revised instructions** (via `delegate-task-to-agent`)
 
@@ -65,6 +65,6 @@ If any important data or artifacts need to be preserved beyond the output direct
 After executing the next steps, you should also double-check if anything was missed by the verifying agent's recommendations, for example:
 
 - Closing tickets
-- Archiving agents (the verifying and/or working agent) (ex: `mng archive -f <agent-id>`)
+- Archiving agents (the verifying and/or working agent) (ex: `mngr archive -f <agent-id>`)
 - Sending messages to the user
 - etc.

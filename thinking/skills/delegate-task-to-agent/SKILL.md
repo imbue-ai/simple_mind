@@ -3,12 +3,12 @@ name: delegate-task-to-agent
 description: Create a sub-agent to perform a task. Use when you need to delegate work to another agent, for example, a working agent (for actually accomplishing some task) or a verifying agent (for deciding what to do about the output of a working agent).
 ---
 
-# Delegating tasks to sub-agents
+# The process for delegating tasks to sub-agents
 
 As the thinking agent, you should NEVER do work directly.
 Instead, delegate all tasks to sub-agents via `mngr create`.
 
-## Check remaining worker capacity
+## 1. Check remaining worker capacity
 
 Before creating a new task, first run:
 
@@ -24,7 +24,17 @@ Be sure to save enough information and context in the ticket so that you will be
 
 If there are not too many workers already running, read on for how to create different types of agents.
 
-## Creating a working agent
+## 2. Check for uncommitted changes
+
+Note that you may need to commit first (if your working directory has uncommitted changes).
+
+This ensures that the new agent's branch has the same base commit as the current agent, which allows the verifying agent to do a proper diff later on.
+
+## 3. Creating the right type of agent
+
+You need to create the right type of agent for the task at hand--either a working agent to do the work, or a verifying agent to check work that was done by a working agent.
+
+### Creating a working agent
 
 To delegate a task, create a sub-agent using `mngr`.
 By default, sub-agents are created as copies of the current agent harness with a different role.
@@ -56,7 +66,7 @@ Then create the agent using the wrapper script in this skill's directory:
 
 This script handles setting the correct env vars (`ROLE=working`), agent type ("worker") and labels (`role=working`, `mind=$MIND_NAME`, and `ticket=<ticket-id>` if provided).
 
-### Linking agents to tickets
+#### Linking agents to tickets
 
 If this task is being done for a ticket, you **must** link them bidirectionally:
 
@@ -72,16 +82,13 @@ The `<task-name>` should be a descriptive name for the task (e.g. `fix-login-bug
 Note that the names *must* be unique because git branches are created for each task.
 If the command fails because the name is taken, simply choose a more specific, longer name.
 
-Note that you may need to commit first (if your working directory has uncommitted changes).
-This ensures that the new agent's branch has the same base commit as the current agent, which allows the verifying agent to do a proper diff later on.
-
-## Creating a verifying agent
+### Creating a verifying agent
 
 When a working agent finishes successfully (you will receive an `mngr/agent_states` event), create a verifying agent to check the work.
 Use `--env ROLE=verifying`.
 See the `verify-task-result` skill for the full details on what to include in the message file.
 
-## Logging the task
+## 4. Logging the task
 
 Whenever you create a new agent, post to the **Work Log** (see `send-message-to-user` skill) with a brief entry, e.g.:
 
@@ -101,8 +108,9 @@ If the user asked for the task to be created, you should reply to the original c
 <NEW_TASK name="(full-sub-agent-name)">(a short description of what you're trying to accomplish with the task)</NEW_TASK>
 ```
 
-## Guidelines
+# Guidelines
 
 - Always give tasks clear, descriptive names so they are easy to track.
 - Always include success criteria in your task instructions.
 - Never allow more than `max_concurrent_workers` tasks to be running concurrently.
+- Remember to commit before creating any task

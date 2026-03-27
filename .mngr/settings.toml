@@ -3,12 +3,16 @@ include = ["""has(labels.mind)"""]
 
 [agent_types.worker]
 parent_type = "claude"
-command = "cd $ROLE && claude"
+trust_working_directory = true
+# gross--have to move the generated settings into the right folder for us...
+command = "mkdir -p $ROLE/.claude && mv .claude/settings.local.json $ROLE/.claude/settings.local.json && cd $ROLE && claude"
 cli_args = """--dangerously-skip-permissions"""
 
 [agent_types.verifier]
 parent_type = "claude"
-command = "cd $ROLE && claude"
+trust_working_directory = true
+# gross--have to move the generated settings into the right folder for us...
+command = "mkdir -p $ROLE/.claude && mv .claude/settings.local.json $ROLE/.claude/settings.local.json && cd $ROLE && claude"
 cli_args = """--dangerously-skip-permissions"""
 
 [commands.create]

@@ -10,6 +10,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     git \
     git-lfs \
     jq \
+    less \
     nano \
     openssh-server \
     procps \
@@ -54,16 +55,19 @@ ENV UV_LINK_MODE=copy
 RUN unset UV_INDEX_URL && uv tool install modal && uv tool install llm && llm install llm-anthropic && llm install llm-live-chat && llm install llm-matched-responses
 
 # copy in all of our code:
-COPY . /code/simple_mind/
+COPY . /code/
 
 # set working directory to the project root
-WORKDIR /code/simple_mind/
+WORKDIR /code/
+
+# make an extra directory for future worktrees
+RUN mkdir -p /worktree
 
 # extract our code into the project directory
-RUN git config --global --add safe.directory /code/simple_mind/ && chown -R root:root /code/simple_mind/
+RUN git config --global --add safe.directory /code/ && chown -R root:root /code/
 
 # add tk and mngr as a tool
-RUN ln -s "/code/simple_mind/vendor/tk/ticket" ~/.local/bin/tk && uv tool install -e /code/simple_mind/vendor/mngr/libs/mngr && mngr plugin add --path vendor/mngr/libs/mngr_modal/ --path vendor/mngr/libs/mngr_llm/ --path vendor/mngr/libs/mngr_mind --path vendor/mngr/libs/mngr_claude --path vendor/mngr/libs/mngr_claude_mind --path vendor/mngr/libs/mngr_pi_coding --path vendor/mngr/libs/mngr_mind_chat/
+RUN ln -s "/code/vendor/tk/ticket" ~/.local/bin/tk && uv tool install -e /code/vendor/mngr/libs/mngr && mngr plugin add --path vendor/mngr/libs/mngr_modal/ --path vendor/mngr/libs/mngr_llm/ --path vendor/mngr/libs/mngr_mind --path vendor/mngr/libs/mngr_claude --path vendor/mngr/libs/mngr_claude_mind --path vendor/mngr/libs/mngr_pi_coding --path vendor/mngr/libs/mngr_mind_chat/
 
 # Run idly forever while being responsive to SIGTERM.
 # PID 1 must explicitly install signal handlers in order to respect signals.

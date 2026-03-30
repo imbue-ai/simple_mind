@@ -6,7 +6,8 @@ welcome_message = "Hi, I'm ProductBot! I help organize your GitHub project. What
 [watchers]
 event_batch_filter_command = "python thinking/scripts/filter_events.py"
 is_message_batching_enabled = false
-idle_event_delay_minutes_schedule = [1, 10, 60]
+# TODO: put this back after we confirm that the second event is working
+idle_event_delay_minutes_schedule = [1, 1, 60]
 
 [[vendor]]
 name = "mngr"

@@ -40,8 +40,10 @@ EOF
 Then create the verifying agent using the wrapper script in this skill's directory:
 
 ```bash
-./skills/verify-task-result/create_verifying_agent.sh <task-name> <working-agent-id> /tmp/verify-<task-name>.md
+./skills/verify-task-result/create_verifying_agent.sh verify-<task-name>-<N> <working-agent-id> /tmp/verify-<task-name>.md
 ```
+
+**Naming convention:** You must pass the full agent name as `verify-<task-name>-<N>` where `<N>` starts at 0 and increments for each verification attempt of the same task. For example: `verify-github-exporter-0`, `verify-github-exporter-1`, etc. This prevents name collisions and gives a count of how many times verification has been attempted -- if the count gets too high (3+), consider asking the user for help rather than retrying again.
 
 This script handles setting the correct env vars (`ROLE=verifying`, `WORKING_AGENT_ID`, `WORKING_AGENT_BRANCH`, `WORKING_AGENT_BASE_BRANCH`), labels (`role=verifying`, `mind=$MIND_NAME`), and agent type ("verifier").
 

@@ -62,19 +62,16 @@ Check for the agent's output file first:
 cat output/<agent-id>/summary.md 2>/dev/null || echo "No summary.md found"
 ```
 
-If no `summary.md` exists, you can try reading the agent's transcript:
+If no `summary.md` exists, you can try reading the agent's transcript.
+**Always include both `--role=user` and `--role=assistant`** so you see the full conversation -- your instructions to the agent *and* its responses:
 
 ```bash
-mngr transcript --format=jsonl --role=assistant <agent-id> | tail -n 20
+mngr transcript --format=jsonl --role=user --role=assistant <agent-id> | tail -n 20
 ```
 
 You're looking for the agent's final summary response, which most agents print when they finish their work.
 
-Sometimes the agent may have had a bunch of pointless system messages at the end if there were some errors, in which case you may need to look a bit further back, or restrict to just the assistant messages:
-
-```bash
-mngr transcript --format=jsonl --role=assistant <agent-id> | tail -n 20
-```
+Sometimes the agent may have had a bunch of pointless system messages at the end if there were some errors, in which case you may need to look a bit further back.
 
 Once you've found the final summary response, you can determine whether the task was completed successfully, or if there were errors or questions.
 
@@ -138,7 +135,7 @@ You may need to fix the underlying agent or code so that `mngr` is able to track
 ## General guidelines
 
 - When a task fails or crashes, review the error before retrying. Use `mngr capture <agent-id> --full` to see what happened. Consider whether the instructions need to be revised.
-- Clean up finished agents with `mngr f archive` after you have processed their results.
+- Archive finished agents with `mngr archive -f <agent-id>` after you have processed their results. When archiving a completed task, **always think about what the next step is** -- is there follow-up work? Should a ticket be closed? Is there now capacity to pick up a pending ticket?
 - After processing any agent state event, check if there is capacity to launch a pending ticket (via `list-tickets`).
-- Notify the user about significant state changes according to their notification preferences
+- Notify the user about significant state changes according to their notification preferences.
 - After some tasks have been stopped/archived/destroyed, remember to check if there is now capacity to launch a pending ticket (using `list-tickets` to check for ready tickets).

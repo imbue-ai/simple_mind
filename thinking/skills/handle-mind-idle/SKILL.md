@@ -19,21 +19,30 @@ First, check if you have agents currently running. If tasks are already in fligh
 
 Then run through these checks in order:
 
-1. **Crashed or stuck agents**: Run `mngr list --exclude "has(labels.archived_at)" --exclude "id == \"$AGENT_ID\"" --format jsonl` and look for agents in unexpected states (crashed, stopped, waiting for too long).
-If you find any that you created, handle them using your `handle-mngr-agent_states` skill.
+1. **Agents in unexpected states**: Run `mngr list --exclude "has(labels.archived_at)" --exclude "id == \"$AGENT_ID\"" --format jsonl` and check **every** agent you created for unexpected states -- crashed, stopped, failed, waiting, or done.
+You may have missed the event for a state transition, so this is your safety net.
+If you find any agents that you created in one of these states, handle them using your `handle-mngr-agent_states` skill as if you just received the event.
 
 2. **Unprocessed agents**: Check if any agents finished but you haven't yet verified their results or acted on their output.
 If so, handle them now.
 
-3. **Unhandled events**: Check if there are any event batch files you haven't fully processed.
+3. **Recently completed tasks were properly handled**: Review recently completed tasks (check your memory and `tk closed`) and make sure each one was fully handled:
+   - Was the working agent archived?
+   - Was the verifying agent archived?
+   - Was the ticket closed?
+   - Were any follow-up actions taken?
+   - Was the user notified (if appropriate)?
+   If anything was missed, do it now.
+
+4. **Unhandled events**: Check if there are any event batch files you haven't fully processed.
 If so, read and handle them.
 
-4. **Pending tickets**: Run `tk ready` to check if there are tickets waiting to be picked up.
+5. **Pending tickets**: Run `tk ready` to check if there are tickets waiting to be picked up.
 If you have capacity (fewer than `max_concurrent_workers` active agents), launch the highest-priority ready ticket using your `list-tickets` skill.
 
-5. **Proactive work**: If nothing above needs attention and you have no agents in flight, consult [idle_activities.md](../../idle_activities.md) for things you could do proactively.
+6. **Proactive work**: If nothing above needs attention and you have no agents in flight, consult [idle_activities.md](../../idle_activities.md) for things you could do proactively.
 
-6. **Cleanup**: Archive agents that are done and have been fully processed.
+7. **Cleanup**: Archive agents that are done and have been fully processed.
 This frees up capacity for new work.
 Do this only if you've been idle for quite a while.
 

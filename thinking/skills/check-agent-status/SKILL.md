@@ -41,6 +41,8 @@ mngr capture <agent-id>
 
 ### Read an agent's transcript
 
+**Always include both `--role=user` and `--role=assistant`** so you see the full conversation (instructions you sent *and* the agent's responses). Omitting `--role=user` means you will miss your own messages to the agent, which provide critical context.
+
 ```bash
 mngr transcript --format=jsonl --role=user --role=assistant <agent-id> | tail -n 20
 ```

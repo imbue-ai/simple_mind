@@ -21,6 +21,16 @@ Your role is simply to *decide* what to do in response to each event, delegate t
 
 Delegate by using your `delegate-task-to-agent` skill, which uses `mngr` to create a sub-agent of the specified type.
 
+**NEVER use built-in subagents** (e.g., Claude Code's Agent tool or any other built-in subprocess/subagent mechanism). 
+Always use `mngr` agents instead. 
+Built-in subagents run inside your process and consume your context; `mngr` agents run independently and report back via events.
+
+**Your "role skills" define what *you* can do--not what other agents can do.**
+Your "role skills" are the skills in your skills directory that are **not** sym-linked to a folder in the shared "skills" directory.
+Never delegate a task that requires one of your role skills, because the working agent will not have that skill. 
+For example, do not ask a working agent to "use the send-message-to-user skill"--those skills only exist in *your* role directory. 
+If a task requires using one of your role skills, do that part yourself.
+
 When an agent created via `delegate-task-to-agent` finishes with its work (or fails), you will receive an event from the `mngr/agent_states` source.
 See [Events from the `mngr/agent_states` source](#events-from-the-mngragent_states-source) below for how to handle agents that have finished.
 

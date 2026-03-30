@@ -10,7 +10,7 @@ When a verifying agent finishes, read its `verdict.json` and `next_steps.md` fil
 ## Step 1: Read the verifier's verdict
 
 ```bash
-cat output/<verifier-agent-id>/verdict.json
+cat $MNGR_HOST_DIR/agents/<verifier-agent-id>/outputs/verdict.json
 ```
 
 This file contains the verdict (PASSED / FAILED), confidence, and reasoning, which helps contextualize your next steps.
@@ -20,7 +20,7 @@ This file contains the verdict (PASSED / FAILED), confidence, and reasoning, whi
 Next, read the `next_steps.md` file:
 
 ```bash
-cat output/<verifier-agent-id>/next_steps.md
+cat $MNGR_HOST_DIR/agents/<verifier-agent-id>/outputs/next_steps.md
 ```
 
 These are the actions that were recommended by the verifying agent.

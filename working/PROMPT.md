@@ -10,16 +10,18 @@ If you have a question, simply include the questions in your `summary.md` file, 
 
 ## Output
 
-When you finish your work, create a `summary.md` file in `output/$MNGR_AGENT_ID/` that describes:
+When you finish your work, create a `summary.md` file in `$MNGR_AGENT_STATE_DIR/outputs/` that describes:
 
 - **What you did**: a brief summary of the work performed *since the beginning of your session* (ie, including both work done originally, and in response to any follow-up messages)
 - **What was produced**: links or paths to any artifacts you created (files, branches, PRs, etc.).
-  Make the file paths in `summary.md` relative to the `output/$MNGR_AGENT_ID/` directory so they can be easily found.
+  Make the file paths in `summary.md` relative to the `$MNGR_AGENT_STATE_DIR/outputs/` directory so they can be easily found.
 - **Any open questions**: (optional section) If you're uncertain about anything, especially if the questions are blocking, list them here so the thinking agent can get you answers and keep things moving.
 - **Any issues or caveats**: (optional section) Things that didn't go perfectly, or that the verifying agent should pay attention to
 - **Status**: whether you believe the task is complete, partially complete, or blocked
 
-The `output/$MNGR_AGENT_ID/` directory is your workspace for any extra files you want to persist beyond your session.
+Create the directory first: `mkdir -p $MNGR_AGENT_STATE_DIR/outputs/`
+
+The `$MNGR_AGENT_STATE_DIR/outputs/` directory is your workspace for any extra files you want to persist beyond your session.
 The thinking agent and verifying agent will look here for your results.
 You can put anything useful in there alongside the summary (data files, logs, scripts, etc.).
 This directory is *not* version controlled, so this is where you should put large files, etc.

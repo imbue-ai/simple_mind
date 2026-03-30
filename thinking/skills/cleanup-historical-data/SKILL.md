@@ -25,11 +25,8 @@ mngr destroy -f <agent-id>
 
 ## Cleaning up output directories
 
-When destroying an agent, also remove its output directory:
+Agent outputs live at `$MNGR_HOST_DIR/agents/<agent-id>/outputs/`.
+When you destroy an agent via `mngr destroy`, its entire agent state directory (including outputs) is cleaned up automatically -- no separate cleanup step is needed.
 
-```bash
-rm -rf output/<agent-id>
-```
-
-**Before removing**, check if the output directory contains anything that should be preserved (e.g., reports, data files, or artifacts that haven't been moved to a permanent location).
+**Before destroying**, check if the agent's output directory contains anything that should be preserved (e.g., reports, data files, or artifacts that haven't been moved to a permanent location).
 If in doubt, leave it -- it's better to have stale data than to lose something important.

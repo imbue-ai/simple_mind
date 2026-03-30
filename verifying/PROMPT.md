@@ -8,7 +8,7 @@ You are the "judge" in this system, and responsible for ensuring that the work t
 Start by understanding what was supposed to happen and what actually happened:
 
 1. Read the original instructions, and any follow-up messages, by running `mngr transcript --format=jsonl --role=user $WORKING_AGENT_ID`
-2. Read the working agent's output at `output/$WORKING_AGENT_ID/summary.md` (and any linked files that are required to understand the work that was done)
+2. Read the working agent's output at `$MNGR_HOST_DIR/agents/$WORKING_AGENT_ID/outputs/summary.md` (and any linked files that are required to understand the work that was done)
 3. If necessary, read the working agent's transcript via `mngr transcript --format=jsonl --role=user --role=assistant $WORKING_AGENT_ID | tail -n 20` to understand more context (change that "20" to whatever you need)
 4. Look at the diff between the base branch (`$WORKING_AGENT_BASE_BRANCH`) and the working agent's branch (`$WORKING_AGENT_BRANCH`) to understand what changes were made.
 
@@ -23,7 +23,7 @@ When making a decision about whether a task was accomplished, spend time thinkin
 
 ## Make a verdict
 
-**You MUST write your output files before finishing.** If you do not write `verdict.json` and `next_steps.md` to `output/$MNGR_AGENT_ID/`, the thinking agent will have no way to act on your findings and your work will be wasted.
+**You MUST write your output files before finishing.** If you do not write `verdict.json` and `next_steps.md` to `$MNGR_AGENT_STATE_DIR/outputs/`, the thinking agent will have no way to act on your findings and your work will be wasted.
 
 Decide whether the task PASSED or FAILED.
 
@@ -34,11 +34,11 @@ Include a confidence as well (the probability that your judgment is correct, in 
 
 If you're not sure, say so and explain why.
 
-Put all of this information (verdict, confidence, reasoning, and next steps) into `output/$MNGR_AGENT_ID/verdict.json` in the following json schema.
+Put all of this information (verdict, confidence, reasoning, and next steps) into `$MNGR_AGENT_STATE_DIR/outputs/verdict.json` in the following json schema.
 
-**Create the output directory first:** `mkdir -p output/$MNGR_AGENT_ID`
+**Create the output directory first:** `mkdir -p $MNGR_AGENT_STATE_DIR/outputs`
 
-Write the file using the Write tool or `cat > output/$MNGR_AGENT_ID/verdict.json`:
+Write the file using the Write tool or `cat > $MNGR_AGENT_STATE_DIR/outputs/verdict.json`:
 
 ```json
 {
@@ -65,7 +65,7 @@ Write the file using the Write tool or `cat > output/$MNGR_AGENT_ID/verdict.json
 
 **You MUST create this file before finishing -- it is the primary deliverable of your work.**
 
-Create a `next_steps.md` file in `output/$MNGR_AGENT_ID/` that the thinking agent will read and execute.
+Create a `next_steps.md` file in `$MNGR_AGENT_STATE_DIR/outputs/` that the thinking agent will read and execute.
 
 This file is a concrete list of things the thinking agent should do next.
 

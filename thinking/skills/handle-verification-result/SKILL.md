@@ -60,11 +60,19 @@ Verification of <task-name>: PASSED.
 
 If any important data or artifacts need to be preserved beyond the output directory (e.g., a report the user should keep, configuration that should be committed), move or copy them to a permanent location now--the output directory will be cleaned up when the agents are eventually destroyed.
 
-## Step 5: Clean up
+## Step 5: Archive the verifier
+
+**Always archive the verifying agent** once you have read its output and executed the next steps:
+
+```bash
+mngr archive -f <verifier-agent-id>
+```
+
+## Step 6: Clean up and next steps
 
 After executing the next steps, you should also double-check if anything was missed by the verifying agent's recommendations, for example:
 
-- Closing tickets
-- Archiving agents (the verifying and/or working agent) (ex: `mngr archive -f <agent-id>`)
+- Closing tickets (use `close-ticket` skill)
+- Archiving the working agent once the ticket is fully complete (verified and changes applied): `mngr archive -f <working-agent-id>`
 - Sending messages to the user
-- etc.
+- **Thinking about the next step**: after archiving a completed task, always consider what comes next -- is there follow-up work to create a ticket for? Is there now capacity to launch a pending ticket (check `tk ready`)? Should the user be notified?

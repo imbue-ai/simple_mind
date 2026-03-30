@@ -40,8 +40,23 @@ To delegate a task, create a sub-agent using `mngr`.
 By default, sub-agents are created as copies of the current agent harness with a different role.
 Use `--env ROLE=working` to create a working agent.
 
-**Always write task instructions to a markdown file** and pass it via `--message-file`.
-This ensures instructions are well-structured, reviewable, and not lost if the command fails.
+**Use the ticket file as the task message file.** Since tickets already contain the title, description, acceptance criteria, and context, pass the ticket's markdown file directly via `--message-file`. 
+There is no need to create a separate instructions file.
+
+Before passing the ticket file, make sure it has all the details the working agent will need:
+- Clear description of what to do and why
+- Relevant context (conversation IDs, prior attempts, constraints, links)
+- Specific success/acceptance criteria
+
+If the ticket is missing any of these, update it first with `tk edit <ticket-id>` or `tk add-note <ticket-id>`.
+
+The ticket files live at `.tickets/<ticket-id>.md`. Pass this path directly:
+
+```bash
+./skills/delegate-task-to-agent/create_working_agent.sh <task-name> .tickets/<ticket-id>.md <ticket-id>
+```
+
+If you are creating a working agent for something that does **not** have a ticket (rare -- you should almost always create a ticket first), write a temporary instructions file:
 
 ```bash
 cat > /tmp/task-<task-name>.md << 'EOF'
@@ -58,13 +73,13 @@ cat > /tmp/task-<task-name>.md << 'EOF'
 EOF
 ```
 
-Then create the agent using the wrapper script in this skill's directory:
+Then:
 
 ```bash
-./skills/delegate-task-to-agent/create_working_agent.sh <task-name> /tmp/task-<task-name>.md [<ticket-id>]
+./skills/delegate-task-to-agent/create_working_agent.sh <task-name> /tmp/task-<task-name>.md
 ```
 
-This script handles setting the correct env vars (`ROLE=working`), agent type ("worker") and labels (`role=working`, `mind=$MIND_NAME`, and `ticket=<ticket-id>` if provided).
+The `create_working_agent.sh` script handles setting the correct env vars (`ROLE=working`), agent type ("worker") and labels (`role=working`, `mind=$MIND_NAME`, and `ticket=<ticket-id>` if provided).
 
 #### Linking agents to tickets
 

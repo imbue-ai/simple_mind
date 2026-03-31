@@ -13,7 +13,7 @@ This skill describes how to clean them up.
 Find agents that were archived more than a week ago and destroy them:
 
 ```bash
-mngr list --include "has(labels.archived_at)" --exclude "id == \"$AGENT_ID\"" --format jsonl
+mngr list --include "has(labels.archived_at)" --format jsonl
 ```
 
 For each agent in the list, check the `archived_at` label.

@@ -19,7 +19,7 @@ First, check if you have agents currently running. If tasks are already in fligh
 
 Then run through these checks in order:
 
-1. **Agents in unexpected states**: Run `mngr list --exclude "has(labels.archived_at)" --exclude "id == \"$AGENT_ID\"" --format jsonl` and check **every** agent you created for unexpected states -- crashed, stopped, failed, waiting, or done.
+1. **Agents in unexpected states**: Run `mngr list --active --format jsonl` and check **every** agent you created for unexpected states -- crashed, stopped, failed, waiting, or done.
 You may have missed the event for a state transition, so this is your safety net.
 If you find any agents that you created in one of these states, handle them using your `handle-mngr-agent_states` skill as if you just received the event.
 

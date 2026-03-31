@@ -12,7 +12,7 @@ The right action depends on how significant the update is.
 
 Figure out which running agent(s) the new information applies to.
 If you have multiple agents in flight, the update might apply to one, several, or none of them.
-Use `mngr list --exclude "has(labels.archived_at)" --exclude "id == \"$AGENT_ID\" --format jsonl` and your memory of what each agent is working on to determine this.
+Use `mngr list --active --format jsonl` and your memory of what each agent is working on to determine this.
 
 If the update doesn't apply to any running task, it might be context for a future task -- store it in memory (if relevant) and move on.
 

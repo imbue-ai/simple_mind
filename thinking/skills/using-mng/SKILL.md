@@ -26,12 +26,19 @@ mngr --help              # list all commands
 mngr <command> --help    # see flags and usage for a specific command
 ```
 
+## `mngr list` vs `mngr list --active`
+
+`mngr list` shows **all** agents, including archived ones.
+`mngr list --active` excludes archived agents and is what you almost always want.
+
+Use `mngr list` (without `--active`) only when you specifically need to see archived agents, such as during cleanup operations.
+
 ## Commands you know
 
 These are the commands you use regularly and can run confidently:
 
 - `mngr create` -- create a new agent (see `delegate-task-to-agent` skill)
-- `mngr list` -- list agents with filtering (see `check-agent-status` skill)
+- `mngr list --active` -- list non-archived agents (see `check-agent-status` skill)
 - `mngr message` -- send a message to an agent
 - `mngr transcript` -- view an agent's message history
 - `mngr capture` -- see the agent's tmux pane output

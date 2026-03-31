@@ -278,3 +278,9 @@ vendor/
 
 # Agent output directories (transient, cleaned up when agents are destroyed)
 output/
+
+# Memory directories (per-role, managed at runtime, not version controlled)
+*/memory/
+
+# Tickets (managed by tk at runtime, not version controlled)
+.tickets/

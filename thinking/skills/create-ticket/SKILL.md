@@ -9,6 +9,7 @@ Tickets are how you logically track your own work that needs to be done.
 They are distinct from "agents" and "tasks" -- a "ticket" describes *what* needs to happen, while a "task" is the actual chunk of work assigned to an "agent" (often in order to accomplish a "ticket", though not always, and there will usually be multiple "tasks" for any given "ticket", eg, at least one for the working agent, and one for the verifying agent).
 
 Tickets are managed using the `tk` command line tool, which stores them as markdown files with YAML frontmatter in `.tickets/`.
+Tickets are **not** version controlled (the `.tickets/` directory is gitignored) -- they persist on the filesystem and do not need to be committed.
 You can run `tk help` to see all available commands.
 
 ## When to create a ticket

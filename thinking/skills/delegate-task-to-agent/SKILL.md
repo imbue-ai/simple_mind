@@ -13,7 +13,7 @@ Instead, delegate all tasks to sub-agents via `mngr create`.
 Before creating a new task, first run:
 
 ```bash
-mngr list --exclude "has(labels.archived_at)" --exclude "id == \"$AGENT_ID\" --format jsonl
+mngr list --active --format jsonl
 ```
 
 In order to see how many agents (besides yourself) are currently active (ie, not archived).

@@ -24,7 +24,7 @@ mngr list --include 'id == "<agent-id>"' --format jsonl
 ### List all your active (non-archived) agents
 
 ```bash
-mngr list --exclude "has(labels.archived_at)" --exclude "id == \"$AGENT_ID\"" --format jsonl
+mngr list --active --format jsonl
 ```
 
 ### Check an agent's labels (role, ticket, etc.)

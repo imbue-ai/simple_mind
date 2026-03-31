@@ -1,10 +1,10 @@
 max_concurrent_workers = 10
 
 [chat]
-welcome_message = "Hi, I'm ProductBot! I help organize your GitHub project. What repo should I manage?"
+welcome_message = "Hi, I'm your general AI assistant! What can I help you with?"
 
 [watchers]
-event_batch_filter_command = "python thinking/scripts/filter_events.py"
+event_batch_filter_command = "python3 thinking/scripts/filter_events.py"
 is_message_batching_enabled = false
 # TODO: put this back after we confirm that the second event is working
 idle_event_delay_minutes_schedule = [1, 1, 60]

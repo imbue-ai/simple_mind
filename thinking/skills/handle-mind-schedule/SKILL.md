@@ -37,8 +37,8 @@ Include a section in the daily conversation that shows how you changed since yes
 This makes your growth visible to the user and gives them a chance to review or correct changes they didn't explicitly approve.
 
 To build this changelog, review:
-- `git log --since="yesterday" --oneline` for commits to this repo (memory changes, skill edits, config updates, etc.)
-- New or updated memories (check your memory directory for recently modified files)
+- `git log --since="yesterday" --oneline` for commits to this repo (skill edits, config updates, prompt changes, etc.)
+- New or updated memories (check your memory directory for recently modified files -- memory is not version controlled, so use `find thinking/memory/ -mtime -1` or similar)
 - Any changes to your skills, prompts, or configuration files
 
 Format it as a short list, sorted by importance, for example:

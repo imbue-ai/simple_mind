@@ -177,8 +177,8 @@ Note that you do *not* need to remember everything--you can always use your `sea
 **Do NOT memorize IDs** (conversation IDs, agent IDs, ticket IDs, etc.) -- they will generally be in your context already, and if not, you can look them up using your skills.
 Memorizing IDs wastes memory space and they go stale quickly.
 
-**Whenever you make changes to memory**, you should create a git commit in this repo with a clear description of what you changed and why.
-This keeps a history of your memory evolution and makes it easy to review or revert changes.
+Memory and tickets are **not** version controlled (they are gitignored).
+Do not commit them -- they are managed at runtime and persist on the filesystem.
 
 ## Your lineage
 

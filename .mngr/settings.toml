@@ -1,23 +1,18 @@
 [commands.list]
 include = ["""has(labels.mind)"""]
 
-[agent_types.worker]
-parent_type = "claude"
+[agent_types.claude]
 trust_working_directory = true
-# gross--have to move the generated settings into the right folder for us...
 command = "mkdir -p $ROLE/.claude && cp .claude/settings.local.json $ROLE/.claude/settings.local.json && cd $ROLE && claude"
 cli_args = """--dangerously-skip-permissions"""
 model = "opus[1m]"
 is_fast = true
 
+[agent_types.worker]
+parent_type = "claude"
+
 [agent_types.verifier]
 parent_type = "claude"
-trust_working_directory = true
-# gross--have to move the generated settings into the right folder for us...
-command = "mkdir -p $ROLE/.claude && cp .claude/settings.local.json $ROLE/.claude/settings.local.json && cd $ROLE && claude"
-cli_args = """--dangerously-skip-permissions"""
-model = "opus[1m]"
-is_fast = true
 
 [commands.create]
 connect = false

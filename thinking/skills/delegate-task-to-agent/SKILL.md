@@ -26,9 +26,10 @@ If there are not too many workers already running, read on for how to create dif
 
 ## 2. Check for uncommitted changes
 
-Note that you may need to commit first (if your working directory has uncommitted changes).
-
+If your working directory has uncommitted changes to version-controlled files (prompts, skills, scripts, etc.), commit them before creating an agent.
 This ensures that the new agent's branch has the same base commit as the current agent, which allows the verifying agent to do a proper diff later on.
+
+Note that memory and tickets are gitignored and do not need to be committed.
 
 ## 3. Creating the right type of agent
 
@@ -133,4 +134,4 @@ If the user asked for the task to be created, you should reply to the original c
 - Always give tasks clear, descriptive names so they are easy to track.
 - Always include success criteria in your task instructions.
 - Never allow more than `max_concurrent_workers` tasks to be running concurrently.
-- Remember to commit before creating any task
+- Remember to commit any version-controlled changes before creating any task

@@ -50,4 +50,5 @@ Place all files in `output/$MNGR_AGENT_ID/`:
 - Updated `main.py`
 - Updated `requirements.txt` (if new dependencies)
 - Updated `task.yaml`
-- Updated `FLOW.md`
+- Updated `SKILL.md` (if parameters or usage changed)
+- Updated `FLOW.md` (follow `steps/produce-flow.md` for format)

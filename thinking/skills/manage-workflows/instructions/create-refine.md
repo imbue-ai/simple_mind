@@ -14,6 +14,7 @@ Delegate using `steps/refine-workflow.md`. Append a Task Details section with:
 
 ```bash
 cp ./skills/manage-workflows/steps/refine-workflow.md /tmp/task-refine-<workflow-name>.md
+cat ./skills/manage-workflows/steps/produce-flow.md >> /tmp/task-refine-<workflow-name>.md
 cat >> /tmp/task-refine-<workflow-name>.md << 'EOF'
 
 ---

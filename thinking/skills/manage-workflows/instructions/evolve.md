@@ -10,6 +10,7 @@ Delegate using `steps/evolve-workflow.md`. Append a Task Details section with:
 
 ```bash
 cp ./skills/manage-workflows/steps/evolve-workflow.md /tmp/task-evolve-<workflow-name>.md
+cat ./skills/manage-workflows/steps/produce-flow.md >> /tmp/task-evolve-<workflow-name>.md
 cat >> /tmp/task-evolve-<workflow-name>.md << 'EOF'
 
 ---

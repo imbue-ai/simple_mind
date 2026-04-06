@@ -13,6 +13,7 @@ If retry fails, delegate using `steps/heal-workflow.md`. Append a Task Details s
 
 ```bash
 cp ./skills/manage-workflows/steps/heal-workflow.md /tmp/task-heal-<workflow-name>.md
+cat ./skills/manage-workflows/steps/produce-flow.md >> /tmp/task-heal-<workflow-name>.md
 cat >> /tmp/task-heal-<workflow-name>.md << 'EOF'
 
 ---

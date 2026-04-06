@@ -50,6 +50,7 @@ Delegate using `steps/crystallize-workflow.md`. Append a Task Details section wi
 
 ```bash
 cp ./skills/manage-workflows/steps/crystallize-workflow.md /tmp/task-crystallize-<workflow-name>.md
+cat ./skills/manage-workflows/steps/produce-flow.md >> /tmp/task-crystallize-<workflow-name>.md
 cat >> /tmp/task-crystallize-<workflow-name>.md << 'EOF'
 
 ---

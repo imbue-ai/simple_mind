@@ -92,3 +92,7 @@ Load instruction files as you reach each step — don't read ahead.
 
 ### Heal a failed workflow
 - [Heal](instructions/heal.md)
+
+## Finishing Up
+
+Regardless of which flow you execute, at the end you should report to the user a summary of what was done, what was saved/updated, and any issues that arose along the way.

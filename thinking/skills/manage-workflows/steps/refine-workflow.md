@@ -28,6 +28,8 @@ Write a Python script that:
 - **Rate limiting**: Respect rate limits. Watch for rate limit headers and back off appropriately.
 - **Progress**: Print progress to stderr (e.g., "Fetched 150/500 messages from #general").
 
+**Structure**: Organize the script so that each logical step of the workflow maps to a clearly named function. For example, a Slack export might have `fetch_channels()`, `fetch_messages(channel)`, `write_events(messages, output_file)`. This isn't about over-abstracting — it's about making the script readable and keeping a clean mapping between what the workflow *does* (documented in FLOW.md) and *how* it does it (the code). Avoid giant monolithic functions that do everything.
+
 Keep the script simple and focused. Avoid unnecessary abstractions or over-engineering.
 
 ## Produce `requirements.txt`
@@ -53,17 +55,40 @@ assumptions:
 
 The `assumptions` field is important — it documents things the script takes for granted that might change over time (rate limits, API behavior, data volumes). These are checked during evolution to see if the script needs updating.
 
+## Produce `SKILL.md`
+
+Write a skill file that describes how to run and use this workflow. This file will be loaded by the thinking agent when it needs to run the workflow, so it should contain everything needed to invoke the script correctly.
+
+```markdown
+---
+name: <workflow-name>
+description: >
+  <When to load this skill — describe what the workflow does and what kinds of
+  user requests should trigger it.>
+---
+
+# <Workflow Name>
+
+<Brief description of what this workflow does.>
+
+## Usage
+
+<How to run the script: the command, required arguments, optional arguments with defaults, and what output to expect. Include a concrete example command.>
+
+## Parameters
+
+<Table or list of all parameters with their types, descriptions, and defaults.>
+
+## Output
+
+<What the script produces — file format, location, and structure of the output data.>
+```
+
+Keep it concise and practical — this is a reference for invocation, not documentation of internals.
+
 ## Produce `FLOW.md`
 
-Write a plain-language, non-technical step-by-step explanation of what the script does. The audience is someone who cannot read code — they should be able to understand the workflow's behavior entirely from this document.
-
-Guidelines:
-- Use numbered steps describing what happens in order when the script runs
-- Describe actions in everyday language: "Connects to Slack", "Looks up messages in the channel", "Saves the results to a file" — not "makes a GET request to the conversations.history endpoint"
-- Mention what inputs the workflow expects (in plain terms, not argparse flags) and what output it produces
-- Include any important behaviors like "if there are too many results, it fetches them in batches" or "if something goes wrong, it waits and tries again"
-- Do NOT include code snippets, function names, variable names, or technical jargon
-- Keep it concise — aim for a document someone could read in under a minute
+Follow the instructions in `steps/produce-flow.md` to create the FLOW.md file for this workflow.
 
 ## Output
 
@@ -72,4 +97,5 @@ Place all files in `output/$MNGR_AGENT_ID/`:
 - `main.py`
 - `requirements.txt`
 - `task.yaml`
+- `SKILL.md`
 - `FLOW.md`

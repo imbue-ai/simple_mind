@@ -11,6 +11,7 @@ Delegate using `steps/update-workflow.md`. Append a Task Details section with:
 
 ```bash
 cp ./skills/manage-workflows/steps/update-workflow.md /tmp/task-update-<workflow-name>.md
+cat ./skills/manage-workflows/steps/produce-flow.md >> /tmp/task-update-<workflow-name>.md
 cat >> /tmp/task-update-<workflow-name>.md << 'EOF'
 
 ---

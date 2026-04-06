@@ -17,7 +17,6 @@ parent_type = "claude"
 [commands.create]
 connect = false
 pass_env = ["MIND_NAME", "ANTHROPIC_API_KEY", "IS_SANDBOX", "IS_AUTONOMOUS"]
-worktree_base_folder = "/worktree/"
 
 [providers.modal]
 is_enabled = false

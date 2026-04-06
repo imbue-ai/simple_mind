@@ -60,8 +60,9 @@ COPY . /code/
 # set working directory to the project root
 WORKDIR /code/
 
-# make an extra directory for future worktrees
-RUN mkdir -p /worktree
+# make an extra directory for future worktrees and configure mngr to use it
+RUN mkdir -p /worktree && \
+    printf '[commands.create]\nworktree_base_folder = "/worktree/"\n' > /code/.mngr/settings.local.toml
 
 # extract our code into the project directory
 RUN git config --global --add safe.directory /code/ && chown -R root:root /code/

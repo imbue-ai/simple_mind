@@ -43,11 +43,11 @@ Once the explore agent finishes, present the results to the user via `send-messa
 
 After presenting results, evaluate whether this task should be saved as a reusable workflow. The motivation for crystallizing is **not** just scheduled/recurring use — it's that any deterministic service integration is worth capturing as a script so that future invocations (whether scheduled, on-demand, or as part of a larger task) can reuse it instead of re-discovering the APIs from scratch.
 
-**Default to crystallizing.** The bar for *not* crystallizing should be high. Only skip if:
+**Default to crystallizing — and do it immediately.** Don't wait for user confirmation or a follow-up message. As soon as results are presented, proceed to the Refine step unless one of these applies:
 - The task is truly one-off and unlikely to ever be needed again, OR
 - An existing workflow already covers this (check `thinking/skills/` for overlap), OR
 - The integration is so trivial that re-discovering it would be negligible effort
 
-If crystallizing: proceed to the **Refine** step (load `instructions/create-refine.md`) using the explore agent's output. If you skipped the interview initially, it may be helpful to do it now to confirm that the crystallized workflow will have the appropriate parameters, outputs, and process.
+If crystallizing: proceed to the **Refine** step (load `instructions/create-refine.md`) using the explore agent's output right away — in the same turn you present results, not after waiting for the user to respond. If you skipped the interview initially, it may be helpful to do it now to confirm that the crystallized workflow will have the appropriate parameters, outputs, and process.
 
-When presenting results to the user, don't frame crystallization as "want me to set this up as a recurring workflow?" — instead, frame it as saving the integration for reuse: "I'll save this as a reusable workflow so future runs don't need to re-discover the APIs."
+When presenting results to the user, don't frame crystallization as a question or suggestion. Just tell them you're doing it: "I'll save this as a reusable workflow so future runs don't need to re-discover the APIs."

@@ -41,3 +41,4 @@ If the script produced JSONL output, process it into a human-readable summary th
 - If failed: the error output and your assessment of the cause
 - Any warnings or anomalies observed during execution
 - Output file location and size
+- **Post-processing performed**: Describe any work you had to do beyond simply formatting the script's output — filtering, deduplication, diffing against previous results, date-range narrowing, aggregation, or any other transformation needed to bridge the gap between what the script produced and what the user actually asked for. Be specific about what the script gave you vs. what you had to compute yourself. If no post-processing was needed, say so explicitly.

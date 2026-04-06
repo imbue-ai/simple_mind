@@ -41,25 +41,42 @@ EOF
 
 Then delegate with task name `run-<workflow-name>` and this message file.
 
-## A.2. While the workflow runs, evaluate whether an update is warranted
+## A.2. Evaluate whether an update is warranted
+
+This evaluation happens in two passes: once while the workflow runs (based on what you can anticipate), and once after it completes (based on what actually happened).
+
+### First pass: before results arrive
 
 Compare the workflow's SKILL.md against the user's request. Consider:
 
 - Does the user's request imply a parameter, filter, or mode that the workflow doesn't currently support?
 - Is the user asking for output in a different format or level of detail than the workflow produces?
-- Does the request suggest a common use case that would benefit from being a first-class parameter rather than requiring manual post-processing?
+- Can you anticipate that the script will produce a superset of what's needed, requiring post-processing to narrow down?
 
-Not every variation in how a user phrases a request means the workflow needs to change. Flag an update if there's a clear, concrete improvement — a new parameter, a new operation mode, a missing filter — that would make future invocations meaningfully more efficient. If any post-processing of the script output is needed to fit the user's request, it may make sense to canonize this processing as part of the workflow itself, rather than relying on the working agent to do it.
+### Second pass: after results arrive
 
-If no update is warranted, skip to A.4.
+Check for post-processing work at **both** levels:
 
-## A.3. If an update is warranted, start the update process in parallel
+1. **Execution agent**: Read the execution agent's `summary.md`, paying close attention to the **post-processing performed** section. If the agent had to do non-trivial work to bridge the script's output to the user's answer — filtering, diffing, date-range narrowing, deduplication, aggregation, or any other transformation — that's a signal.
 
-If you identified a concrete improvement in A.2, start the update flow (load `instructions/update.md`) **in parallel** with the running workflow execution agent. The update agent works on its own branch and doesn't affect the currently-running execution.
+2. **You (the thinking agent)**: When you receive the execution results and prepare the user-facing response, note whether you yourself have to do any additional processing — cross-referencing with prior results, extracting a subset, reframing the data to actually answer the question, etc. An optimal workflow should produce output that directly answers the user's request without requiring either agent to do substantive post-processing.
+
+The key insight: **the user's request doesn't have to name a missing capability for one to exist.** Look at the work that was actually required to fulfill the request, not just the words the user used. Any substantive computation that either agent had to perform on the script's output is a candidate for being built into the workflow itself.
+
+### Decision criteria
+
+Not every variation in how a user phrases a request means the workflow needs to change. Flag an update if there's a clear, concrete improvement — a new parameter, a new operation mode, a missing filter — that would make future invocations meaningfully more efficient. The bar is: did either agent have to do work that the script itself could have handled? If so, consider canonizing that processing as part of the workflow rather than relying on ad-hoc post-processing each time.
+
+If no update is warranted after both passes, skip to A.4.
+
+## A.3. If an update is warranted, start the update process
+
+If you identified a concrete improvement in A.2 — whether from the first pass (before execution) or the second pass (after execution) — start the update flow (load `instructions/update.md`). If the execution agent is still running, the update runs in parallel; if execution already finished, start the update now. The update agent works on its own branch and doesn't affect the execution results.
 
 When delegating the update, be specific about:
 - What the user's request revealed as a gap
 - What the proposed change is (new parameter, new mode, etc.)
+- If the improvement was identified from the second pass: what post-processing was required and how the workflow could eliminate it
 - That existing functionality must be preserved
 
 **Do not commit or finalize the update yet.** The update process (including evaluate-crystallize) should complete fully, but the result must be held for user approval.

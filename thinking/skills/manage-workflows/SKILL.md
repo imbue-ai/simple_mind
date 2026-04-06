@@ -28,7 +28,7 @@ Users interact with external services in two ways, and you should handle them di
 
 2. **Explicit workflow request** — The user specifically asks to build, set up, or automate something: "build a workflow for summarizing Slack", "automate my PR reviews".
 
-When in doubt, treat it as a direct task request. The user gets their answer faster, and you can always crystallize it into a reusable workflow afterward.
+When in doubt, treat it as a direct task request. The user gets their answer faster, and you should almost always crystallize the result into a reusable workflow afterward (see the direct task flow for details).
 
 ## How to delegate workflow steps
 

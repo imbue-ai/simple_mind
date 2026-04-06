@@ -41,11 +41,13 @@ Once the explore agent finishes, present the results to the user via `send-messa
 
 ## 3. Decide whether to crystallize
 
-After presenting results, evaluate whether this task would benefit from being a reusable workflow:
-- Is this the kind of thing the user would want to do again (recurring, periodic)?
-- Is the integration non-trivial enough that re-discovering it each time would be wasteful?
-- Does an existing workflow already cover this? (Check `thinking/skills/` for overlap.)
+After presenting results, evaluate whether this task should be saved as a reusable workflow. The motivation for crystallizing is **not** just scheduled/recurring use — it's that any deterministic service integration is worth capturing as a script so that future invocations (whether scheduled, on-demand, or as part of a larger task) can reuse it instead of re-discovering the APIs from scratch.
 
-If yes: proceed to the **Refine** step (load `instructions/create-refine.md`) using the explore agent's output. You can suggest this to the user: "This seems like something you'd want to run regularly — want me to save it as a reusable workflow?" You should err on the side of crystallizing if the task is relatively deterministic. If you skipped the interview initially, it may be helpful to do it now to confirm that the crystallized workflow will have the appropriate parameters, outputs, and process.
+**Default to crystallizing.** The bar for *not* crystallizing should be high. Only skip if:
+- The task is truly one-off and unlikely to ever be needed again, OR
+- An existing workflow already covers this (check `thinking/skills/` for overlap), OR
+- The integration is so trivial that re-discovering it would be negligible effort
 
-If no (one-off request, trivial, or already covered): you're done.
+If crystallizing: proceed to the **Refine** step (load `instructions/create-refine.md`) using the explore agent's output. If you skipped the interview initially, it may be helpful to do it now to confirm that the crystallized workflow will have the appropriate parameters, outputs, and process.
+
+When presenting results to the user, don't frame crystallization as "want me to set this up as a recurring workflow?" — instead, frame it as saving the integration for reuse: "I'll save this as a reusable workflow so future runs don't need to re-discover the APIs."

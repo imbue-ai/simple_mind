@@ -40,8 +40,11 @@ Before delegating any work, clarify the user's intent via `send-message-to-user`
 - What parameters matter (time ranges, filters, scope) and reasonable defaults?
 - What does the output look like?
 - Any known API docs or hints?
+- What authentication method should be used?
 
 If the user's request is clear enough that you already know the service, data, and rough parameters, you can skip the interview. But if there's ambiguity — e.g., "export my Slack data" could mean channels, DMs, threads, date ranges, specific users — interview first. The exploration agent needs to know what to target, and exploring the wrong thing wastes a full agent cycle.
+
+For authentication, you can first check whether the user has the service setup using latchkey; if so, assume that that should be used. If not, you MUST ask the user what their preferred authentication method is; the response to this should be forwarded to the exploration agent.
 
 For direct task requests, frame as: "Let me make sure I understand what you need before I go fetch this." For explicit workflow requests, frame as: "I'll start with a basic version and we can iterate."
 
@@ -95,9 +98,9 @@ After presenting results, evaluate whether this task would benefit from being a 
 - Is the integration non-trivial enough that re-discovering it each time would be wasteful?
 - Does an existing workflow already cover this? (Check `thinking/skills/` for overlap.)
 
-If yes: proceed to the **Refine** step (step 4 under "Creating a new workflow") using the explore agent's output. You can suggest this to the user: "This seems like something you'd want to run regularly — want me to save it as a reusable workflow?"
+If yes: proceed to the **Refine** step (step 4 under "Creating a new workflow") using the explore agent's output. You can suggest this to the user: "This seems like something you'd want to run regularly — want me to save it as a reusable workflow?" You should err on the side of crystallizing if the task is relatively deterministic. If you skipped the interview initially, it may be helpful to do it now to confirm that the crystallized workflow will have the appropriate parameters, outputs, and process.
 
-If no (one-off request, trivial, or already covered): you're done.
+If no (one-off request, trivial, or already covered): you're done. 
 
 ---
 

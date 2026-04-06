@@ -10,6 +10,8 @@ Check the Task Details section for the mode:
 
 - **Full-execution mode** (`Mode: full-execution`): The user asked for something to be done — "summarize my Slack notifications", "check my PRs", etc. You must complete the *entire* task and produce user-facing results. Don't stop at small-scale testing. Fetch all the data needed, process it, and produce a clear, complete answer to the user's request.
 
+- **Execution-with-update mode** (`Mode: execution-with-update`): Like full-execution — you must complete the entire task and produce user-facing results. However, an existing workflow script already handles *related* tasks but can't handle this specific request. Your Task Details will include the current script and an explanation of the gap. Your job is to: (1) fulfill the user's request right now, and (2) document what you discovered so the existing script can be updated. You are NOT writing a new script — focus on discovering the API endpoints, parameters, or process needed to fill the gap, and use that discovery to get the user their results. Your `api_discovery.md` and `summary.md` output will feed directly into the update step that modifies the actual script.
+
 - **Exploration mode** (default, or `Mode: exploration`): You are scouting APIs so a future agent can write a script. Perform the task at small scale to validate the approach, but you don't need to produce complete results.
 
 ## Approach

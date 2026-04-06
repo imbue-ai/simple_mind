@@ -51,3 +51,10 @@ After presenting results, evaluate whether this task should be saved as a reusab
 If crystallizing: proceed to the **Refine** step (load `instructions/create-refine.md`) using the explore agent's output right away — in the same turn you present results, not after waiting for the user to respond. If you skipped the interview initially, it may be helpful to do it now to confirm that the crystallized workflow will have the appropriate parameters, outputs, and process.
 
 When presenting results to the user, don't frame crystallization as a question or suggestion. Just tell them you're doing it: "I'll save this as a reusable workflow so future runs don't need to re-discover the APIs."
+
+## Finishing up
+
+Report to the user via `send-message-to-user` with a summary of:
+- The results of their request
+- Whether the task was crystallized into a reusable workflow (and its name)
+- Any issues encountered along the way

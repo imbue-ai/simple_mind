@@ -36,10 +36,14 @@ Keep the script simple and focused. Avoid unnecessary abstractions or over-engin
 
 List any Python packages the script needs beyond the standard library.
 
+## Naming convention
+
+The workflow name **must** end with `-workflow` (e.g., `slack-export-workflow`, `github-pr-workflow`). This applies to the directory name, the `name` field in `task.yaml`, and the `name` field in `SKILL.md`. This convention distinguishes workflows from other skills.
+
 ## Produce `task.yaml`
 
 ```yaml
-name: <workflow-name>
+name: <name>-workflow
 description: >
   <What this workflow does and when to use it.>
 latchkey_service: <service-name>
@@ -61,7 +65,7 @@ Write a skill file that describes how to run and use this workflow. This file wi
 
 ```markdown
 ---
-name: <workflow-name>
+name: <name>-workflow
 description: >
   <When to load this skill — describe what the workflow does and what kinds of
   user requests should trigger it.>
@@ -70,6 +74,8 @@ description: >
 # <Workflow Name>
 
 <Brief description of what this workflow does.>
+
+**When this skill is loaded, also load the `manage-workflows` skill** — it contains the instructions for how to run existing workflows, handle updates, and manage the workflow lifecycle.
 
 ## Usage
 

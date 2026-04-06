@@ -3,33 +3,37 @@ name: manage-workflows
 description: >
   Load this skill VERY proactively — any time the user's request involves
   fetching data from, acting on, or integrating with an external service.
-  This includes direct task requests like "summarize my Slack notifications",
+  This includes running existing workflows (any skill named *-workflow),
+  direct task requests like "summarize my Slack notifications",
   "check my GitHub PRs", or "what emails did I get today" — not just explicit
   "build a workflow" requests. Also covers setting up new integrations,
   automating recurring tasks, fixing broken workflows, updating or improving
-  existing ones. If the request touches an external service, load this skill.
+  existing ones. If the request touches an external service OR matches an
+  existing *-workflow skill, load this skill.
 ---
 
 # Managing Workflows
 
 Workflows are Python scripts that integrate with external services to fetch data and produce event streams (JSONL files). This skill covers the full lifecycle: creating new workflows, updating them for new requirements, evolving them based on runtime data, and healing them when they break.
 
-Each workflow lives in `thinking/skills/<workflow-name>/` and contains:
+Each workflow lives in `thinking/skills/<workflow-name>/` and **must** be named with a `-workflow` suffix (e.g., `slack-export-workflow`, `github-pr-workflow`). This convention makes it easy to identify workflows among other skills. The directory contains:
 - `main.py` — the script itself
 - `task.yaml` — metadata: name, description, service, parameters, assumptions
 - `requirements.txt` — Python dependencies
 - `SKILL.md` — auto-generated, describes how to run the workflow
 - `FLOW.md` — auto-generated, plain-language step-by-step explanation of what the workflow does (for non-technical readers)
 
-## Two modes of operation
+## Modes of operation
 
-Users interact with external services in two ways, and you should handle them differently:
+Users interact with external services in three ways, and you should handle them differently:
 
-1. **Direct task request** — The user wants something done *now*: "summarize my Slack notifications", "what PRs need my review", "check my email". They didn't ask for a workflow — they asked for results.
+1. **Run an existing workflow** — The user's request matches a workflow that already exists in `thinking/skills/` (any skill directory ending in `-workflow`). For example, if there's a `slack-export-workflow` and the user says "get my Slack messages from last week." **Always check for existing `*-workflow` skills first** — if one matches, use this mode.
 
-2. **Explicit workflow request** — The user specifically asks to build, set up, or automate something: "build a workflow for summarizing Slack", "automate my PR reviews".
+2. **Direct task request** — The user wants something done *now* and no existing workflow covers it: "summarize my Slack notifications", "what PRs need my review", "check my email". They didn't ask for a workflow — they asked for results.
 
-When in doubt, treat it as a direct task request. The user gets their answer faster, and you should almost always crystallize the result into a reusable workflow afterward (see the direct task flow for details).
+3. **Explicit workflow request** — The user specifically asks to build, set up, or automate something: "build a workflow for summarizing Slack", "automate my PR reviews".
+
+When in doubt between (2) and (3), treat it as a direct task request. The user gets their answer faster, and you should almost always crystallize the result into a reusable workflow afterward (see the direct task flow for details).
 
 ## How to delegate workflow steps
 
@@ -74,6 +78,10 @@ For direct task requests, frame as: "Let me make sure I understand what you need
 
 Load instruction files as you reach each step — don't read ahead.
 
+### Run an existing workflow
+When the user's request matches an existing workflow in `thinking/skills/`:
+- [Run, evaluate for improvements & present](instructions/run-existing.md)
+
 ### Direct task request
 1. Interview *(if the request is ambiguous)*
 2. [Execute, present & decide whether to crystallize](instructions/direct-task.md)
@@ -95,4 +103,4 @@ Load instruction files as you reach each step — don't read ahead.
 
 ## Finishing Up
 
-Regardless of which flow you execute, at the end you should report to the user a summary of what was done, what was saved/updated, and any issues that arose along the way.
+Each instruction file includes a reminder to report back to the user at the end. The report should summarize what was done, what was saved/updated, and any issues that arose along the way.

@@ -53,6 +53,18 @@ assumptions:
 
 The `assumptions` field is important — it documents things the script takes for granted that might change over time (rate limits, API behavior, data volumes). These are checked during evolution to see if the script needs updating.
 
+## Produce `FLOW.md`
+
+Write a plain-language, non-technical step-by-step explanation of what the script does. The audience is someone who cannot read code — they should be able to understand the workflow's behavior entirely from this document.
+
+Guidelines:
+- Use numbered steps describing what happens in order when the script runs
+- Describe actions in everyday language: "Connects to Slack", "Looks up messages in the channel", "Saves the results to a file" — not "makes a GET request to the conversations.history endpoint"
+- Mention what inputs the workflow expects (in plain terms, not argparse flags) and what output it produces
+- Include any important behaviors like "if there are too many results, it fetches them in batches" or "if something goes wrong, it waits and tries again"
+- Do NOT include code snippets, function names, variable names, or technical jargon
+- Keep it concise — aim for a document someone could read in under a minute
+
 ## Output
 
 Place all files in `output/$MNGR_AGENT_ID/`:
@@ -60,3 +72,4 @@ Place all files in `output/$MNGR_AGENT_ID/`:
 - `main.py`
 - `requirements.txt`
 - `task.yaml`
+- `FLOW.md`

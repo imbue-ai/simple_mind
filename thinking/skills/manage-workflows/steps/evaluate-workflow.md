@@ -34,6 +34,17 @@ For each test case:
 
 Save per-case output in `output/$MNGR_AGENT_ID/test_results/case_<N>/`.
 
+## Validate `FLOW.md`
+
+Check that `FLOW.md` exists and accurately describes what the script actually does:
+
+1. Read `FLOW.md` and walk through each step it describes
+2. Compare against the actual script behavior — does each step in `FLOW.md` correspond to something the script really does, in the right order?
+3. Flag any mismatches: steps the script performs that `FLOW.md` doesn't mention, steps `FLOW.md` describes that the script doesn't do, or descriptions that are misleading
+4. Check that the language is genuinely non-technical — no code snippets, function names, endpoint URLs, or jargon that a non-technical reader wouldn't understand
+
+Include `FLOW.md` validation results in your summary under a dedicated section.
+
 ## Output
 
 Produce `summary.md` in `output/$MNGR_AGENT_ID/` with:
@@ -51,3 +62,9 @@ Produce `summary.md` in `output/$MNGR_AGENT_ID/` with:
 ### Comparison with exploration (if applicable)
 - Does the script produce the same data as the exploration agent found manually?
 - Any discrepancies in data volume, format, or content
+
+### FLOW.md validation
+- Does `FLOW.md` exist?
+- Does it accurately describe the script's behavior, step by step?
+- Any missing steps, extra steps, or misleading descriptions?
+- Is the language genuinely non-technical?

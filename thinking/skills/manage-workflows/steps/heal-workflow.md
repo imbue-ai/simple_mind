@@ -32,6 +32,10 @@ Once you've identified the root cause, fix the script. Stay within the current s
 - If the fix requires accessing new endpoints or services the script doesn't currently use, **don't attempt it**. Instead, report in your summary what's needed and recommend using the update-workflow process.
 - If the fix reveals that a core assumption is broken (e.g., an API is deprecated), report that and recommend re-exploration.
 
+## Update `FLOW.md`
+
+If the fix changed the script's observable behavior (e.g., it now handles a new response format, or connects to a different endpoint), update `FLOW.md` to match. `FLOW.md` is a plain-language, non-technical step-by-step explanation of what the script does, written for someone who can't read code.
+
 ## Verify
 
 Run the fixed script to confirm the failure is resolved. Use similar parameters to the failed run.
@@ -43,3 +47,4 @@ Place all files in `output/$MNGR_AGENT_ID/`:
 - Updated `main.py`
 - Updated `requirements.txt` (if dependencies changed)
 - Updated `task.yaml` (if assumptions needed correction)
+- Updated `FLOW.md` (if script behavior changed)

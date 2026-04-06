@@ -25,7 +25,11 @@ After fixing evaluation issues, consider:
 - **Cover the full parameter space**: Make sure all documented parameters actually work correctly
 - **Improve output quality**: Ensure JSONL output is consistent and complete
 
-### 3. Don't change things for the sake of it
+### 3. Update `FLOW.md`
+
+If you changed the script's behavior (not just internal refactoring), update `FLOW.md` to reflect the new behavior. `FLOW.md` is a plain-language, non-technical step-by-step explanation of what the script does, written for someone who can't read code. Make sure it accurately describes what the script does after your changes.
+
+### 4. Don't change things for the sake of it
 
 If the evaluation and feedback indicate no issues, say so. A script that works correctly and handles its edge cases is done. Don't add complexity, refactor working code, or "improve" things that aren't broken.
 
@@ -42,3 +46,4 @@ Place all files in `output/$MNGR_AGENT_ID/`:
 - Updated `main.py`
 - Updated `requirements.txt` (if dependencies changed)
 - Updated `task.yaml` (if assumptions changed)
+- Updated `FLOW.md` (if script behavior changed)

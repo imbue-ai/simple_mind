@@ -19,6 +19,7 @@ Each workflow lives in `thinking/skills/<workflow-name>/` and contains:
 - `task.yaml` — metadata: name, description, service, parameters, assumptions
 - `requirements.txt` — Python dependencies
 - `SKILL.md` — auto-generated, describes how to run the workflow
+- `FLOW.md` — auto-generated, plain-language step-by-step explanation of what the workflow does (for non-technical readers)
 
 ## Two modes of operation
 

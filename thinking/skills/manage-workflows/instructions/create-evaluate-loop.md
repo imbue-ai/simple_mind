@@ -27,6 +27,9 @@ cat >> /tmp/task-evaluate-<workflow-name>.md << 'EOF'
 ### task.yaml
 <paste task.yaml content>
 
+### FLOW.md
+<paste FLOW.md content>
+
 ### Exploration Output (for comparison)
 <paste exploration data summary, or "Not available">
 EOF
@@ -56,6 +59,9 @@ cat >> /tmp/task-crystallize-<workflow-name>.md << 'EOF'
 ### Current Script (main.py)
 <paste main.py content>
 
+### Current FLOW.md
+<paste FLOW.md content>
+
 ### Evaluation Report
 <paste evaluation summary.md content>
 
@@ -72,4 +78,4 @@ Repeat the evaluate → present → crystallize cycle up to 3 times or until qua
 
 ## Finalize
 
-On the final pass, present the script to the user for approval. Once approved, commit the workflow files to `thinking/skills/<workflow-name>/`.
+On the final pass, present the script to the user for approval. Include the final `FLOW.md` content in your message to the user — this gives them a plain-language summary of what the workflow does without needing to read the code. Once approved, commit the workflow files to `thinking/skills/<workflow-name>/`.

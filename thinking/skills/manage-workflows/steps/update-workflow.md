@@ -25,7 +25,11 @@ Modify the script to support the new requirements. Key principles:
 - **Reuse patterns**: If the script already handles pagination, auth, or rate limiting for this service, use the same patterns for new endpoints.
 - **If exploration output is available**, use it to understand the new API endpoints and their behavior.
 
-### 3. Update `task.yaml`
+### 3. Update `FLOW.md`
+
+Update `FLOW.md` to reflect the new functionality. `FLOW.md` is a plain-language, non-technical step-by-step explanation of what the script does, written for someone who can't read code. Add steps for new behavior, update existing steps if they changed, and make sure the document still reads as a coherent whole.
+
+### 4. Update `task.yaml`
 
 - Add new parameters if the new requirements introduce them
 - Update the description if the scope has meaningfully changed
@@ -46,3 +50,4 @@ Place all files in `output/$MNGR_AGENT_ID/`:
 - Updated `main.py`
 - Updated `requirements.txt` (if new dependencies)
 - Updated `task.yaml`
+- Updated `FLOW.md`

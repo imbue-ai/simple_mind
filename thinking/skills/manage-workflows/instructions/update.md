@@ -36,4 +36,4 @@ Then delegate with task name `update-<workflow-name>` and this message file.
 ## After the update
 
 - Run the evaluate → crystallize cycle (see `instructions/create-evaluate-loop.md`).
-- Present to user for re-approval. Regenerate SKILL.md if parameters changed.
+- Present to user for re-approval. Regenerate SKILL.md if parameters changed. FLOW.md will be updated as part of the update and crystallize steps.

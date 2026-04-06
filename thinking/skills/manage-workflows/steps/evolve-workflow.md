@@ -34,6 +34,10 @@ Examples of valid evolution:
 
 If the data shows the approach is fundamentally broken — cascading failures, systematic assumption violations, the API has changed significantly — say so and recommend re-exploration. Don't try to patch a script that needs to be rewritten.
 
+## Update `FLOW.md`
+
+If your changes altered the script's observable behavior (not just internal tuning like backoff timing), update `FLOW.md` to match. `FLOW.md` is a plain-language, non-technical step-by-step explanation of what the script does, written for someone who can't read code.
+
 ## Verify
 
 Run the improved script and compare output to recent successful runs. The output should be equivalent or better, not different in unexpected ways.
@@ -45,3 +49,4 @@ Place all files in `output/$MNGR_AGENT_ID/`:
 - Updated `main.py`
 - Updated `requirements.txt` (if dependencies changed)
 - Updated `task.yaml` (especially assumptions, if any were found to be wrong)
+- Updated `FLOW.md` (if script behavior changed)

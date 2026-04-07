@@ -55,9 +55,13 @@ Compare the workflow's SKILL.md against the user's request. Consider:
 
 ### Second pass: after results arrive
 
+**This pass is mandatory. You MUST read the execution agent's `summary.md` before deciding whether an update is warranted or presenting results to the user.**
+
+The execution agent's `summary.md` contains a **"Post-processing performed"** section that documents any extra work it had to do to bridge the gap between what the script produced and what the user actually asked for. This is your most important signal for whether the workflow needs improvement. Read it carefully.
+
 Check for post-processing work at **both** levels:
 
-1. **Execution agent**: Read the execution agent's `summary.md`, paying close attention to the **post-processing performed** section. If the agent had to do non-trivial work to bridge the script's output to the user's answer — filtering, diffing, date-range narrowing, deduplication, aggregation, or any other transformation — that's a signal.
+1. **Execution agent** (read `summary.md`): Did the agent have to do non-trivial work to get the script's output into the right shape? Filtering, diffing, date-range narrowing, deduplication, aggregation, reformatting, or any other transformation beyond simple presentation? If the agent says "no post-processing was needed," that's a strong signal the workflow is working well. If it describes substantive processing, that's a concrete improvement opportunity.
 
 2. **You (the thinking agent)**: When you receive the execution results and prepare the user-facing response, note whether you yourself have to do any additional processing — cross-referencing with prior results, extracting a subset, reframing the data to actually answer the question, etc. An optimal workflow should produce output that directly answers the user's request without requiring either agent to do substantive post-processing.
 

@@ -37,12 +37,4 @@ Then delegate with task name `heal-<workflow-name>` and this message file.
 
 If the fix changes scope (needs new endpoints, services, or fundamentally different approach), flag this for the user before committing. Recommend using the update flow (`instructions/update.md`) instead.
 
-**You must get explicit user approval before committing the healed workflow.** Present the changes using the FLOW.md diff as a human-readable summary — show what changed in terms of workflow steps. The user shouldn't need to read code to understand what was fixed.
-
-## Finishing up
-
-Report to the user via `send-message-to-user` with a summary of:
-- What failed and the root cause
-- What was fixed (or if a scope change is needed)
-- Whether the workflow is now working again
-- Any issues encountered along the way
+Once the fix is ready, proceed to [Confirm and Save](instructions/confirm-and-save.md) to present the changes for user approval, save the files, and commit.

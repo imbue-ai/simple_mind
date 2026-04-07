@@ -79,13 +79,4 @@ Repeat the evaluate → present → crystallize cycle up to 3 times or until qua
 
 ## Finalize
 
-On the final pass, present the workflow to the user for approval. Use the final `FLOW.md` content as a human-readable summary of what the workflow does — the user shouldn't need to read code to understand what's being proposed. Also include the SKILL.md (parameters, usage) so they can see how the workflow will be invoked.
-
-**You must get explicit user approval before committing.** Do not commit the workflow files to `thinking/skills/<workflow-name>/` until the user confirms.
-
-## Finishing up
-
-Report to the user via `send-message-to-user` with a summary of:
-- What was created or updated (workflow name, what it does)
-- How many evaluate/crystallize cycles were needed
-- Any issues encountered or decisions made along the way
+Once quality stabilizes, proceed to [Confirm and Save](instructions/confirm-and-save.md) to present the workflow for user approval, save the files, and commit.

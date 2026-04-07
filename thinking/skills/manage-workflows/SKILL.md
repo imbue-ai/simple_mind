@@ -103,4 +103,4 @@ When the user's request matches an existing workflow in `thinking/skills/`:
 
 ## Finishing Up
 
-Each instruction file includes a reminder to report back to the user at the end. The report should summarize what was done, what was saved/updated, and any issues that arose along the way.
+Every flow that creates or modifies a workflow ends with [Confirm and Save](instructions/confirm-and-save.md). This step handles presenting the workflow for user approval, copying files to their final location, committing, and reporting. **Do not save workflow files or commit changes without going through this step** — the instruction file contains the full process.

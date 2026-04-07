@@ -49,14 +49,5 @@ Then delegate with task name `update-<workflow-name>` and this message file.
 ## 3. After the update
 
 - Run the evaluate → crystallize cycle (see `instructions/create-evaluate-loop.md`).
-- Present to user for re-approval. Regenerate SKILL.md if parameters changed. FLOW.md will be updated as part of the update and crystallize steps.
-
-**You must get explicit user approval before committing the workflow update.** Present the changes using the FLOW.md diff as a human-readable summary — show what changed in terms of workflow steps (e.g., "Added step: Filter messages by date" or "Changed step 3 from 'Fetch all channels' to 'Fetch channels matching filter'"). The user shouldn't need to read code to understand what's being proposed.
-
-## Finishing up
-
-Report to the user via `send-message-to-user` with a summary of:
-- What was updated and why
-- What new parameters, modes, or behaviors were added
-- Whether immediate results were delivered (if applicable)
-- Any issues encountered along the way
+- Regenerate SKILL.md if parameters changed. FLOW.md will be updated as part of the update and crystallize steps.
+- Proceed to [Confirm and Save](instructions/confirm-and-save.md) to present the changes for user approval, save the files, and commit.

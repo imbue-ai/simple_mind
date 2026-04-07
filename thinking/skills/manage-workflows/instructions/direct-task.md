@@ -54,7 +54,6 @@ When presenting results to the user, don't frame crystallization as a question o
 
 ## Finishing up
 
-Report to the user via `send-message-to-user` with a summary of:
-- The results of their request
-- Whether the task was crystallized into a reusable workflow (and its name)
-- Any issues encountered along the way
+If crystallizing, the Refine → Evaluate-Crystallize flow ends with [Confirm and Save](instructions/confirm-and-save.md), which handles presenting the new workflow for user approval, saving the files, and committing.
+
+If not crystallizing, report to the user via `send-message-to-user` with a summary of the results and any issues encountered.

@@ -33,11 +33,4 @@ Then delegate with task name `evolve-<workflow-name>` and this message file.
 ## After the evolution
 
 - Run the evaluate → crystallize cycle (see `instructions/create-evaluate-loop.md`) to validate and improve the changes.
-- **You must get explicit user approval before committing the evolved workflow.** Present the changes using the FLOW.md diff as a human-readable summary — show what changed in terms of workflow steps. The user shouldn't need to read code to understand what's being proposed.
-
-## Finishing up
-
-Report to the user via `send-message-to-user` with a summary of:
-- What was evolved and what data patterns drove the changes
-- Specific improvements made
-- Any issues encountered along the way
+- The evaluate-crystallize cycle ends with [Confirm and Save](instructions/confirm-and-save.md), which handles presenting changes for user approval, saving the files, and committing.

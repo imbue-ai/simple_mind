@@ -89,17 +89,8 @@ Once the execution agent finishes:
 
 - **If it failed**: Inform the user that the workflow encountered an error, then follow the [Heal](instructions/heal.md) flow to diagnose and fix the issue. The execution agent's summary will include the full error output and its assessment of the cause — pass this along to the heal process.
 
-## A.5. If an update was started, ask for user approval
+## A.5. If an update was started, confirm and save
 
-After the update process finishes (including the evaluate-crystallize cycle), present the proposed changes to the user using the FLOW.md diff as a human-readable summary. Show what changed in terms of workflow steps — e.g., "Added step: Filter messages by date" or "Changed step 3 from 'Fetch all channels' to 'Fetch channels matching filter'". The user shouldn't need to read code to understand what's being proposed.
+After the update process finishes (including the evaluate-crystallize cycle), proceed to [Confirm and Save](instructions/confirm-and-save.md) to present the changes for user approval, save the files, and commit.
 
 Frame it as: "While running your request, I noticed the workflow could be improved. Here's what would change: [FLOW.md diff]. Want me to save this?"
-
-**You must get explicit user approval before committing the workflow update.** If the user approves, commit and finalize the updated workflow. If they decline, discard the update branch.
-
-## Finishing up
-
-Report to the user via `send-message-to-user` with a summary of:
-- What was done (workflow executed, results delivered)
-- Whether any workflow updates were proposed and their status (approved/declined/not needed)
-- Any issues encountered along the way

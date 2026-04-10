@@ -39,7 +39,19 @@ Then delegate with task name `refine-<workflow-name>` and this message file.
 
 ## 2. Verify the script
 
-Use standard verification.
+Use standard verification, but scope the verification message to **structural completeness only**. The evaluate step that follows will test script correctness with actual test cases — the verifier should not duplicate that work.
+
+Tell the verifier to check:
+- All required files were produced (`main.py`, `requirements.txt`, `task.yaml`, `SKILL.md`, `FLOW.md`)
+- Files follow the formats specified in the refine instructions (e.g., `main.py` uses argparse, JSONL output; `task.yaml` has required fields; `SKILL.md` has correct frontmatter)
+- The script structurally reflects the exploration findings (it targets the right service/data/process, uses the right tools)
+
+Tell the verifier **not** to assess:
+- Whether the script logic is correct (pagination, error handling, edge cases, etc.)
+- Whether the output data would be complete or accurate
+- Script quality or style beyond structural requirements
+
+These concerns are handled by the evaluate → crystallize cycle that follows.
 
 ## Next step
 

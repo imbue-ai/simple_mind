@@ -7,7 +7,7 @@ This flow handles two scenarios:
 
 ## 1. Explore new scope (if needed)
 
-If the update touches APIs or services the script doesn't currently use, explore first.
+If the update touches APIs, services, or processing steps the script doesn't currently handle, explore first.
 
 - **Normal update**: Delegate `explore-workflow` in **exploration mode** (see `instructions/create-explore.md`).
 - **Immediate results needed**: Delegate `explore-workflow` in **execution-with-update mode**. This gets the user their results right now while also documenting what the workflow needs. Present the results to the user via `send-message-to-user` as soon as the explore agent finishes — don't wait for the update to complete.

@@ -9,7 +9,7 @@ Don't delay — get the user their results using the current version of the work
 Append a Task Details section with:
 - The user's request (verbatim)
 - The workflow name and directory path
-- The service name
+- The service name (if applicable)
 - Any parameters implied by the request
 - The SKILL.md usage section so the agent knows the correct invocation
 
@@ -29,10 +29,10 @@ Name: <workflow-name>
 Directory: thinking/skills/<workflow-name>/
 
 ### Service
-<service name>
+<service name, or "N/A — local workflow">
 
 ### Parameters
-<any parameters implied or stated by the user — time ranges, filters, scope, etc.>
+<any parameters implied or stated by the user — time ranges, filters, scope, input paths, etc.>
 
 ### How to Run
 <paste SKILL.md usage section>

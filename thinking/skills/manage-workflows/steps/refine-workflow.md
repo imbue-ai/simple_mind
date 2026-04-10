@@ -1,34 +1,34 @@
 # Task: Refine Exploration into a Working Script
 
-You are transforming API exploration findings into an initial working Python script. A previous agent explored the service's APIs and documented what works — your job is to turn that into a clean, runnable script.
+You are transforming exploration findings into an initial working Python script. A previous agent explored the task (service APIs, data processing steps, or both) and documented what works — your job is to turn that into a clean, runnable script.
 
-**Authentication**: Use `latchkey curl <service> <url>` (via `subprocess`) for authenticated API calls. Latchkey handles token management automatically — do not implement auth logic in the script itself.
+**Authentication (for service integrations)**: Use `latchkey curl <service> <url>` (via `subprocess`) for authenticated API calls. Latchkey handles token management automatically — do not implement auth logic in the script itself. Not all workflows involve external services — if the task is purely local (data transformation, file processing, etc.), auth is not relevant.
 
 ## Inputs
 
 You should have been provided:
 - An exploration summary (`summary.md`) describing what was discovered
-- An API discovery document (`api_discovery.md`) with endpoint details, auth patterns, pagination, rate limits, etc.
+- A discovery document (`discovery.md`) with details on how to accomplish the task (API endpoints, processing steps, etc.)
 - The exploration agent's ID (use `mngr transcript <agent-id>` if you need to check specific details that aren't in the summary)
 - Any relevant existing workflows to reference for patterns
 
 ## Check for existing patterns
 
-Look at existing workflows in `thinking/skills/` for the same or similar services. If there are any, reuse their patterns for auth, pagination, error handling, etc. Don't reinvent what's already working.
+Look at existing workflows in `thinking/skills/` for similar tasks or services. If there are any, reuse their patterns for auth, pagination, error handling, data processing, etc. Don't reinvent what's already working.
 
 ## Produce `main.py`
 
 Write a Python script that:
 
-- **Authenticated API calls**: Use `latchkey curl <service> <url>` (via `subprocess`) for any calls that require authentication. This handles auth automatically.
+- **Authenticated API calls (if the task involves external services)**: Use `latchkey curl <service> <url>` (via `subprocess`) for any calls that require authentication. This handles auth automatically.
 - **Event output**: Write output data as JSONL (one JSON object per line) to an output file. Each line should be a complete JSON event with at minimum: `timestamp`, `type`, `event_id`, `source`, and the payload data.
 - **CLI arguments**: Use `argparse` for all configurable parameters. Include sensible defaults where possible.
-- **Error handling**: Implement retries with exponential backoff for transient failures (rate limits, network errors). Log errors to stderr. Exit with non-zero code on unrecoverable failures.
-- **Pagination**: Handle pagination completely — don't stop at the first page.
-- **Rate limiting**: Respect rate limits. Watch for rate limit headers and back off appropriately.
-- **Progress**: Print progress to stderr (e.g., "Fetched 150/500 messages from #general").
+- **Error handling**: Implement retries with exponential backoff for transient failures (rate limits, network errors, file I/O issues). Log errors to stderr. Exit with non-zero code on unrecoverable failures.
+- **Pagination (if applicable)**: Handle pagination completely — don't stop at the first page.
+- **Rate limiting (if applicable)**: Respect rate limits. Watch for rate limit headers and back off appropriately.
+- **Progress**: Print progress to stderr (e.g., "Fetched 150/500 messages from #general" or "Processed 45/120 files").
 
-**Structure**: Organize the script so that each logical step of the workflow maps to a clearly named function. For example, a Slack export might have `fetch_channels()`, `fetch_messages(channel)`, `write_events(messages, output_file)`. This isn't about over-abstracting — it's about making the script readable and keeping a clean mapping between what the workflow *does* (documented in FLOW.md) and *how* it does it (the code). Avoid giant monolithic functions that do everything.
+**Structure**: Organize the script so that each logical step of the workflow maps to a clearly named function. For example, a Slack export might have `fetch_channels()`, `fetch_messages(channel)`, `write_events(messages, output_file)`. A data processing workflow might have `read_input(path)`, `transform_records(records)`, `write_output(results, output_file)`. This isn't about over-abstracting — it's about making the script readable and keeping a clean mapping between what the workflow *does* (documented in FLOW.md) and *how* it does it (the code). Avoid giant monolithic functions that do everything.
 
 Keep the script simple and focused. Avoid unnecessary abstractions or over-engineering.
 
@@ -46,14 +46,14 @@ The workflow name **must** end with `-workflow` (e.g., `slack-export-workflow`, 
 name: <name>-workflow
 description: >
   <What this workflow does and when to use it.>
-latchkey_service: <service-name>
+latchkey_service: <service-name>  # omit if the workflow doesn't use an external service
 parameters:
   <param-name>:
     type: "<python type>"
     description: "<what this parameter controls>"
   # ... more parameters
 assumptions:
-  - "<assumption about the service or data that this script relies on>"
+  - "<assumption about the service, data, or environment that this script relies on>"
   - "<another assumption>"
 ```
 

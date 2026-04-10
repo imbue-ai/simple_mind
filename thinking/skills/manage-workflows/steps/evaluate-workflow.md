@@ -2,7 +2,7 @@
 
 You are testing a crystallized workflow script against multiple inputs and compiling results for review. The goal is to find bugs, edge cases, and quality issues before the script is finalized.
 
-**Authentication**: Scripts should be using `latchkey curl <service> <url>` for authenticated API calls. If you need to make ad-hoc API calls during evaluation, use latchkey as well.
+**Authentication (for service integrations)**: If the workflow involves external services, scripts should be using `latchkey curl <service> <url>` for authenticated API calls. If you need to make ad-hoc API calls during evaluation, use latchkey as well.
 
 ## Inputs
 
@@ -12,7 +12,7 @@ You should have been provided:
 
 ## Generate test cases
 
-Based on the script's parameters (from `task.yaml`) and your understanding of the service, create 2-4 test cases:
+Based on the script's parameters (from `task.yaml`) and your understanding of the task, create 2-4 test cases:
 
 1. **Happy path**: Typical parameters that should produce clean output
 2. **Edge case — empty results**: Parameters that should return little or no data (e.g., a channel with no messages, a date range with no activity)

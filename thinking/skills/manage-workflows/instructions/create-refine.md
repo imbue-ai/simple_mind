@@ -8,9 +8,9 @@ You are transforming exploration output into an initial working script.
 
 Delegate using `steps/refine-workflow.md`. Append a Task Details section with:
 - The exploration summary (copy the content of the exploration agent's `summary.md`)
-- The API discovery notes (copy `api_discovery.md`)
+- The discovery notes (copy `discovery.md`)
 - The exploration agent's ID (so the refine agent can check its transcript if needed)
-- Paths to any relevant existing workflows for the same service
+- Paths to any relevant existing workflows for the same task or service
 
 ```bash
 cp ./skills/manage-workflows/steps/refine-workflow.md /tmp/task-refine-<workflow-name>.md
@@ -24,8 +24,8 @@ cat >> /tmp/task-refine-<workflow-name>.md << 'EOF'
 ### Exploration Summary
 <paste exploration summary.md content>
 
-### API Discovery
-<paste api_discovery.md content>
+### Discovery
+<paste discovery.md content>
 
 ### Exploration Agent ID
 <agent-id>

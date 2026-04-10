@@ -76,3 +76,9 @@ After executing the next steps, you should also double-check if anything was mis
 - Archiving the working agent once the ticket is fully complete (verified and changes applied): `mngr archive -f <working-agent-id>`
 - Sending messages to the user
 - **Thinking about the next step**: after archiving a completed task, always consider what comes next -- is there follow-up work to create a ticket for? Is there now capacity to launch a pending ticket (check `tk ready`)? Should the user be notified?
+- **Consider formalizing as a workflow**: If the completed task was *not* part of a `manage-workflows` process (i.e., not a workflow execution, exploration, refinement, evaluation, crystallization, update, evolution, or heal step), and the verdict was PASSED, assess whether the task involved a deterministic sequence of steps that could be automated. Signals to look for:
+  - The working agent made 5 or more tool calls following a repeatable, deterministic pattern (not exploratory/debugging — a consistent sequence that would look the same every time this type of task is performed). It's fine if this pattern varies based on a set of parameters; that can still be deterministic.
+  - The task involved an external service integration (API calls, data fetching, etc.)
+  - The same type of task has been requested before, or is likely to recur
+  
+  If any of these apply, consider formalizing the task as a reusable workflow using the `manage-workflows` skill. You don't need to do this for every passing task — use judgment. But if the task's steps are clearly repeatable and non-trivial, a workflow saves re-discovery on future invocations. Start from the **Refine** step (the exploration was effectively already done by the working agent whose transcript you can reference). You can also send a message to the user letting them know you're saving the process as a reusable workflow.

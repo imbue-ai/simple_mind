@@ -2,14 +2,14 @@
 
 You are modifying an existing workflow to accommodate new requirements or changed scope requested by the user. The key constraint: preserve existing functionality while adding the new capabilities.
 
-**Authentication**: Use `latchkey curl <service> <url>` for any new authenticated API calls. If the existing script already uses latchkey, follow the same pattern.
+**Authentication (for service integrations)**: If the workflow involves external services, use `latchkey curl <service> <url>` for any new authenticated API calls. If the existing script already uses latchkey, follow the same pattern.
 
 ## Inputs
 
 You should have been provided:
 - The current script (`main.py`, `task.yaml`, `requirements.txt`)
 - A description of the new requirements
-- Optionally: exploration output if the new requirements involve APIs or services the script doesn't currently use
+- Optionally: exploration output if the new requirements involve APIs, services, or processing steps the script doesn't currently handle
 
 ## Process
 
@@ -23,7 +23,7 @@ Modify the script to support the new requirements. Key principles:
 - **Preserve existing functionality**: Everything the script currently does should still work with the same parameters.
 - **Add new parameters** in `task.yaml` for new capabilities. Keep existing parameters unchanged.
 - **Reuse patterns**: If the script already handles pagination, auth, or rate limiting for this service, use the same patterns for new endpoints.
-- **If exploration output is available**, use it to understand the new API endpoints and their behavior.
+- **If exploration output is available**, use it to understand the new APIs, processing steps, or behavior.
 
 ### 3. Update `FLOW.md`
 

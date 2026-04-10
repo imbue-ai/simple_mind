@@ -1,6 +1,6 @@
 # Direct Task Execution
 
-When the user asks you to do something involving an external service (not explicitly asking to build a workflow), prioritize getting them results quickly.
+When the user asks you to do something that involves a repeatable multi-step process (not explicitly asking to build a workflow), prioritize getting them results quickly. This includes external service interactions, data processing tasks, file transformations, or any other deterministic task.
 
 ## 1. Execute the task
 
@@ -8,8 +8,8 @@ Delegate using `steps/explore-workflow.md` in **full execution mode**. The explo
 
 Append a Task Details section with:
 - The user's request (verbatim)
-- The service name
-- Any parameters implied by the request (e.g., time ranges, filters)
+- The service name (if applicable)
+- Any parameters implied by the request (e.g., time ranges, filters, input paths)
 - **Mode: full-execution** — this tells the explore agent to complete the entire task, not just small-scale testing
 
 ```bash
@@ -26,10 +26,10 @@ cat >> /tmp/task-explore-<task-name>.md << 'EOF'
 <paste the user's request verbatim>
 
 ### Service
-<service name>
+<service name, or "N/A — local task">
 
 ### Parameters
-<any parameters implied or stated by the user — time ranges, filters, scope, etc.>
+<any parameters implied or stated by the user — time ranges, filters, scope, input paths, etc.>
 EOF
 ```
 
@@ -41,7 +41,7 @@ Once the explore agent finishes, present the results to the user via `send-messa
 
 ## 3. Decide whether to crystallize
 
-After presenting results, evaluate whether this task should be saved as a reusable workflow. The motivation for crystallizing is **not** just scheduled/recurring use — it's that any deterministic service integration is worth capturing as a script so that future invocations (whether scheduled, on-demand, or as part of a larger task) can reuse it instead of re-discovering the APIs from scratch.
+After presenting results, evaluate whether this task should be saved as a reusable workflow. The motivation for crystallizing is **not** just scheduled/recurring use — it's that any deterministic multi-step process is worth capturing as a script so that future invocations (whether scheduled, on-demand, or as part of a larger task) can reuse it instead of re-doing the same work from scratch. This applies to service integrations (avoid re-discovering APIs) and non-service tasks alike (avoid re-figuring-out the processing steps).
 
 **Default to crystallizing — and do it immediately.** Don't wait for user confirmation or a follow-up message. As soon as results are presented, proceed to the Refine step unless one of these applies:
 - The task is truly one-off and unlikely to ever be needed again, OR

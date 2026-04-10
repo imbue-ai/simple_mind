@@ -14,7 +14,7 @@ You are running an existing workflow script to fulfill a user's request. The scr
 
 2. Run the script with the parameters specified in the Task Details section. Use `uv run python main.py ...` from the workflow directory.
 
-3. If the script requires authenticated API calls via latchkey, make sure the service is available by checking with `/latchkey` first.
+3. If the script involves an external service and requires authenticated API calls via latchkey, make sure the service is available by checking with `/latchkey` first.
 
 ## Handling failures
 

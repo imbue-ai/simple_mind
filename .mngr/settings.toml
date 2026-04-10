@@ -10,13 +10,13 @@ parent_type = "claude-mind"
 [commands.create]
 connect = false
 pass_env = ["MIND_NAME", "ANTHROPIC_API_KEY", "IS_SANDBOX", "IS_AUTONOMOUS"]
+agent_args = ["--dangerously-skip-permissions"]
 
 [create_templates.main]
 type = "claude-mind"
 env = ["ROLE=thinking"]
 
 [create_templates.dev]
-agent_args = ["--dangerously-skip-permissions"]
 
 [create_templates.docker]
 

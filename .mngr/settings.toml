@@ -2,19 +2,13 @@
 include = ["""has(labels.mind)"""]
 
 [agent_types.claude]
-command = "mkdir -p $ROLE/.claude && cp .claude/settings.local.json $ROLE/.claude/settings.local.json && cd $ROLE && claude"
-cli_args = """--dangerously-skip-permissions"""
-auto_dismiss_dialogs = true
-
-[agent_types.claude.settings_overrides]
-model = "opus[1m]"
-fastMode = true
+parent_type = "claude-mind"
 
 [agent_types.worker]
-parent_type = "claude"
+parent_type = "claude-mind"
 
 [agent_types.verifier]
-parent_type = "claude"
+parent_type = "claude-mind"
 
 [commands.create]
 connect = false

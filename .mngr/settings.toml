@@ -1,9 +1,6 @@
 [commands.list]
 include = ["""has(labels.mind)"""]
 
-[agent_types.claude]
-parent_type = "claude-mind"
-
 [agent_types.worker]
 parent_type = "claude-mind"
 
@@ -15,7 +12,7 @@ connect = false
 pass_env = ["MIND_NAME", "ANTHROPIC_API_KEY", "IS_SANDBOX", "IS_AUTONOMOUS"]
 
 [create_templates.main]
-type = "claude"
+type = "claude-mind"
 env = ["ROLE=thinking"]
 
 [create_templates.dev]

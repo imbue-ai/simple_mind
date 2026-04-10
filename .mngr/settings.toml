@@ -16,6 +16,7 @@ type = "claude-mind"
 env = ["ROLE=thinking"]
 
 [create_templates.dev]
+agent_args = ["--dangerously-skip-permissions"]
 
 [create_templates.docker]
 

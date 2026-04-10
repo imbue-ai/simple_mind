@@ -15,6 +15,7 @@ connect = false
 pass_env = ["MIND_NAME", "ANTHROPIC_API_KEY", "IS_SANDBOX", "IS_AUTONOMOUS"]
 
 [create_templates.main]
+type = "claude"
 env = ["ROLE=thinking"]
 
 [create_templates.dev]
